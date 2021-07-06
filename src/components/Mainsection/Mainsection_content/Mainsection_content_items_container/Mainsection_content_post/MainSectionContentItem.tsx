@@ -21,7 +21,6 @@ export const MainSectionContentItem: React.FC<MainSectionContentItemProps> = (
       </a>
     );
   });
-  console.log(props.dateTime);
 
   const d = new Date(props.dateTime);
   const t = new Date(Date.now());
