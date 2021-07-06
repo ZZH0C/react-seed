@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { MainSectionContentModal } from './Mainsection_content_searchbar_modal/MainSectionContentModal';
 type MainSectionContentSearchbarProps = React.HTMLAttributes<HTMLElement>;
 
 export const MainSectionContentSearchbar: React.FC<MainSectionContentSearchbarProps> =
@@ -39,58 +40,10 @@ export const MainSectionContentSearchbar: React.FC<MainSectionContentSearchbarPr
             <i className="icon-plus-small"></i>
             <span>New Item</span>
           </button>
-          <div
-            className={isModalHidden ? 'modal fade in' : 'modal fade'}
-            id="myModal"
-            tabIndex={-1}
-            role="dialog"
-            aria-labelledby="myModalLabel"
-            aria-hidden={isModalHidden}
-            style={isModalHidden ? { display: 'block' } : { display: 'none' }}
-          >
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <button
-                    type="button"
-                    className="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">×</span>
-                  </button>
-                  <h4 className="modal-title" id="myModalLabel">
-                    Add new item
-                  </h4>
-                </div>
-                <div className="modal-body">
-                  <p className="modal-label">Item name</p>
-                  <input type="text" className="form-control" />
-                  <p className="modal-label">Text</p>
-                  <textarea
-                    className="form-control"
-                    rows={3}
-                    defaultValue={''}
-                  />
-                </div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-default"
-                    data-dismiss="modal"
-                    onClick={() => {
-                      setIsModalHidden(!isModalHidden);
-                    }}
-                  >
-                    Close
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Save changes
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <MainSectionContentModal
+            isHidden={isModalHidden}
+            toggleHandler={setIsModalHidden}
+          />
           <a href="index.html" className="btn btn-sm btn-option">
             <i className="icon-sliders"></i>
           </a>
