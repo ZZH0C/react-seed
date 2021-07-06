@@ -21,6 +21,10 @@ export const MainSectionContentItem: React.FC<MainSectionContentItemProps> = (
       </a>
     );
   });
+  console.log(props.dateTime);
+
+  const d = new Date(props.dateTime);
+  const t = new Date(Date.now());
   return (
     <div className="media">
       <div className="media-left">
@@ -39,7 +43,9 @@ export const MainSectionContentItem: React.FC<MainSectionContentItemProps> = (
             </a>
             <span>
               <i className="icon-clock"></i>
-              <time className="timeago" dateTime={props.dateTime}></time>
+              <time className="timeago" dateTime={props.dateTime}>
+                {t.getFullYear() - d.getFullYear()}Y
+              </time>
             </span>
           </div>
         </div>
