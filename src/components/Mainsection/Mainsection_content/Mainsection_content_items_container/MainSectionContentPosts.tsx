@@ -15,7 +15,7 @@ export const MainSectionContentPosts: React.FC<MainSectionContentPostsProps> =
         dateTime: '2015-06-14T09:24:17Z',
         text: 'Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc.',
         comments: 2,
-        tags: ['tag 1', 'tag 2', 'tag 3'],
+        tags: ['tag1', 'tag2', 'tag3'],
       },
       {
         user: 'username 2',
@@ -26,7 +26,7 @@ export const MainSectionContentPosts: React.FC<MainSectionContentPostsProps> =
         dateTime: '2015-06-14T09:24:17Z',
         text: 'Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc.',
         comments: 4,
-        tags: ['tag 1', 'tag 2', 'tag 3'],
+        tags: ['tag1', 'tag2', 'tag3'],
       },
       {
         user: 'username 2',
@@ -38,7 +38,7 @@ export const MainSectionContentPosts: React.FC<MainSectionContentPostsProps> =
         dateTime: '2015-06-14T09:24:17Z',
         text: 'Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc.',
         comments: 4,
-        tags: ['tag 1', 'tag 2', 'tag 3'],
+        tags: ['tag1', 'tag2', 'tag3'],
       },
       {
         user: 'username 2',
@@ -49,7 +49,7 @@ export const MainSectionContentPosts: React.FC<MainSectionContentPostsProps> =
         dateTime: '2015-06-14T09:24:17Z',
         text: 'Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc.',
         comments: 4,
-        tags: ['tag 1', 'tag 2', 'tag 3'],
+        tags: ['tag1', 'tag2', 'tag3'],
       },
     ];
     const items = examplePosts.map((elem) => {
