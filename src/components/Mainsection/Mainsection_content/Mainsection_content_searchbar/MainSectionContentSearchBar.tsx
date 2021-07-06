@@ -5,6 +5,7 @@ type MainSectionContentSearchbarProps = React.HTMLAttributes<HTMLElement>;
 export const MainSectionContentSearchbar: React.FC<MainSectionContentSearchbarProps> =
   () => {
     const [isModalHidden, setIsModalHidden] = useState(false);
+
     return (
       <div className="searchForm row">
         <div className="col-sm-14">
@@ -31,11 +32,22 @@ export const MainSectionContentSearchbar: React.FC<MainSectionContentSearchbarPr
           <button
             onClick={() => {
               setIsModalHidden(!isModalHidden);
+              if (!isModalHidden) {
+                document.body.classList.add('modal-open');
+                document.body.style.paddingRight = '17px';
+              } else {
+                document.body.classList.remove('modal-open');
+                document.body.style.paddingRight = '0px';
+              }
+              // !isModalHidden
+              //   ? (document.body.classList.add('modal-open') document.body.style.paddingRight = '17px')
+              //   : (document.body.classList.remove('modal-open'))
             }}
             title="Add new item"
             className="newItem"
             data-toggle="modal"
             data-target="#myModal"
+            style={{ border: 'none', background: 'none' }}
           >
             <i className="icon-plus-small"></i>
             <span>New Item</span>

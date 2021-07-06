@@ -44,6 +44,16 @@ export const MainSectionContentModal: React.FC<MainSectionContentModalProps> =
                 data-dismiss="modal"
                 onClick={() => {
                   toggleHandler(!isHidden);
+                  if (!isHidden) {
+                    document.body.classList.add('modal-open');
+                    document.body.style.paddingRight = '17px';
+                  } else {
+                    document.body.classList.remove('modal-open');
+                    document.body.style.paddingRight = '0px';
+                  }
+                  // !isHidden
+                  //   ? document.body.classList.add('modal-open')
+                  //   : document.body.classList.remove('modal-open');
                 }}
               >
                 Close
