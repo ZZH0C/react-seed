@@ -5,7 +5,7 @@ export const MainSectionContentHeading: React.FC<MainSectionContentHeadingProps>
   () => {
     return (
       <div className="heading">
-        <h1>Page title</h1>
+        <h1>Page title in</h1>
       </div>
     );
   };

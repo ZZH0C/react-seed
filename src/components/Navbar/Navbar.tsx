@@ -6,11 +6,11 @@ type NavbarProps = React.HTMLAttributes<HTMLElement>;
 export const Navbar: React.FC<NavbarProps> = () => {
   // variable to test
   const testArr = [
-    { isActive: false, text: '111111111' },
-    { isActive: false, text: '22222' },
-    { isActive: true, text: '333' },
-    { isActive: false, text: '44444' },
-    { isActive: false, text: '55555' },
+    { isActive: false, text: 'Menu item' },
+    { isActive: false, text: 'Menu item' },
+    { isActive: true, text: 'Menu item' },
+    { isActive: false, text: 'Menu item' },
+    { isActive: false, text: 'Menu item' },
   ];
   const navBarElems = testArr.map((elem) => {
     return (
