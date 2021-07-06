@@ -64,6 +64,9 @@ export const MainSectionContentSearchbar: React.FC<MainSectionContentSearchbarPr
                   </h4>
                 </div>
                 <div className="modal-body">
+                  <p className="modal-label">Item name</p>
+                  <input type="text" className="form-control" />
+                  <p className="modal-label">Text</p>
                   <textarea
                     className="form-control"
                     rows={3}
