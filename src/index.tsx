@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './global.scss';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
+import './styles/main.css';
+import './fonts/fontello/css/fontello.css';
 
 ReactDOM.render(
   <React.StrictMode>
