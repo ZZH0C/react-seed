@@ -12,6 +12,7 @@ import {
   testProps_subItemOff,
   testPropsNavBarOn,
   testPropsNavBarOff,
+  testProps_UserIcon,
 } from '../../components/mockProps';
 import { SubmenuSubItem } from '../../components/Submenu/SubmenuSubItem/SubmenuSubItem';
 
@@ -21,7 +22,7 @@ export const HomePage: React.FC = () => {
       <Button styleType="primary">Ok!</Button>
       <Head>
         <HeaderLogo />
-        <HeaderUser />
+        <HeaderUser src={testProps_UserIcon.src} alt={testProps_UserIcon.alt} />
       </Head>
       <Navbar>
         <NavbarItem isActive={testPropsNavBarOff.isActive}>

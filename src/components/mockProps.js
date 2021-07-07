@@ -19,3 +19,8 @@ export const testPropsNavBarOn = {
   isActive: true,
   content: 'Test Bar 1',
 };
+
+export const testProps_UserIcon = {
+  alt: 'Search icon',
+  src: 'images/profilePhoto.png',
+};
