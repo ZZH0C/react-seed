@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '../../components/Button/Button';
 import { Head } from '../../components/Head/Head';
 import { Navbar } from '../../components/Navbar/Navbar';
-import { MainSection } from '../../components/MainSection/MainSection';
+import { MainSection } from '../../components/Mainsection/MainSection';
 import { NavbarItem } from '../../components/NavbarItem/NavbarItem';
 import { HeaderLogo } from '../../components/HeaderLogo/HeaderLogo';
 import { HeaderUser } from '../../components/HeaderUser/HeaderUser';
