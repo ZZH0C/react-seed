@@ -3,18 +3,14 @@ import React from 'react';
 interface MainSectionSubmenuItemProps
   extends React.HTMLAttributes<HTMLElement> {
   name: string;
-  content: { name: string; href: string; active: boolean | undefined }[];
+  content: { name: string; href: string; active?: boolean }[];
 }
 
 export const MainSectionSubmenuItem: React.FC<MainSectionSubmenuItemProps> = (
   props,
 ) => {
   const subItems = props.content.map(
-    (elem: {
-      href: string | undefined;
-      name: string | undefined;
-      active: boolean | undefined;
-    }) => {
+    (elem: { href?: string; name?: string; active?: boolean }) => {
       return (
         <li key={Math.random()}>
           <a
