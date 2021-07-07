@@ -28,7 +28,9 @@ export const HomePage: React.FC = () => {
           mobileImgAlc={testProps_logo.mobileImgAlc}
           desktopImgSrc={testProps_logo.desktopImgSrc}
           desktopImgAlt={testProps_logo.desktopImgAlt}
-        />
+        >
+          Page Title
+        </HeaderLogo>
         <HeaderUser src={testProps_UserIcon.src} alt={testProps_UserIcon.alt}>
           <HeaderUserIcons classname={'icon-bell'} />
           <HeaderUserIcons classname={'icon-mail'} />
@@ -47,6 +49,13 @@ export const HomePage: React.FC = () => {
       </Navbar>
       <MainSection>
         <SubmenuItem name={'Item 1'}>
+          <SubmenuSubItem
+            href={testProps_subItemOff.href}
+            name={testProps_subItemOff.name}
+            isActive={testProps_subItemOff.active}
+          >
+            {testProps_subItemOff.name}
+          </SubmenuSubItem>{' '}
           <SubmenuSubItem
             href={testProps_subItemOff.href}
             name={testProps_subItemOff.name}

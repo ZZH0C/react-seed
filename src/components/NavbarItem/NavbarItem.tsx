@@ -2,17 +2,19 @@ import React from 'react';
 import classNames from 'classnames';
 
 interface NavbarElemProps extends React.HTMLAttributes<HTMLElement> {
-  isActive: true | false;
+  isActive: boolean;
+  url?: string;
 }
 
 export const NavbarItem: React.FC<NavbarElemProps> = ({
   isActive,
+  url,
   children,
 }) => {
   return (
     <li>
       <a
-        href="index.html"
+        href={url}
         title="Menu item"
         className={classNames('', { active: isActive })}
       >
