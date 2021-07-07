@@ -1,6 +1,6 @@
 import React from 'react';
-import { HeaderLogo } from '../Header_logo/HeaderLogo';
-import { HeaderUser } from '../Header_user/HeaderUser';
+import { HeaderLogo } from '../HeaderLogo/HeaderLogo';
+import { HeaderUser } from '../HeaderUser/HeaderUser';
 
 type HeadProps = React.HTMLAttributes<HTMLElement>;
 

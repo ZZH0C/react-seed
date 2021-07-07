@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavbarElem } from './Navbar_elem/Navbarelem';
+import { NavbarElem } from '../NavbarElem/Navbarelem';
 
 type NavbarProps = React.HTMLAttributes<HTMLElement>;
 
