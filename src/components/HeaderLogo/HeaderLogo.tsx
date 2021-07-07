@@ -1,13 +1,28 @@
 import React from 'react';
 
-type HeaderLogoProps = React.HTMLAttributes<HTMLElement>;
+interface HeaderLogoProps extends React.HTMLAttributes<HTMLElement> {
+  desktopImgSrc?: string;
+  mobileImgSrc?: string;
+  desktopImgAlt?: string;
+  mobileImgAlc?: string;
+}
 
-export const HeaderLogo: React.FC<HeaderLogoProps> = () => {
+export const HeaderLogo: React.FC<HeaderLogoProps> = ({
+  desktopImgAlt,
+  desktopImgSrc,
+  mobileImgSrc,
+  mobileImgAlc,
+}) => {
   return (
     <div className="logoBlock">
       <a href="index.html">
-        <img alt="1" src="images/logotype.png" className="logo" title="Logo" />
-        <img alt="2" src="images/logotypeMobile.png" className="logoMobile" />
+        <img
+          alt={desktopImgAlt}
+          src={desktopImgSrc}
+          className="logo"
+          title="Logo"
+        />
+        <img alt={mobileImgAlc} src={mobileImgSrc} className="logoMobile" />
       </a>
       <span>Page title</span>
     </div>

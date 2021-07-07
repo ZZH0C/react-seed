@@ -13,16 +13,26 @@ import {
   testPropsNavBarOn,
   testPropsNavBarOff,
   testProps_UserIcon,
+  testProps_logo,
 } from '../../components/mockProps';
 import { SubmenuSubItem } from '../../components/Submenu/SubmenuSubItem/SubmenuSubItem';
+import { HeaderUserIcons } from '../../components/HeaderUserIcons/HeaderUserIcons';
 
 export const HomePage: React.FC = () => {
   return (
     <section>
       <Button styleType="primary">Ok!</Button>
       <Head>
-        <HeaderLogo />
-        <HeaderUser src={testProps_UserIcon.src} alt={testProps_UserIcon.alt} />
+        <HeaderLogo
+          mobileImgSrc={testProps_logo.mobileImgSrc}
+          mobileImgAlc={testProps_logo.mobileImgAlc}
+          desktopImgSrc={testProps_logo.desktopImgSrc}
+          desktopImgAlt={testProps_logo.desktopImgAlt}
+        />
+        <HeaderUser src={testProps_UserIcon.src} alt={testProps_UserIcon.alt}>
+          <HeaderUserIcons classname={'icon-bell'} />
+          <HeaderUserIcons classname={'icon-mail'} />
+        </HeaderUser>
       </Head>
       <Navbar>
         <NavbarItem isActive={testPropsNavBarOff.isActive}>

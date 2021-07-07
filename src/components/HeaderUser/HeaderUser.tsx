@@ -1,15 +1,17 @@
 import React from 'react';
-import { HeaderUserIcons } from '../HeaderUserIcons/HeaderUserIcons';
 interface HeaderUserProps extends React.HTMLAttributes<HTMLElement> {
   src?: string;
   alt?: string;
 }
 
-export const HeaderUser: React.FC<HeaderUserProps> = ({ src, alt }) => {
+export const HeaderUser: React.FC<HeaderUserProps> = ({
+  src,
+  alt,
+  children,
+}) => {
   return (
     <div className="header-comp pull-right">
-      <HeaderUserIcons style={'headerIcon icon-bell'} />
-      <HeaderUserIcons style={'headerIcon icon-mail'} />
+      {children}
       <a href="./index.html" className="profile">
         <span>User name</span>
         <img alt={alt} src={src} />

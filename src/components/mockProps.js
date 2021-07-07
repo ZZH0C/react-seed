@@ -24,3 +24,10 @@ export const testProps_UserIcon = {
   alt: 'Search icon',
   src: 'images/profilePhoto.png',
 };
+
+export const testProps_logo = {
+  desktopImgSrc: 'images/logotype.png',
+  mobileImgSrc: 'images/logotypeMobile.png',
+  desktopImgAlt: 'logo',
+  mobileImgAlc: 'logo',
+};
