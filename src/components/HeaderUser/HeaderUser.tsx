@@ -1,5 +1,5 @@
 import React from 'react';
-import { HeaderUserIcons } from '../Header_user_icons/HeaderUserIcons';
+import { HeaderUserIcons } from '../HeaderUserIcons/HeaderUserIcons';
 type HeaderUserProps = React.HTMLAttributes<HTMLElement>;
 
 export const HeaderUser: React.FC<HeaderUserProps> = () => {

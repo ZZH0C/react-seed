@@ -1,5 +1,5 @@
 import React from 'react';
-import { MainSectionSubmenuItem } from './Mainsection_submenu_item/MainSectionSubmenuItem';
+import { MainSectionSubmenuItem } from './MainSectionSubMenuItem/MainSectionSubmenuItem';
 type MainSectionSubmenuProps = React.HTMLAttributes<HTMLElement>;
 
 export const MainSectionSubmenu: React.FC<MainSectionSubmenuProps> = () => {
