@@ -32,23 +32,19 @@ function reducer(
       throw new Error();
   }
 }
-
 const initialState = { userData: {}, isLogged: false };
 
 export const HomePage: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const responseGoogle = (response: any) => {
-    console.log(response);
     dispatch({ type: 'logIn', user: response, isLogged: true });
   };
 
   const logout = () => {
-    console.log('logout');
     dispatch({ type: 'logOut', user: null, isLogged: false });
   };
 
-  console.log(state);
   return (
     <section>
       <GoogleLogin
