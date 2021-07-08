@@ -32,7 +32,7 @@ function reducer(
       throw new Error();
   }
 }
-const initialState = { userData: {}, isLogged: false };
+const initialState = { userData: null, isLogged: false };
 
 export const HomePage: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -53,6 +53,7 @@ export const HomePage: React.FC = () => {
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
         disabled={state.isLogged}
+        disabledStyle={{ display: 'none' }}
       />
       <GoogleLogout
         clientId={
@@ -62,6 +63,7 @@ export const HomePage: React.FC = () => {
         onLogoutSuccess={logout}
         onFailure={logout}
         disabled={!state.isLogged}
+        disabledStyle={{ display: 'none' }}
       />
       <Button
         styleType="primary"
