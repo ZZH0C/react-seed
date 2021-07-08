@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { Button } from '../../components/Button/Button';
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { Head } from '../../components/Head/Head';
 import { Navbar } from '../../components/Navbar/Navbar';
 import { MainSection } from '../../components/Mainsection/MainSection';
@@ -18,10 +19,62 @@ import {
 import { SubmenuSubItem } from '../../components/Submenu/SubmenuSubItem/SubmenuSubItem';
 import { HeaderUserIcons } from '../../components/HeaderUserIcons/HeaderUserIcons';
 
+function reducer(
+  state: { userData: unknown; isLogged: boolean },
+  action: { type: string; user: unknown; isLogged: boolean },
+) {
+  switch (action.type) {
+    case 'logIn':
+      return { userData: action.user, isLogged: action.isLogged };
+    case 'logOut':
+      return { userData: action.user, isLogged: action.isLogged };
+    default:
+      throw new Error();
+  }
+}
+
+const initialState = { userData: {}, isLogged: false };
+
 export const HomePage: React.FC = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const responseGoogle = (response: any) => {
+    console.log(response);
+    dispatch({ type: 'logIn', user: response, isLogged: true });
+  };
+
+  const logout = () => {
+    console.log('logout');
+    dispatch({ type: 'logOut', user: null, isLogged: false });
+  };
+
+  console.log(state);
   return (
     <section>
-      <Button styleType="primary">Ok!</Button>
+      <GoogleLogin
+        clientId="386327906890-ce0q1vn2cja1ellekvjj6hmqah4g901c.apps.googleusercontent.com"
+        buttonText="Login"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        disabled={state.isLogged}
+      />
+      <GoogleLogout
+        clientId={
+          '386327906890-ce0q1vn2cja1ellekvjj6hmqah4g901c.apps.googleusercontent.com'
+        }
+        buttonText="Logout"
+        onLogoutSuccess={logout}
+        onFailure={logout}
+        disabled={!state.isLogged}
+      />
+      <Button
+        styleType="primary"
+        onClick={() => {
+          console.log(state);
+        }}
+      >
+        Check login
+      </Button>
       <Head>
         <HeaderLogo
           mobileImgSrc={testProps_logo.mobileImgSrc}
