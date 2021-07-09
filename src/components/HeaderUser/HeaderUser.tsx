@@ -6,7 +6,7 @@ interface HeaderUserProps extends React.HTMLAttributes<HTMLElement> {
   alt?: string;
 }
 
-async function testFetch(token: string) {
+async function getMessageList(token: string) {
   const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages?access_token=${token}`;
   const response = await fetch(url);
   if (response.ok) {
@@ -57,7 +57,7 @@ export const HeaderUser: React.FC<HeaderUserProps> = ({ children }) => {
         onClick={() => {
           if (userData)
             if ('accessToken' in userData) {
-              testFetch(userData.accessToken).then((r) => console.log(r));
+              getMessageList(userData.accessToken).then((r) => console.log(r));
             }
         }}
       >
