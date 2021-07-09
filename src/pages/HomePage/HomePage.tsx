@@ -1,6 +1,11 @@
 import React, { useReducer } from 'react';
 import { Button } from '../../components/Button/Button';
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import {
+  GoogleLogin,
+  GoogleLoginResponse,
+  GoogleLoginResponseOffline,
+  GoogleLogout,
+} from 'react-google-login';
 import { Head } from '../../components/Head/Head';
 import { Navbar } from '../../components/Navbar/Navbar';
 import { MainSection } from '../../components/Mainsection/MainSection';
@@ -18,27 +23,47 @@ import {
 } from '../../components/mockProps';
 import { SubmenuSubItem } from '../../components/Submenu/SubmenuSubItem/SubmenuSubItem';
 import { HeaderUserIcons } from '../../components/HeaderUserIcons/HeaderUserIcons';
+import { UserProfileData } from '../../models/UserProfileData';
+
+type UserState = UserProfileData | null;
+
+interface LoginState {
+  userData: UserState;
+  isLogged: boolean;
+}
+const initialState: LoginState = { userData: null, isLogged: false };
 
 function reducer(
-  state: { userData: unknown; isLogged: boolean },
-  action: { type: string; user: unknown; isLogged: boolean },
-) {
+  state: LoginState,
+  action: { type: string; user: UserProfileData | null; isLogged: boolean },
+): LoginState {
   switch (action.type) {
     case 'logIn':
-      return { userData: action.user, isLogged: action.isLogged };
+      return {
+        userData: action.user as UserProfileData | null,
+        isLogged: action.isLogged,
+      };
     case 'logOut':
-      return { userData: action.user, isLogged: action.isLogged };
+      return {
+        userData: action.user as UserProfileData | null,
+        isLogged: action.isLogged,
+      };
     default:
       throw new Error();
   }
 }
-const initialState = { userData: null, isLogged: false };
+
+const UserContext = React.createContext<UserState>(initialState.userData);
 
 export const HomePage: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const responseGoogle = (response: any) => {
-    dispatch({ type: 'logIn', user: response, isLogged: true });
+  const responseGoogle = (
+    response: GoogleLoginResponse | GoogleLoginResponseOffline,
+  ) => {
+    if ('profileObj' in response) {
+      dispatch({ type: 'logIn', user: response.profileObj, isLogged: true });
+    }
   };
 
   const logout = () => {
@@ -46,112 +71,114 @@ export const HomePage: React.FC = () => {
   };
 
   return (
-    <section>
-      <GoogleLogin
-        clientId="386327906890-ce0q1vn2cja1ellekvjj6hmqah4g901c.apps.googleusercontent.com"
-        buttonText="Login"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        disabled={state.isLogged}
-        disabledStyle={{ display: 'none' }}
-      />
-      <GoogleLogout
-        clientId={
-          '386327906890-ce0q1vn2cja1ellekvjj6hmqah4g901c.apps.googleusercontent.com'
-        }
-        buttonText="Logout"
-        onLogoutSuccess={logout}
-        onFailure={logout}
-        disabled={!state.isLogged}
-        disabledStyle={{ display: 'none' }}
-      />
-      <Button
-        styleType="primary"
-        onClick={() => {
-          console.log(state);
-        }}
-      >
-        Check login
-      </Button>
-      <Head>
-        <HeaderLogo
-          mobileImgSrc={testProps_logo.mobileImgSrc}
-          mobileImgAlc={testProps_logo.mobileImgAlc}
-          desktopImgSrc={testProps_logo.desktopImgSrc}
-          desktopImgAlt={testProps_logo.desktopImgAlt}
+    <UserContext.Provider value={state.userData}>
+      <section>
+        <GoogleLogin
+          clientId="386327906890-ce0q1vn2cja1ellekvjj6hmqah4g901c.apps.googleusercontent.com"
+          buttonText="Login"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          disabled={state.isLogged}
+          disabledStyle={{ display: 'none' }}
+        />
+        <GoogleLogout
+          clientId={
+            '386327906890-ce0q1vn2cja1ellekvjj6hmqah4g901c.apps.googleusercontent.com'
+          }
+          buttonText="Logout"
+          onLogoutSuccess={logout}
+          onFailure={logout}
+          disabled={!state.isLogged}
+          disabledStyle={{ display: 'none' }}
+        />
+        <Button
+          styleType="primary"
+          onClick={() => {
+            console.log(state);
+          }}
         >
-          Page Title
-        </HeaderLogo>
-        <HeaderUser src={testProps_UserIcon.src} alt={testProps_UserIcon.alt}>
-          <HeaderUserIcons classname={'icon-bell'} />
-          <HeaderUserIcons classname={'icon-mail'} />
-        </HeaderUser>
-      </Head>
-      <Navbar>
-        <NavbarItem isActive={testPropsNavBarOff.isActive}>
-          {testPropsNavBarOff.content}
-        </NavbarItem>
-        <NavbarItem isActive={testPropsNavBarOff.isActive}>
-          {testPropsNavBarOff.content}
-        </NavbarItem>
-        <NavbarItem isActive={testPropsNavBarOn.isActive}>
-          {testPropsNavBarOn.content}
-        </NavbarItem>
-      </Navbar>
-      <MainSection>
-        <SubmenuItem name={'Item 1'}>
-          <SubmenuSubItem
-            href={testProps_subItemOff.href}
-            name={testProps_subItemOff.name}
-            isActive={testProps_subItemOff.active}
+          Check login
+        </Button>
+        <Head>
+          <HeaderLogo
+            mobileImgSrc={testProps_logo.mobileImgSrc}
+            mobileImgAlc={testProps_logo.mobileImgAlc}
+            desktopImgSrc={testProps_logo.desktopImgSrc}
+            desktopImgAlt={testProps_logo.desktopImgAlt}
           >
-            {testProps_subItemOff.name}
-          </SubmenuSubItem>{' '}
-          <SubmenuSubItem
-            href={testProps_subItemOff.href}
-            name={testProps_subItemOff.name}
-            isActive={testProps_subItemOff.active}
-          >
-            {testProps_subItemOff.name}
-          </SubmenuSubItem>
-        </SubmenuItem>
-        <SubmenuItem name={'Item 2'}>
-          <SubmenuSubItem
-            href={testProps_subItemOff.href}
-            name={testProps_subItemOff.name}
-            isActive={testProps_subItemOff.active}
-          >
-            {testProps_subItemOff.name}
-          </SubmenuSubItem>
-        </SubmenuItem>
-        <SubmenuItem name={'Item 3'}>
-          <SubmenuSubItem
-            href={testProps_subItemOn.href}
-            name={testProps_subItemOn.name}
-            isActive={testProps_subItemOn.active}
-          >
-            {testProps_subItemOn.name}
-          </SubmenuSubItem>
-        </SubmenuItem>
-        <SubmenuItem name={'Item 4'}>
-          <SubmenuSubItem
-            href={testProps_subItemOff.href}
-            name={testProps_subItemOff.name}
-            isActive={testProps_subItemOff.active}
-          >
-            {testProps_subItemOff.name}
-          </SubmenuSubItem>
-        </SubmenuItem>
-        <SubmenuItem name={'Item 5'}>
-          <SubmenuSubItem
-            href={testProps_subItemOff.href}
-            name={testProps_subItemOff.name}
-            isActive={testProps_subItemOff.active}
-          >
-            {testProps_subItemOff.name}
-          </SubmenuSubItem>
-        </SubmenuItem>
-      </MainSection>
-    </section>
+            Page Title
+          </HeaderLogo>
+          <HeaderUser src={testProps_UserIcon.src} alt={testProps_UserIcon.alt}>
+            <HeaderUserIcons classname={'icon-bell'} />
+            <HeaderUserIcons classname={'icon-mail'} />
+          </HeaderUser>
+        </Head>
+        <Navbar>
+          <NavbarItem isActive={testPropsNavBarOff.isActive}>
+            {testPropsNavBarOff.content}
+          </NavbarItem>
+          <NavbarItem isActive={testPropsNavBarOff.isActive}>
+            {testPropsNavBarOff.content}
+          </NavbarItem>
+          <NavbarItem isActive={testPropsNavBarOn.isActive}>
+            {testPropsNavBarOn.content}
+          </NavbarItem>
+        </Navbar>
+        <MainSection>
+          <SubmenuItem name={'Item 1'}>
+            <SubmenuSubItem
+              href={testProps_subItemOff.href}
+              name={testProps_subItemOff.name}
+              isActive={testProps_subItemOff.active}
+            >
+              {testProps_subItemOff.name}
+            </SubmenuSubItem>{' '}
+            <SubmenuSubItem
+              href={testProps_subItemOff.href}
+              name={testProps_subItemOff.name}
+              isActive={testProps_subItemOff.active}
+            >
+              {testProps_subItemOff.name}
+            </SubmenuSubItem>
+          </SubmenuItem>
+          <SubmenuItem name={'Item 2'}>
+            <SubmenuSubItem
+              href={testProps_subItemOff.href}
+              name={testProps_subItemOff.name}
+              isActive={testProps_subItemOff.active}
+            >
+              {testProps_subItemOff.name}
+            </SubmenuSubItem>
+          </SubmenuItem>
+          <SubmenuItem name={'Item 3'}>
+            <SubmenuSubItem
+              href={testProps_subItemOn.href}
+              name={testProps_subItemOn.name}
+              isActive={testProps_subItemOn.active}
+            >
+              {testProps_subItemOn.name}
+            </SubmenuSubItem>
+          </SubmenuItem>
+          <SubmenuItem name={'Item 4'}>
+            <SubmenuSubItem
+              href={testProps_subItemOff.href}
+              name={testProps_subItemOff.name}
+              isActive={testProps_subItemOff.active}
+            >
+              {testProps_subItemOff.name}
+            </SubmenuSubItem>
+          </SubmenuItem>
+          <SubmenuItem name={'Item 5'}>
+            <SubmenuSubItem
+              href={testProps_subItemOff.href}
+              name={testProps_subItemOff.name}
+              isActive={testProps_subItemOff.active}
+            >
+              {testProps_subItemOff.name}
+            </SubmenuSubItem>
+          </SubmenuItem>
+        </MainSection>
+      </section>
+    </UserContext.Provider>
   );
 };
