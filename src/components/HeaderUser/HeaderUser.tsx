@@ -7,7 +7,7 @@ interface HeaderUserProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 async function getMessageList(token: string) {
-  const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages?access_token=${token}`;
+  const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=3&access_token=${token}`;
   const response = await fetch(url);
   if (response.ok) {
     return await response.json();
