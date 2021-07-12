@@ -23,8 +23,8 @@ function reducer(
       };
     case 'logOut':
       return {
-        userData: action.user as UserState | null,
-        isLogged: action.isLogged,
+        userData: null,
+        isLogged: false,
       };
     default:
       throw new Error();
