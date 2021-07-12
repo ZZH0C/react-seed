@@ -27,17 +27,16 @@ export const HeaderUser: React.FC<HeaderUserProps> = ({ children }) => {
   });
 
   useEffect(() => {
-    if (userData) {
-      if ('profileObj' in userData) {
-        setProfileSrc({
-          iconSrc: userData.profileObj.imageUrl,
-          name: userData.profileObj.name,
-        });
-      }
-    } else {
+    if (!userData) {
       setProfileSrc({
         name: '',
         iconSrc: emptyProfilePictureSrc,
+      });
+    }
+    if (userData && 'profileObj' in userData) {
+      setProfileSrc({
+        iconSrc: userData.profileObj.imageUrl,
+        name: userData.profileObj.name,
       });
     }
   }, [userData]);
@@ -57,7 +56,11 @@ export const HeaderUser: React.FC<HeaderUserProps> = ({ children }) => {
         onClick={() => {
           if (userData)
             if ('accessToken' in userData) {
-              getMessageList(userData.accessToken).then((r) => console.log(r));
+              getMessageList(userData.accessToken).then((r) =>
+                r.messages.forEach((e: any) => {
+                  console.log(e.id);
+                }),
+              );
             }
         }}
       >

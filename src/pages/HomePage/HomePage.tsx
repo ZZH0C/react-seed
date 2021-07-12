@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import { Button } from '../../components/Button/Button';
 import {
   GoogleLogin,
@@ -23,6 +23,7 @@ import {
 } from '../../components/mockProps';
 import { SubmenuSubItem } from '../../components/Submenu/SubmenuSubItem/SubmenuSubItem';
 import { HeaderUserIcons } from '../../components/HeaderUserIcons/HeaderUserIcons';
+import { useSetUserData } from '../../hooks/useSetUserData';
 
 type UserState = GoogleLoginResponse | GoogleLoginResponseOffline | null;
 
@@ -32,31 +33,12 @@ interface LoginState {
 }
 const initialState: LoginState = { userData: null, isLogged: false };
 
-function reducer(
-  state: LoginState,
-  action: { type: string; user: UserState | null; isLogged: boolean },
-): LoginState {
-  switch (action.type) {
-    case 'logIn':
-      return {
-        userData: action.user as UserState | null,
-        isLogged: action.isLogged,
-      };
-    case 'logOut':
-      return {
-        userData: action.user as UserState | null,
-        isLogged: action.isLogged,
-      };
-    default:
-      throw new Error();
-  }
-}
 export const UserContext = React.createContext<UserState>(
   initialState.userData,
 );
 
 export const HomePage: React.FC = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const { state, dispatch } = useSetUserData();
 
   const responseGoogle = (
     response: GoogleLoginResponse | GoogleLoginResponseOffline,
