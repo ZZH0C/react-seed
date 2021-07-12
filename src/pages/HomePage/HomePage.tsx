@@ -23,7 +23,7 @@ import {
 } from '../../components/mockProps';
 import { SubmenuSubItem } from '../../components/Submenu/SubmenuSubItem/SubmenuSubItem';
 import { HeaderUserIcons } from '../../components/HeaderUserIcons/HeaderUserIcons';
-import { useSetUserData } from '../../hooks/useSetUserData';
+import { useUserData } from '../../hooks/useUserData';
 
 type UserState = GoogleLoginResponse | GoogleLoginResponseOffline | null;
 
@@ -38,7 +38,7 @@ export const UserContext = React.createContext<UserState>(
 );
 
 export const HomePage: React.FC = () => {
-  const { state, dispatch } = useSetUserData();
+  const { state, dispatch } = useUserData();
 
   const responseGoogle = (
     response: GoogleLoginResponse | GoogleLoginResponseOffline,
@@ -107,7 +107,7 @@ export const HomePage: React.FC = () => {
           </NavbarItem>
         </Navbar>
         <MainSection>
-          <SubmenuItem name={'Item 1'}>
+          <SubmenuItem name={testProps_subItemOff.name}>
             <SubmenuSubItem
               href={testProps_subItemOff.href}
               name={testProps_subItemOff.name}
@@ -123,7 +123,7 @@ export const HomePage: React.FC = () => {
               {testProps_subItemOff.name}
             </SubmenuSubItem>
           </SubmenuItem>
-          <SubmenuItem name={'Item 2'}>
+          <SubmenuItem name={testProps_subItemOff.name}>
             <SubmenuSubItem
               href={testProps_subItemOff.href}
               name={testProps_subItemOff.name}
@@ -132,7 +132,7 @@ export const HomePage: React.FC = () => {
               {testProps_subItemOff.name}
             </SubmenuSubItem>
           </SubmenuItem>
-          <SubmenuItem name={'Item 3'}>
+          <SubmenuItem name={testProps_subItemOn.name}>
             <SubmenuSubItem
               href={testProps_subItemOn.href}
               name={testProps_subItemOn.name}
@@ -141,7 +141,7 @@ export const HomePage: React.FC = () => {
               {testProps_subItemOn.name}
             </SubmenuSubItem>
           </SubmenuItem>
-          <SubmenuItem name={'Item 4'}>
+          <SubmenuItem name={testProps_subItemOff.name}>
             <SubmenuSubItem
               href={testProps_subItemOff.href}
               name={testProps_subItemOff.name}
@@ -150,7 +150,7 @@ export const HomePage: React.FC = () => {
               {testProps_subItemOff.name}
             </SubmenuSubItem>
           </SubmenuItem>
-          <SubmenuItem name={'Item 5'}>
+          <SubmenuItem name={testProps_subItemOff.name}>
             <SubmenuSubItem
               href={testProps_subItemOff.href}
               name={testProps_subItemOff.name}

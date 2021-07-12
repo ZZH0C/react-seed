@@ -6,16 +6,6 @@ interface HeaderUserProps extends React.HTMLAttributes<HTMLElement> {
   alt?: string;
 }
 
-async function getMessageList(token: string) {
-  const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=3&access_token=${token}`;
-  const response = await fetch(url);
-  if (response.ok) {
-    return await response.json();
-  } else {
-    alert('Ошибка HTTP: ' + response.status);
-  }
-}
-
 export const HeaderUser: React.FC<HeaderUserProps> = ({ children }) => {
   const userData = useContext(UserContext);
   const emptyProfilePictureSrc =
@@ -51,21 +41,6 @@ export const HeaderUser: React.FC<HeaderUserProps> = ({ children }) => {
       <a href="./index.html" className="btn btn-xs btn-header">
         <i className="headerIcon icon-search" />
       </a>
-
-      <button
-        onClick={() => {
-          if (userData)
-            if ('accessToken' in userData) {
-              getMessageList(userData.accessToken).then((r) =>
-                r.messages.forEach((e: any) => {
-                  console.log(e.id);
-                }),
-              );
-            }
-        }}
-      >
-        Click me to test!
-      </button>
     </div>
   );
 };
