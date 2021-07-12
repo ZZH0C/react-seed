@@ -63,14 +63,6 @@ export const HomePage: React.FC = () => {
           disabled={!state.isLogged}
           disabledStyle={{ display: 'none' }}
         />
-        <Button
-          styleType="primary"
-          onClick={() => {
-            console.log(state);
-          }}
-        >
-          Check login
-        </Button>
         <Head>
           <HeaderLogo
             mobileImgSrc={testProps_logo.mobileImgSrc}
