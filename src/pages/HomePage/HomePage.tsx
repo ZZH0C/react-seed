@@ -8,7 +8,7 @@ import {
 } from 'react-google-login';
 import { Head } from '../../components/Head/Head';
 import { Navbar } from '../../components/Navbar/Navbar';
-import { MainSection } from '../../components/Mainsection/MainSection';
+import { MainContainer } from '../../components/MainContainer/MainContainer';
 import { NavbarItem } from '../../components/NavbarItem/NavbarItem';
 import { HeaderLogo } from '../../components/HeaderLogo/HeaderLogo';
 import { HeaderUser } from '../../components/HeaderUser/HeaderUser';
@@ -24,12 +24,13 @@ import { SubmenuSubItem } from '../../components/Submenu/SubmenuSubItem/SubmenuS
 import { HeaderUserIcons } from '../../components/HeaderUserIcons/HeaderUserIcons';
 import { useUserData } from '../../hooks/useUserData';
 import { useUserContext } from '../../hooks/useUserContext';
+import { Submenu } from '../../components/Submenu/Submenu';
+import { MainSection } from '../../components/MainSection/MainSection';
 
 export const UserContext = useUserContext;
 
 export const HomePage: React.FC = () => {
   const { state, dispatch } = useUserData();
-
   const responseGoogle = (
     response: GoogleLoginResponse | GoogleLoginResponseOffline,
   ) => {
@@ -37,7 +38,6 @@ export const HomePage: React.FC = () => {
       dispatch({ type: 'logIn', user: response, isLogged: true });
     }
   };
-
   const logout = () => {
     dispatch({ type: 'logOut', user: null, isLogged: false });
   };
@@ -96,60 +96,63 @@ export const HomePage: React.FC = () => {
             {testPropsNavBarOn.content}
           </NavbarItem>
         </Navbar>
-        <MainSection>
-          <SubmenuItem name={testProps_subItemOff.name}>
-            <SubmenuSubItem
-              href={testProps_subItemOff.href}
-              name={testProps_subItemOff.name}
-              isActive={testProps_subItemOff.active}
-            >
-              {testProps_subItemOff.name}
-            </SubmenuSubItem>{' '}
-            <SubmenuSubItem
-              href={testProps_subItemOff.href}
-              name={testProps_subItemOff.name}
-              isActive={testProps_subItemOff.active}
-            >
-              {testProps_subItemOff.name}
-            </SubmenuSubItem>
-          </SubmenuItem>
-          <SubmenuItem name={testProps_subItemOff.name}>
-            <SubmenuSubItem
-              href={testProps_subItemOff.href}
-              name={testProps_subItemOff.name}
-              isActive={testProps_subItemOff.active}
-            >
-              {testProps_subItemOff.name}
-            </SubmenuSubItem>
-          </SubmenuItem>
-          <SubmenuItem name={testProps_subItemOn.name}>
-            <SubmenuSubItem
-              href={testProps_subItemOn.href}
-              name={testProps_subItemOn.name}
-              isActive={testProps_subItemOn.active}
-            >
-              {testProps_subItemOn.name}
-            </SubmenuSubItem>
-          </SubmenuItem>
-          <SubmenuItem name={testProps_subItemOff.name}>
-            <SubmenuSubItem
-              href={testProps_subItemOff.href}
-              name={testProps_subItemOff.name}
-              isActive={testProps_subItemOff.active}
-            >
-              {testProps_subItemOff.name}
-            </SubmenuSubItem>
-          </SubmenuItem>
-          <SubmenuItem name={testProps_subItemOff.name}>
-            <SubmenuSubItem
-              href={testProps_subItemOff.href}
-              name={testProps_subItemOff.name}
-              isActive={testProps_subItemOff.active}
-            >
-              {testProps_subItemOff.name}
-            </SubmenuSubItem>
-          </SubmenuItem>
-        </MainSection>
+        <MainContainer>
+          <Submenu>
+            <SubmenuItem name={testProps_subItemOff.name}>
+              <SubmenuSubItem
+                href={testProps_subItemOff.href}
+                name={testProps_subItemOff.name}
+                isActive={testProps_subItemOff.active}
+              >
+                {testProps_subItemOff.name}
+              </SubmenuSubItem>{' '}
+              <SubmenuSubItem
+                href={testProps_subItemOff.href}
+                name={testProps_subItemOff.name}
+                isActive={testProps_subItemOff.active}
+              >
+                {testProps_subItemOff.name}
+              </SubmenuSubItem>
+            </SubmenuItem>
+            <SubmenuItem name={testProps_subItemOff.name}>
+              <SubmenuSubItem
+                href={testProps_subItemOff.href}
+                name={testProps_subItemOff.name}
+                isActive={testProps_subItemOff.active}
+              >
+                {testProps_subItemOff.name}
+              </SubmenuSubItem>
+            </SubmenuItem>
+            <SubmenuItem name={testProps_subItemOn.name}>
+              <SubmenuSubItem
+                href={testProps_subItemOn.href}
+                name={testProps_subItemOn.name}
+                isActive={testProps_subItemOn.active}
+              >
+                {testProps_subItemOn.name}
+              </SubmenuSubItem>
+            </SubmenuItem>
+            <SubmenuItem name={testProps_subItemOff.name}>
+              <SubmenuSubItem
+                href={testProps_subItemOff.href}
+                name={testProps_subItemOff.name}
+                isActive={testProps_subItemOff.active}
+              >
+                {testProps_subItemOff.name}
+              </SubmenuSubItem>
+            </SubmenuItem>
+            <SubmenuItem name={testProps_subItemOff.name}>
+              <SubmenuSubItem
+                href={testProps_subItemOff.href}
+                name={testProps_subItemOff.name}
+                isActive={testProps_subItemOff.active}
+              >
+                {testProps_subItemOff.name}
+              </SubmenuSubItem>
+            </SubmenuItem>
+          </Submenu>
+          <MainSection></MainSection>
+        </MainContainer>
       </section>
     </UserContext.Provider>
   );
