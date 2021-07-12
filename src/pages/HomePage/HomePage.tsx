@@ -18,24 +18,14 @@ import {
   testProps_subItemOff,
   testPropsNavBarOn,
   testPropsNavBarOff,
-  testProps_UserIcon,
   testProps_logo,
 } from '../../components/mockProps';
 import { SubmenuSubItem } from '../../components/Submenu/SubmenuSubItem/SubmenuSubItem';
 import { HeaderUserIcons } from '../../components/HeaderUserIcons/HeaderUserIcons';
 import { useUserData } from '../../hooks/useUserData';
+import { useUserContext } from '../../hooks/useUserContext';
 
-type UserState = GoogleLoginResponse | GoogleLoginResponseOffline | null;
-
-interface LoginState {
-  userData: UserState;
-  isLogged: boolean;
-}
-const initialState: LoginState = { userData: null, isLogged: false };
-
-export const UserContext = React.createContext<UserState>(
-  initialState.userData,
-);
+export const UserContext = useUserContext;
 
 export const HomePage: React.FC = () => {
   const { state, dispatch } = useUserData();
@@ -90,7 +80,7 @@ export const HomePage: React.FC = () => {
           >
             Page Title
           </HeaderLogo>
-          <HeaderUser src={testProps_UserIcon.src} alt={testProps_UserIcon.alt}>
+          <HeaderUser>
             <HeaderUserIcons classname={'icon-bell'} />
             <HeaderUserIcons classname={'icon-mail'} />
           </HeaderUser>
