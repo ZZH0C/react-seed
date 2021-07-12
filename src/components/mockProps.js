@@ -1,12 +1,12 @@
 export const testProps_subItemOn = {
   href: 'index.html',
-  name: 'subitem 1',
+  name: 'subitem',
   active: true,
 };
 
 export const testProps_subItemOff = {
   href: 'index.html',
-  name: 'subitem 0',
+  name: 'subitem',
   active: false,
 };
 
