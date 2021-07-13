@@ -3,7 +3,6 @@ import axios from 'axios';
 
 async function getMessage(id: string, token: string | null) {
   const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages/${id}`;
-  // const response = await fetch(url);
 
   try {
     const response = await axios.get(url, {
@@ -12,7 +11,7 @@ async function getMessage(id: string, token: string | null) {
     console.log(response.data);
     return response.data;
   } catch (error) {
-    //   //TODO: write nice handler
+    //TODO: write nice error handler
     console.error(error);
   }
 }
@@ -27,7 +26,7 @@ async function getMessageList(token: string | null) {
     console.log(response.data);
     return response.data;
   } catch (error) {
-    //   //TODO: write nice handler
+    //TODO: write nice error handler
     console.error(error);
   }
 }
