@@ -8,7 +8,6 @@ async function getMessage(id: string, token: string | null) {
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     //TODO: write nice error handler
@@ -23,7 +22,6 @@ async function getMessageList(token: string | null) {
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     //TODO: write nice error handler
