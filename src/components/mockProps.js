@@ -1,11 +1,11 @@
 export const testProps_subItemOn = {
-  href: 'index.html',
+  href: '/',
   name: 'subitem',
   active: true,
 };
 
 export const testProps_subItemOff = {
-  href: 'index.html',
+  href: '/',
   name: 'subitem',
   active: false,
 };

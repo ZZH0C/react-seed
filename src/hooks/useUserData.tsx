@@ -18,6 +18,7 @@ function reducer(
   switch (action.type) {
     case 'logIn':
       return {
+        ...state,
         userData: action.user as UserState | null,
         isLogged: action.isLogged,
       };

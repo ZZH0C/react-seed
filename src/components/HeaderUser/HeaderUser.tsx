@@ -26,11 +26,11 @@ export const HeaderUser: React.FC<HeaderUserProps> = ({ children }) => {
   return (
     <div className="header-comp pull-right">
       {children}
-      <a href="./index.html" className="profile">
+      <a href="/" className="profile">
         <span>{profile.name}</span>
         <img alt={'userPick'} src={profile.iconSrc} />
       </a>
-      <a href="./index.html" className="btn btn-xs btn-header">
+      <a href="/" className="btn btn-xs btn-header">
         <i className="headerIcon icon-search" />
       </a>
     </div>

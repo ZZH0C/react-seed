@@ -30,12 +30,17 @@ export const UserContext = useUserContext;
 
 export const HomePage: React.FC = () => {
   const { state, dispatch } = useUserData();
+
   const responseGoogle = (
     response: GoogleLoginResponse | GoogleLoginResponseOffline,
   ) => {
     if ('profileObj' in response) {
       dispatch({ type: 'logIn', user: response, isLogged: true });
     }
+  };
+  const responseFailure = (resp: any) => {
+    // TODO: add error handler
+    throw new Error(resp.error);
   };
   const logout = () => {
     dispatch({ type: 'logOut', user: null, isLogged: false });
@@ -48,7 +53,7 @@ export const HomePage: React.FC = () => {
           clientId="386327906890-ce0q1vn2cja1ellekvjj6hmqah4g901c.apps.googleusercontent.com"
           buttonText="Login"
           onSuccess={responseGoogle}
-          onFailure={responseGoogle}
+          onFailure={responseFailure}
           disabled={state.isLogged}
           disabledStyle={{ display: 'none' }}
         />
@@ -58,7 +63,6 @@ export const HomePage: React.FC = () => {
           }
           buttonText="Logout"
           onLogoutSuccess={logout}
-          onFailure={logout}
           disabled={!state.isLogged}
           disabledStyle={{ display: 'none' }}
         />
