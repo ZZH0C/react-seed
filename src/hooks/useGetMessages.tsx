@@ -65,8 +65,9 @@ export const useGetMessages = () => {
   // const resetMessageList = () => {
   //   dispatch({ type: 'RESET', token: null });
   // };
-  const setMessageList = (token: string) => {
-    loadMessages(token).then((r) => setState(r));
+  const setMessageList = (token: string | null) => {
+    if (token) loadMessages(token).then((r) => setState(r));
+    if (!token) setState([]);
   };
   // return { state, resetMessageList, getMessageList };
   return { setMessageList, state };
