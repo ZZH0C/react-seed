@@ -3,18 +3,13 @@ import { UserContext } from '../../pages/HomePage/HomePage';
 
 interface HeaderUserProps extends React.HTMLAttributes<HTMLElement> {
   src?: string;
-  alt?: string;
 }
 
-const emptyProfilePictureSrc =
-  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
-
-export const HeaderUser: React.FC<HeaderUserProps> = ({ children }) => {
+export const HeaderUser: React.FC<HeaderUserProps> = ({ src, children }) => {
   const userData = useContext(UserContext);
-
   const profile = {
     name: '',
-    iconSrc: emptyProfilePictureSrc,
+    iconSrc: src,
   };
   if (userData && 'profileObj' in userData) {
     profile.name = userData.profileObj.name;

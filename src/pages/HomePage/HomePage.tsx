@@ -29,6 +29,9 @@ const clientId =
   '386327906890-ce0q1vn2cja1ellekvjj6hmqah4g901c.apps.googleusercontent.com';
 export const UserContext = useUserContext;
 
+const emptyProfilePictureSrc =
+  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
+
 export const HomePage: React.FC = () => {
   const { state, dispatch } = useUserData();
 
@@ -75,7 +78,7 @@ export const HomePage: React.FC = () => {
           >
             Page Title
           </HeaderLogo>
-          <HeaderUser>
+          <HeaderUser src={emptyProfilePictureSrc}>
             <HeaderUserIcons classname={'icon-bell'} />
             <HeaderUserIcons classname={'icon-mail'} />
           </HeaderUser>
