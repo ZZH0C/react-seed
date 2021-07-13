@@ -25,7 +25,8 @@ import { useUserData } from '../../hooks/useUserData';
 import { useUserContext } from '../../hooks/useUserContext';
 import { Submenu } from '../../components/Submenu/Submenu';
 import { MainSection } from '../../components/MainSection/MainSection';
-
+const clientId =
+  '386327906890-ce0q1vn2cja1ellekvjj6hmqah4g901c.apps.googleusercontent.com';
 export const UserContext = useUserContext;
 
 export const HomePage: React.FC = () => {
@@ -38,7 +39,8 @@ export const HomePage: React.FC = () => {
       dispatch({ type: 'logIn', user: response, isLogged: true });
     }
   };
-  const responseFailure = (resp: any) => {
+  const responseFailure = (resp: { error: string }) => {
+    console.log(resp);
     // TODO: add error handler
     throw new Error(resp.error);
   };
@@ -50,7 +52,7 @@ export const HomePage: React.FC = () => {
     <UserContext.Provider value={state.userData}>
       <section>
         <GoogleLogin
-          clientId="386327906890-ce0q1vn2cja1ellekvjj6hmqah4g901c.apps.googleusercontent.com"
+          clientId={clientId}
           buttonText="Login"
           onSuccess={responseGoogle}
           onFailure={responseFailure}
@@ -58,9 +60,7 @@ export const HomePage: React.FC = () => {
           disabledStyle={{ display: 'none' }}
         />
         <GoogleLogout
-          clientId={
-            '386327906890-ce0q1vn2cja1ellekvjj6hmqah4g901c.apps.googleusercontent.com'
-          }
+          clientId={clientId}
           buttonText="Logout"
           onLogoutSuccess={logout}
           disabled={!state.isLogged}
@@ -84,40 +84,12 @@ export const HomePage: React.FC = () => {
           <NavbarItem isActive={testPropsNavBarOff.isActive}>
             {testPropsNavBarOff.content}
           </NavbarItem>
-          <NavbarItem isActive={testPropsNavBarOff.isActive}>
-            {testPropsNavBarOff.content}
-          </NavbarItem>
           <NavbarItem isActive={testPropsNavBarOn.isActive}>
             {testPropsNavBarOn.content}
           </NavbarItem>
         </Navbar>
         <MainContainer>
           <Submenu>
-            <SubmenuItem name={testProps_subItemOff.name}>
-              <SubmenuSubItem
-                href={testProps_subItemOff.href}
-                name={testProps_subItemOff.name}
-                isActive={testProps_subItemOff.active}
-              >
-                {testProps_subItemOff.name}
-              </SubmenuSubItem>{' '}
-              <SubmenuSubItem
-                href={testProps_subItemOff.href}
-                name={testProps_subItemOff.name}
-                isActive={testProps_subItemOff.active}
-              >
-                {testProps_subItemOff.name}
-              </SubmenuSubItem>
-            </SubmenuItem>
-            <SubmenuItem name={testProps_subItemOff.name}>
-              <SubmenuSubItem
-                href={testProps_subItemOff.href}
-                name={testProps_subItemOff.name}
-                isActive={testProps_subItemOff.active}
-              >
-                {testProps_subItemOff.name}
-              </SubmenuSubItem>
-            </SubmenuItem>
             <SubmenuItem name={testProps_subItemOn.name}>
               <SubmenuSubItem
                 href={testProps_subItemOn.href}
@@ -125,15 +97,6 @@ export const HomePage: React.FC = () => {
                 isActive={testProps_subItemOn.active}
               >
                 {testProps_subItemOn.name}
-              </SubmenuSubItem>
-            </SubmenuItem>
-            <SubmenuItem name={testProps_subItemOff.name}>
-              <SubmenuSubItem
-                href={testProps_subItemOff.href}
-                name={testProps_subItemOff.name}
-                isActive={testProps_subItemOff.active}
-              >
-                {testProps_subItemOff.name}
               </SubmenuSubItem>
             </SubmenuItem>
             <SubmenuItem name={testProps_subItemOff.name}>
