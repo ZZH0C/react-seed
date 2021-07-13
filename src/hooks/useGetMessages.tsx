@@ -2,11 +2,13 @@ import { useState } from 'react';
 import axios from 'axios';
 
 async function getMessage(id: string, token: string | null) {
-  const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages/${id}?access_token=${token}`;
+  const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages/${id}`;
   // const response = await fetch(url);
 
   try {
-    const response = await axios.get(url);
+    const response = await axios.get(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     console.log(response.data);
     return response.data;
   } catch (error) {
@@ -16,9 +18,12 @@ async function getMessage(id: string, token: string | null) {
 }
 
 async function getMessageList(token: string | null) {
-  const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=3&access_token=${token}`;
+  const url =
+    'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=3';
   try {
-    const response = await axios.get(url);
+    const response = await axios.get(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     console.log(response.data);
     return response.data;
   } catch (error) {
