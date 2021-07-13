@@ -16,11 +16,9 @@ export const HeaderUser: React.FC<HeaderUserProps> = ({ children }) => {
     name: '',
     iconSrc: emptyProfilePictureSrc,
   };
-  if (userData) {
-    if ('profileObj' in userData) {
-      profile.name = userData.profileObj.name;
-      profile.iconSrc = userData.profileObj.imageUrl;
-    }
+  if (userData && 'profileObj' in userData) {
+    profile.name = userData.profileObj.name;
+    profile.iconSrc = userData.profileObj.imageUrl;
   }
 
   return (
