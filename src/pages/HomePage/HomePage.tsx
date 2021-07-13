@@ -112,7 +112,7 @@ export const HomePage: React.FC = () => {
               </SubmenuSubItem>
             </SubmenuItem>
           </Submenu>
-          <MainSection></MainSection>
+          <MainSection />
         </MainContainer>
       </section>
     </UserContext.Provider>
