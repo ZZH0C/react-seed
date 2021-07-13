@@ -7,7 +7,6 @@ type MainSectionProps = React.HTMLAttributes<HTMLElement>;
 export const MainSection: React.FC<MainSectionProps> = () => {
   const userData = useContext(UserContext);
   const { setMessageList, state } = useGetMessages();
-  // const [state, setState] = useState([]);
 
   const messages: any[] = [];
 
@@ -32,8 +31,6 @@ export const MainSection: React.FC<MainSectionProps> = () => {
         if (e.name === 'From') props.from = e.value;
         if (e.name === 'Subject') props.title = e.value;
       });
-
-      console.log(e);
       messages.push(
         <MessageItem
           key={Math.random()}
