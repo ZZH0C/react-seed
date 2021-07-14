@@ -34,14 +34,21 @@ export const MessagePage: React.FC = () => {
     text: '',
   };
   if (state) text = sortMessageData(state);
+  if (text.text === '') {
+    text.text = text.snippet;
+  }
   return (
-    <section className={'message_section_container'}>
-      <Link to="/home">To Home!</Link>
-      <div className={'message_section'}>
-        <span>From: {text.from}</span>
-        <span>Subject: {text.title}</span>
-        <span> {text.text}</span>
-      </div>
-    </section>
+    <>
+      <Link to="/home">
+        <button className={'button_home'}>Return Home</button>
+      </Link>
+      <section className={'message_section_container'}>
+        <div className={'message_section'}>
+          <span>From: {text.from}</span>
+          <span>Subject: {text.title}</span>
+          <span> {text.text}</span>
+        </div>
+      </section>
+    </>
   );
 };

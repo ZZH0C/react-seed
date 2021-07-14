@@ -32,7 +32,17 @@ code {
   width: 80%;
   height: 50%;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  span{
+  span {
     margin: 0.5em 0;
   }
+}
+
+.button_home {
+  border-radius: 2px;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 1px 0 rgba(0, 0, 0, 0.24);
+  color: rgba(0, 0, 0, 0.54);
+  margin: 0 1em;
+  height: 3em;
+  background: white;
 }
