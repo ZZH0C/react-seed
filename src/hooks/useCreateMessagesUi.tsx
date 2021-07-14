@@ -26,10 +26,15 @@ export const useCreateMessagesUi = () => {
         from: '',
         snippet: e.value.snippet,
         title: '',
+        date: '',
       };
       e.value.payload.headers.forEach((e: { name: string; value: string }) => {
         if (e.name === 'From') props.from = e.value;
         if (e.name === 'Subject') props.title = e.value;
+        if (e.name === 'Date') {
+          const messageDate = new Date(e.value);
+          props.date = `${messageDate.getDate()}-${messageDate.getMonth()}-${messageDate.getFullYear()}`;
+        }
       });
       messages.push(
         <MessageItem
@@ -37,6 +42,7 @@ export const useCreateMessagesUi = () => {
           fromWho={props.from}
           messageSnippet={props.snippet}
           messageTitle={props.title}
+          messageDate={props.date}
         />,
       );
     });
