@@ -1,5 +1,7 @@
 import { HeaderUser } from './HeaderUser';
+
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+
 import React from 'react';
 
 export default {

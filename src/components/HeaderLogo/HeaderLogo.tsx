@@ -16,7 +16,7 @@ export const HeaderLogo: React.FC<HeaderLogoProps> = ({
 }) => {
   return (
     <div className="logoBlock">
-      <a href="index.html">
+      <a href="/">
         <img
           alt={desktopImgAlt}
           src={desktopImgSrc}
