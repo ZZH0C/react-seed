@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { UserContext } from '../pages/HomePage/HomePage';
 import { useGetMessages } from './useGetMessages';
 import { GoogleMessage } from '../models/GoogleMessage';
 import { MessageItem } from '../components/MessageItem/MessageItem';
+import { UserContext } from '../App';
 
-const sortMessageData = (messageData: {
+export const sortMessageData = (messageData: {
   snippet: any;
   payload: any;
   forEach?: any;
@@ -14,6 +14,7 @@ const sortMessageData = (messageData: {
     snippet: messageData.snippet,
     title: '',
     date: '',
+    text: messageData.payload.parts[0].body.data,
   };
   messageData.payload.headers.forEach((e: { name: string; value: string }) => {
     if (e.name === 'From') result.from = e.value;
@@ -23,7 +24,6 @@ const sortMessageData = (messageData: {
       result.date = `${messageDate.getDate()}-${messageDate.getMonth()}-${messageDate.getFullYear()}`;
     }
   });
-
   return result;
 };
 
@@ -42,7 +42,6 @@ export const useCreateMessagesUi = () => {
       setMessageList(null);
     }
   }, [userData]);
-
   if (state.length > 0) {
     state.forEach((e: GoogleMessage) => {
       const messageData = sortMessageData(e.value);
@@ -53,6 +52,7 @@ export const useCreateMessagesUi = () => {
           messageSnippet={messageData.snippet}
           messageTitle={messageData.title}
           messageDate={messageData.date}
+          messageId={e.value.id}
         />,
       );
     });

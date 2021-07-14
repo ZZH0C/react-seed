@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { loadMessages } from '../api/userMessages';
+import { loadMessages } from '../api/userMessages/userMessages';
 
 export const useGetMessages = () => {
   const [state, setState] = useState<any>([]);

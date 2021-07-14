@@ -1,10 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface MessageItemProps extends React.HTMLAttributes<HTMLElement> {
   fromWho: string;
   messageTitle: string;
   messageSnippet: string;
   messageDate: string;
+  messageId: string;
 }
 
 export const MessageItem: React.FC<MessageItemProps> = ({
@@ -12,6 +14,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
   messageTitle,
   messageSnippet,
   messageDate,
+  messageId,
 }) => {
   return (
     <section className="media">
@@ -28,9 +31,16 @@ export const MessageItem: React.FC<MessageItemProps> = ({
           </div>
         </div>
         <div className="itemName">
-          <a href="/" className="media-heading" title="Message Title">
-            {messageTitle}
-          </a>
+          <Link
+            to={{
+              pathname: '/message',
+              state: messageId,
+            }}
+          >
+            <span className="media-heading" title="Message Title">
+              {messageTitle}
+            </span>
+          </Link>
           <span className="status pull-right" />
         </div>
         <p>{messageSnippet} </p>

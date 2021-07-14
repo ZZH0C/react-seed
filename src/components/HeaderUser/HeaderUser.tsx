@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { UserContext } from '../../pages/HomePage/HomePage';
+import { UserContext } from '../../App';
 
 interface HeaderUserProps extends React.HTMLAttributes<HTMLElement> {
   src?: string;

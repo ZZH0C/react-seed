@@ -33,6 +33,10 @@ export const loadMessages = async (token: string | null) => {
   const messageList = idList.messages.map(async (e: { id: string }) => {
     return await getMessage(e.id, token);
   });
-  const result = await Promise.allSettled(messageList);
-  return result;
+  return await Promise.allSettled(messageList);
+};
+
+export const loadOneMessage = async (id: string, token: string | null) => {
+  const message = await getMessage(id, token);
+  return await message;
 };
