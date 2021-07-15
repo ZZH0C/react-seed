@@ -2,7 +2,7 @@ import { GoogleMessage } from '../models/GoogleMessage';
 
 const convertDate = (date: string) => {
   const messageDate = new Date(date);
-  if (isNaN(messageDate.getDate())) {
+  if (messageDate.getDate() !== messageDate.getDate()) {
     return '';
   } else {
     return `${messageDate.getDate()}-${messageDate.getMonth()}-${messageDate.getFullYear()}`;
