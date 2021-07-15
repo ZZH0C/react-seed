@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../pages/HomePage/HomePage';
 
 interface MessageItemProps extends React.HTMLAttributes<HTMLElement> {
   fromWho: string;
@@ -16,6 +17,11 @@ export const MessageItem: React.FC<MessageItemProps> = ({
   messageDate,
   messageId,
 }) => {
+  const userData = useContext(UserContext);
+  let token = '';
+  if (userData && 'accessToken' in userData) {
+    token = userData.accessToken;
+  }
   return (
     <section className="media">
       <div className="media-body">
@@ -34,7 +40,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
           <Link
             to={{
               pathname: '/message',
-              state: messageId,
+              state: { id: messageId, token: token },
             }}
           >
             <span className="media-heading" title="Message Title">

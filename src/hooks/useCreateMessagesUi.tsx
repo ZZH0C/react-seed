@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import { useGetMessages } from './useGetMessages';
 import { GoogleMessage } from '../models/GoogleMessage';
 import { MessageItem } from '../components/MessageItem/MessageItem';
-import { UserContext } from '../App';
 import { sortMessageData } from './useSortMessageData';
+import { UserContext } from '../pages/HomePage/HomePage';
 
 export const useCreateMessagesUi = () => {
   const userData = useContext(UserContext);

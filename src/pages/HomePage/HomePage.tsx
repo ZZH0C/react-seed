@@ -18,58 +18,104 @@ import { SubmenuSubItem } from '../../components/Submenu/SubmenuSubItem/SubmenuS
 import { HeaderUserIcons } from '../../components/HeaderUserIcons/HeaderUserIcons';
 import { Submenu } from '../../components/Submenu/Submenu';
 import { MainSection } from '../../components/MainSection/MainSection';
+import {
+  GoogleLogin,
+  GoogleLoginResponse,
+  GoogleLoginResponseOffline,
+  GoogleLogout,
+} from 'react-google-login';
+import { useUserContext } from '../../hooks/useUserContext';
+import { useUserData } from '../../hooks/useUserData';
+
+export const UserContext = useUserContext;
+const clientId =
+  '843858826455-oe7ebu2uaj0bcfjujcntbo7mu72no2f7.apps.googleusercontent.com';
 
 const emptyProfilePictureSrc =
   'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
 
 export const HomePage: React.FC = () => {
+  const { state, dispatch } = useUserData();
+
+  const responseGoogle = (
+    response: GoogleLoginResponse | GoogleLoginResponseOffline,
+  ) => {
+    if ('profileObj' in response) {
+      dispatch({ type: 'logIn', user: response });
+    }
+  };
+  const responseFailure = (resp: { error: string }) => {
+    console.log(resp);
+    // TODO: add error handler
+    throw new Error(resp.error);
+  };
+  const logout = () => {
+    dispatch({ type: 'logOut', user: null });
+  };
   return (
     <section>
-      <Head>
-        <HeaderLogo
-          mobileImgSrc={testProps_logo.mobileImgSrc}
-          mobileImgAlc={testProps_logo.mobileImgAlc}
-          desktopImgSrc={testProps_logo.desktopImgSrc}
-          desktopImgAlt={testProps_logo.desktopImgAlt}
-        >
-          Page Title
-        </HeaderLogo>
-        <HeaderUser src={emptyProfilePictureSrc}>
-          <HeaderUserIcons classname={'icon-bell'} />
-          <HeaderUserIcons classname={'icon-mail'} />
-        </HeaderUser>
-      </Head>
-      <Navbar>
-        <NavbarItem isActive={testPropsNavBarOff.isActive}>
-          {testPropsNavBarOff.content}
-        </NavbarItem>
-        <NavbarItem isActive={testPropsNavBarOn.isActive}>
-          {testPropsNavBarOn.content}
-        </NavbarItem>
-      </Navbar>
-      <MainContainer>
-        <Submenu>
-          <SubmenuItem name={testProps_subItemOn.name}>
-            <SubmenuSubItem
-              href={testProps_subItemOn.href}
-              name={testProps_subItemOn.name}
-              isActive={testProps_subItemOn.active}
-            >
-              {testProps_subItemOn.name}
-            </SubmenuSubItem>
-          </SubmenuItem>
-          <SubmenuItem name={testProps_subItemOff.name}>
-            <SubmenuSubItem
-              href={testProps_subItemOff.href}
-              name={testProps_subItemOff.name}
-              isActive={testProps_subItemOff.active}
-            >
-              {testProps_subItemOff.name}
-            </SubmenuSubItem>
-          </SubmenuItem>
-        </Submenu>
-        <MainSection />
-      </MainContainer>
+      <UserContext.Provider value={state.userData}>
+        <GoogleLogin
+          clientId={clientId}
+          buttonText="Login"
+          onSuccess={responseGoogle}
+          onFailure={responseFailure}
+          disabled={state.isLogged}
+          disabledStyle={{ display: 'none' }}
+        />
+        <GoogleLogout
+          clientId={clientId}
+          buttonText="Logout"
+          onLogoutSuccess={logout}
+          disabled={!state.isLogged}
+          disabledStyle={{ display: 'none' }}
+        />
+        <Head>
+          <HeaderLogo
+            mobileImgSrc={testProps_logo.mobileImgSrc}
+            mobileImgAlc={testProps_logo.mobileImgAlc}
+            desktopImgSrc={testProps_logo.desktopImgSrc}
+            desktopImgAlt={testProps_logo.desktopImgAlt}
+          >
+            Page Title
+          </HeaderLogo>
+          <HeaderUser src={emptyProfilePictureSrc}>
+            <HeaderUserIcons classname={'icon-bell'} />
+            <HeaderUserIcons classname={'icon-mail'} />
+          </HeaderUser>
+        </Head>
+        <Navbar>
+          <NavbarItem isActive={testPropsNavBarOff.isActive}>
+            {testPropsNavBarOff.content}
+          </NavbarItem>
+          <NavbarItem isActive={testPropsNavBarOn.isActive}>
+            {testPropsNavBarOn.content}
+          </NavbarItem>
+        </Navbar>
+        <MainContainer>
+          <Submenu>
+            <SubmenuItem name={testProps_subItemOn.name}>
+              <SubmenuSubItem
+                href={testProps_subItemOn.href}
+                name={testProps_subItemOn.name}
+                isActive={testProps_subItemOn.active}
+              >
+                {testProps_subItemOn.name}
+              </SubmenuSubItem>
+            </SubmenuItem>
+            <SubmenuItem name={testProps_subItemOff.name}>
+              <SubmenuSubItem
+                href={testProps_subItemOff.href}
+                name={testProps_subItemOff.name}
+                isActive={testProps_subItemOff.active}
+              >
+                {testProps_subItemOff.name}
+              </SubmenuSubItem>
+            </SubmenuItem>
+          </Submenu>
+          <MainSection />
+        </MainContainer>
+      </UserContext.Provider>
     </section>
   );
 };
