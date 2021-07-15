@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { UserContext } from '../../App';
 import { loadOneMessage } from '../../api/userMessages/userMessages';
 import { ButtonLink } from '../../components/ButtonLink/ButtonLink';
 import { MessageFull } from '../../components/MessageFull/MessageFull';
@@ -16,32 +15,31 @@ interface MessagePageValues {
 }
 
 export const MessagePage: React.FC = () => {
-  const userData = useContext(UserContext);
-  const [state, setState] = useState<GoogleMessage | undefined>();
+  const [message, setMessage] = useState<GoogleMessage | undefined>();
   const location = useLocation();
-  const messageId = location.state;
+  const apiData: any = location.state;
   useEffect(() => {
-    if (userData && 'accessToken' in userData) {
-      loadOneMessage(messageId, userData.accessToken).then((respond) =>
-        setState(respond),
-      );
-    }
+    loadOneMessage(apiData.id, apiData.token).then((message) =>
+      setMessage(message),
+    );
   }, []);
-  let text: MessagePageValues = {
+  let messageData: MessagePageValues = {
     from: '',
     snippet: '',
     title: '',
     date: '',
     text: '',
   };
-  if (state) text = sortMessageData(state);
-  if (!text.text) {
-    text.text = text.snippet;
+  if (message) messageData = sortMessageData(message);
+  if (!messageData.text) {
+    messageData.text = messageData.snippet;
   }
   return (
     <React.Fragment>
       <ButtonLink href={'/home'}>Return Home</ButtonLink>
-      <MessageFull from={text.from} title={text.title} text={text.text} />
+      <MessageFull from={messageData.from} title={messageData.title}>
+        {messageData.text}
+      </MessageFull>
     </React.Fragment>
   );
 };
