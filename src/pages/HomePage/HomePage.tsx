@@ -26,14 +26,8 @@ import {
 } from 'react-google-login';
 import { useUserContext } from '../../hooks/useUserContext';
 import { useUserData } from '../../hooks/useUserData';
-
+import { clientId, emptyProfilePictureSrc } from '../../components/config';
 export const UserContext = useUserContext;
-const clientId =
-  '843858826455-oe7ebu2uaj0bcfjujcntbo7mu72no2f7.apps.googleusercontent.com';
-
-const emptyProfilePictureSrc =
-  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
-
 export const HomePage: React.FC = () => {
   const { state, dispatch } = useUserData();
 
@@ -50,7 +44,7 @@ export const HomePage: React.FC = () => {
     throw new Error(resp.error);
   };
   const logout = () => {
-    dispatch({ type: 'logOut', user: null });
+    dispatch({ type: 'logOut' });
   };
   return (
     <section>

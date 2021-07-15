@@ -13,7 +13,7 @@ interface LoginState {
 
 function reducer(
   state: LoginState,
-  action: { type: string; user: UserState | null },
+  action: { type: string; user?: UserState | null },
 ): LoginState {
   switch (action.type) {
     case 'logIn':
