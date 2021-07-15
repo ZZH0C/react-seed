@@ -14,8 +14,7 @@ const getMessage = async (id: string, token: string) => {
 };
 
 const getMessageList = async (token: string) => {
-  const url =
-    'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=3';
+  const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=3`;
   try {
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${token}` },
