@@ -7,10 +7,6 @@ import { ButtonLink } from '../../components/ButtonLink/ButtonLink';
 import { MessageFull } from '../../components/MessageFull/MessageFull';
 import { GoogleMessage } from '../../models/GoogleMessage';
 
-// const sortMessage = (data) => {
-//
-// }
-
 interface MessagePageValues {
   snippet?: string;
   date: string;
