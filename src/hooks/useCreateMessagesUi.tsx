@@ -4,11 +4,7 @@ import { GoogleMessage } from '../models/GoogleMessage';
 import { MessageItem } from '../components/MessageItem/MessageItem';
 import { UserContext } from '../App';
 
-export const sortMessageData = (messageData: {
-  snippet: any;
-  payload: any;
-  forEach?: any;
-}) => {
+export const sortMessageData = (messageData: GoogleMessage) => {
   const result = {
     from: '',
     snippet: messageData.snippet,
@@ -16,14 +12,24 @@ export const sortMessageData = (messageData: {
     date: '',
     text: messageData.payload.parts[0].body.data,
   };
-  messageData.payload.headers.forEach((e: { name: string; value: string }) => {
-    if (e.name === 'From') result.from = e.value;
-    if (e.name === 'Subject') result.title = e.value;
-    if (e.name === 'Date') {
-      const messageDate = new Date(e.value);
-      result.date = `${messageDate.getDate()}-${messageDate.getMonth()}-${messageDate.getFullYear()}`;
-    }
-  });
+  messageData.payload.headers.forEach(
+    (element: { name: string; value: string }) => {
+      switch (element.name) {
+        case 'From':
+          result.from = element.value;
+          break;
+        case 'Subject':
+          result.title = element.value;
+          break;
+        case 'Date':
+          const messageDate = new Date(element.value);
+          result.date = `${messageDate.getDate()}-${messageDate.getMonth()}-${messageDate.getFullYear()}`;
+          break;
+        default:
+          break;
+      }
+    },
+  );
   return result;
 };
 

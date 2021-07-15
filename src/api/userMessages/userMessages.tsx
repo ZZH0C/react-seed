@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-const getMessage = async (id: string, token: string | null) => {
+const getMessage = async (id: string | unknown, token: string | null) => {
   const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages/${id}`;
-
   try {
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${token}` },
@@ -36,7 +35,9 @@ export const loadMessages = async (token: string | null) => {
   return await Promise.allSettled(messageList);
 };
 
-export const loadOneMessage = async (id: string, token: string | null) => {
-  const message = await getMessage(id, token);
-  return await message;
+export const loadOneMessage = async (
+  id: string | unknown,
+  token: string | null,
+) => {
+  return await getMessage(id, token);
 };
