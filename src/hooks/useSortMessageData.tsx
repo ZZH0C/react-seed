@@ -2,7 +2,11 @@ import { GoogleMessage } from '../models/GoogleMessage';
 
 const convertDate = (date: string) => {
   const messageDate = new Date(date);
-  return `${messageDate.getDate()}-${messageDate.getMonth()}-${messageDate.getFullYear()}`;
+  if (isNaN(messageDate.getDate())) {
+    return '';
+  } else {
+    return `${messageDate.getDate()}-${messageDate.getMonth()}-${messageDate.getFullYear()}`;
+  }
 };
 
 export const sortMessageData = (messageData: GoogleMessage) => {
@@ -23,7 +27,7 @@ export const sortMessageData = (messageData: GoogleMessage) => {
           result.title = element.value;
           break;
         case 'Date':
-          result.date = convertDate(element.value);
+          if (result.date) result.date = convertDate(element.value);
           break;
         default:
           break;
