@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { UserContext } from '../../App';
 import { loadOneMessage } from '../../api/userMessages/userMessages';
-import { sortMessageData } from '../../hooks/useCreateMessagesUi';
 import { ButtonLink } from '../../components/ButtonLink/ButtonLink';
 import { MessageFull } from '../../components/MessageFull/MessageFull';
 import { GoogleMessage } from '../../models/GoogleMessage';
+import { sortMessageData } from '../../hooks/useSortMessageData';
 
 interface MessagePageValues {
   snippet?: string;
@@ -39,9 +39,9 @@ export const MessagePage: React.FC = () => {
     text.text = text.snippet;
   }
   return (
-    <>
+    <React.Fragment>
       <ButtonLink href={'/home'}>Return Home</ButtonLink>
       <MessageFull from={text.from} title={text.title} text={text.text} />
-    </>
+    </React.Fragment>
   );
 };
