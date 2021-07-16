@@ -7,11 +7,7 @@ import { NavbarItem } from '../../components/NavbarItem/NavbarItem';
 import { HeaderLogo } from '../../components/HeaderLogo/HeaderLogo';
 import { HeaderUser } from '../../components/HeaderUser/HeaderUser';
 import { SubmenuItem } from '../../components/Submenu/SubmenuItem/SubmenuItem';
-import {
-  testPropsNavBarOn,
-  testPropsNavBarOff,
-  testProps_logo,
-} from '../../components/mockProps';
+import { testProps_logo } from '../../components/mockProps';
 import { SubmenuSubItem } from '../../components/Submenu/SubmenuSubItem/SubmenuSubItem';
 import { HeaderUserIcons } from '../../components/HeaderUserIcons/HeaderUserIcons';
 import { Submenu } from '../../components/Submenu/Submenu';
@@ -29,6 +25,7 @@ import {
   emptyProfilePictureSrc,
   SubItemCategories,
   categoryContainer,
+  navBarLabels,
 } from '../../components/config';
 export const UserContext = useUserContext;
 export const HomePage: React.FC = () => {
@@ -63,6 +60,19 @@ export const HomePage: React.FC = () => {
       </SubmenuSubItem>
     );
   });
+  const navBarItems = navBarLabels.map((navBarItemProps) => {
+    return (
+      <NavbarItem
+        key={Math.random()}
+        href={navBarItemProps.href}
+        name={navBarItemProps.name}
+        label={navBarItemProps.label}
+      >
+        {navBarItemProps.name}
+      </NavbarItem>
+    );
+  });
+
   return (
     <section>
       <UserContext.Provider value={state.userData}>
@@ -95,14 +105,7 @@ export const HomePage: React.FC = () => {
             <HeaderUserIcons classname={'icon-mail'} />
           </HeaderUser>
         </Head>
-        <Navbar>
-          <NavbarItem isActive={testPropsNavBarOff.isActive}>
-            {testPropsNavBarOff.content}
-          </NavbarItem>
-          <NavbarItem isActive={testPropsNavBarOn.isActive}>
-            {testPropsNavBarOn.content}
-          </NavbarItem>
-        </Navbar>
+        <Navbar>{navBarItems}</Navbar>
         <MainContainer>
           <Submenu>
             <SubmenuItem name={categoryContainer.name}>{subItems}</SubmenuItem>

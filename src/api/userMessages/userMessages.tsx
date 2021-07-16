@@ -20,7 +20,6 @@ const getMessageList = async (token: string, category: string) => {
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
     return response.data;
   } catch (error) {
     //TODO: write nice error handler

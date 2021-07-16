@@ -27,6 +27,19 @@ export const SubItemCategories = [
   },
 ];
 
+export const navBarLabels = [
+  {
+    href: '/home',
+    name: 'Primary',
+    label: 'primary',
+  },
+  {
+    href: '/home',
+    name: 'Social',
+    label: 'social',
+  },
+];
+
 export const categoryContainer = {
   name: 'Category',
 };
