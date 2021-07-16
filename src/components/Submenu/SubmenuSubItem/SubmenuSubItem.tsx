@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useQueryParams } from '../../../hooks/useQueryParams';
 
 interface SubmenuSubItemProps extends React.HTMLAttributes<HTMLElement> {
@@ -15,9 +15,8 @@ export const SubmenuSubItem: React.FC<SubmenuSubItemProps> = ({
   category,
   children,
 }) => {
-  const location = useLocation();
   const { changeParams } = useQueryParams();
-  const params = changeParams(category, location, 'category');
+  const params = changeParams(category, 'category');
   return (
     <li>
       <Link
