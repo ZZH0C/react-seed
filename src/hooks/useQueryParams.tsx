@@ -10,9 +10,7 @@ export const useQueryParams = () => {
   };
   const changeParams = (category: string, key: string) => {
     let isActive = false;
-    console.log(location.search);
     const queryParams = queryString.parse(location.search);
-    console.log(queryParams);
     if (queryParams[key] === category) {
       isActive = true;
     }
