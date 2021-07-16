@@ -6,7 +6,7 @@ import { sortMessageData } from './useSortMessageData';
 import { UserContext } from '../pages/HomePage/HomePage';
 import { useQueryParams } from './useQueryParams';
 
-export const useCreateMessagesUi = () => {
+export const useCreateMessagesUi = (): JSX.Element[] => {
   const userData = useContext(UserContext);
   const { setMessageList, state } = useGetMessages();
   const { getGoogleQueryParams } = useQueryParams();

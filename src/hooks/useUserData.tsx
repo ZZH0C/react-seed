@@ -35,7 +35,10 @@ function reducer(
 
 const initialState: LoginState = { userData: null, isLogged: false };
 
-export const useUserData = () => {
+export const useUserData = (): {
+  state: any;
+  dispatch: any;
+} => {
   const [state, dispatch] = useReducer(reducer, initialState);
   return { state, dispatch };
 };
