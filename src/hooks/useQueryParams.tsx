@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 
 export const useQueryParams = () => {
   const location = useLocation();
-
   const getGoogleQueryParams = () => {
     const queryParams = queryString.parse(location.search);
     return `&q=in%3A${queryParams.category}%20category%3A${queryParams.label}`;

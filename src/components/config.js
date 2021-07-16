@@ -7,23 +7,28 @@ export const emptyProfilePictureSrc =
 export const SubItemCategories = [
   {
     href: '/home',
-    name: 'inbox',
+    name: 'Inbox',
     category: 'inbox',
   },
   {
     href: '/home',
-    name: 'starred',
+    name: 'Starred',
     category: 'starred',
   },
   {
     href: '/home',
-    name: 'snoozed',
+    name: 'Snoozed',
     category: 'snoozed',
   },
   {
     href: '/home',
-    name: 'sent',
+    name: 'Sent',
     category: 'sent',
+  },
+  {
+    href: '/home',
+    name: 'Important',
+    category: 'important',
   },
 ];
 
@@ -37,6 +42,21 @@ export const navBarLabels = [
     href: '/home',
     name: 'Social',
     label: 'social',
+  },
+  {
+    href: '/home',
+    name: 'Promotions',
+    label: 'promotions',
+  },
+  {
+    href: '/home',
+    name: 'Updates',
+    label: 'updates',
+  },
+  {
+    href: '/home',
+    name: 'Forums',
+    label: 'forums',
   },
 ];
 
