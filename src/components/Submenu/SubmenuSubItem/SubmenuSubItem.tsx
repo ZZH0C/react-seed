@@ -1,13 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Link, useLocation } from 'react-router-dom';
-import queryString from 'query-string';
+import { useChangeSearchParams } from '../../../hooks/useChangeSearchParams';
 
 interface SubmenuSubItemProps extends React.HTMLAttributes<HTMLElement> {
   href: string;
   name: string;
   category: string;
-  // isActive?: boolean;
 }
 
 export const SubmenuSubItem: React.FC<SubmenuSubItemProps> = ({
@@ -17,23 +16,16 @@ export const SubmenuSubItem: React.FC<SubmenuSubItemProps> = ({
   children,
 }) => {
   const location = useLocation();
-  let isActive = false;
-
-  const queryParams = queryString.parse(location.search);
-  if (queryParams.category === category) {
-    isActive = true;
-  }
-  queryParams.category = category;
-  const parsedParams = queryString.stringify(queryParams);
-
+  const { changeCategory } = useChangeSearchParams();
+  const params = changeCategory(category, location, 'category');
   return (
     <li>
       <Link
         to={{
           pathname: href,
-          search: parsedParams,
+          search: params.parsedParams,
         }}
-        className={classNames({ active: isActive })}
+        className={classNames({ active: params.isActive })}
         title={name}
       >
         {children}
