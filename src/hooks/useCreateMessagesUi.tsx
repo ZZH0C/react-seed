@@ -4,22 +4,23 @@ import { GoogleMessage } from '../models/GoogleMessage';
 import { MessageItem } from '../components/MessageItem/MessageItem';
 import { sortMessageData } from './useSortMessageData';
 import { UserContext } from '../pages/HomePage/HomePage';
+import { useQueryParams } from './useQueryParams';
 import { useLocation } from 'react-router-dom';
 
 export const useCreateMessagesUi = () => {
   const userData = useContext(UserContext);
-  const location = useLocation<{ category: string }>();
-  const { setMessageList, state } = useGetMessages(location.search);
-
+  const location = useLocation();
+  const { setMessageList, state } = useGetMessages();
+  const { getGoogleQueryParams } = useQueryParams();
   const messages: JSX.Element[] = [];
-
   useEffect(() => {
+    const googleData = getGoogleQueryParams(location);
     if (userData && 'accessToken' in userData) {
       const token = userData.accessToken;
-      setMessageList(token);
+      setMessageList(token, googleData);
     }
     if (!userData) {
-      setMessageList(null);
+      setMessageList(null, '');
     }
   }, [userData]);
   if (state.length > 0) {

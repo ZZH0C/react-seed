@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Link, useLocation } from 'react-router-dom';
-import { useChangeSearchParams } from '../../hooks/useChangeSearchParams';
+import { useQueryParams } from '../../hooks/useQueryParams';
 
 interface NavbarElemProps extends React.HTMLAttributes<HTMLElement> {
   href: string;
@@ -16,8 +16,8 @@ export const NavbarItem: React.FC<NavbarElemProps> = ({
   children,
 }) => {
   const location = useLocation();
-  const { changeCategory } = useChangeSearchParams();
-  const params = changeCategory(label, location, 'label');
+  const { changeParams } = useQueryParams();
+  const params = changeParams(label, location, 'label');
   return (
     <li>
       <Link

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { loadMessages } from '../api/userMessages/userMessages';
 
-export const useGetMessages = (category: string) => {
+export const useGetMessages = () => {
   const [state, setState] = useState<any>([]);
-  const setMessageList = (token: string | null) => {
+  const setMessageList = (token: string | null, category: string) => {
     if (token) {
       loadMessages(token, category).then((r) => setState(r));
     }

@@ -1,7 +1,11 @@
 import queryString from 'query-string';
 
-export const useChangeSearchParams = () => {
-  const changeCategory = (
+export const useQueryParams = () => {
+  const getGoogleQueryParams = (searchParams: { search: string }) => {
+    const queryParams = queryString.parse(searchParams.search);
+    return `&q=in%3A${queryParams.category}%20category%3A${queryParams.label}`;
+  };
+  const changeParams = (
     category: string,
     location: { search: string },
     key: string,
@@ -19,5 +23,5 @@ export const useChangeSearchParams = () => {
       parsedParams: parsedParams,
     };
   };
-  return { changeCategory };
+  return { changeParams, getGoogleQueryParams };
 };
