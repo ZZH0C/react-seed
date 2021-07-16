@@ -4,10 +4,12 @@ import { GoogleMessage } from '../models/GoogleMessage';
 import { MessageItem } from '../components/MessageItem/MessageItem';
 import { sortMessageData } from './useSortMessageData';
 import { UserContext } from '../pages/HomePage/HomePage';
+import { useLocation } from 'react-router-dom';
 
 export const useCreateMessagesUi = () => {
   const userData = useContext(UserContext);
-  const { setMessageList, state } = useGetMessages();
+  const location = useLocation<{ category: string }>();
+  const { setMessageList, state } = useGetMessages(location.search);
 
   const messages: JSX.Element[] = [];
 

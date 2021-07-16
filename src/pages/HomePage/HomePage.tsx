@@ -8,8 +8,6 @@ import { HeaderLogo } from '../../components/HeaderLogo/HeaderLogo';
 import { HeaderUser } from '../../components/HeaderUser/HeaderUser';
 import { SubmenuItem } from '../../components/Submenu/SubmenuItem/SubmenuItem';
 import {
-  testProps_subItemOn,
-  testProps_subItemOff,
   testPropsNavBarOn,
   testPropsNavBarOff,
   testProps_logo,
@@ -26,7 +24,12 @@ import {
 } from 'react-google-login';
 import { useUserContext } from '../../hooks/useUserContext';
 import { useUserData } from '../../hooks/useUserData';
-import { clientId, emptyProfilePictureSrc } from '../../components/config';
+import {
+  clientId,
+  emptyProfilePictureSrc,
+  SubItemCategories,
+  categoryContainer,
+} from '../../components/config';
 export const UserContext = useUserContext;
 export const HomePage: React.FC = () => {
   const { state, dispatch } = useUserData();
@@ -46,6 +49,20 @@ export const HomePage: React.FC = () => {
   const logout = () => {
     dispatch({ type: 'logOut' });
   };
+
+  const subItems = SubItemCategories.map((subItemProps) => {
+    return (
+      <SubmenuSubItem
+        key={Math.random()}
+        href={subItemProps.href}
+        name={subItemProps.name}
+        category={subItemProps.category}
+        // isActive={false}
+      >
+        {subItemProps.name}
+      </SubmenuSubItem>
+    );
+  });
   return (
     <section>
       <UserContext.Provider value={state.userData}>
@@ -88,24 +105,7 @@ export const HomePage: React.FC = () => {
         </Navbar>
         <MainContainer>
           <Submenu>
-            <SubmenuItem name={testProps_subItemOn.name}>
-              <SubmenuSubItem
-                href={testProps_subItemOn.href}
-                name={testProps_subItemOn.name}
-                isActive={testProps_subItemOn.active}
-              >
-                {testProps_subItemOn.name}
-              </SubmenuSubItem>
-            </SubmenuItem>
-            <SubmenuItem name={testProps_subItemOff.name}>
-              <SubmenuSubItem
-                href={testProps_subItemOff.href}
-                name={testProps_subItemOff.name}
-                isActive={testProps_subItemOff.active}
-              >
-                {testProps_subItemOff.name}
-              </SubmenuSubItem>
-            </SubmenuItem>
+            <SubmenuItem name={categoryContainer.name}>{subItems}</SubmenuItem>
           </Submenu>
           <MainSection />
         </MainContainer>

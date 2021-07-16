@@ -1,27 +1,38 @@
 import React from 'react';
 import classNames from 'classnames';
+import { Link, useLocation } from 'react-router-dom';
 
 interface SubmenuSubItemProps extends React.HTMLAttributes<HTMLElement> {
   href: string;
   name: string;
-  isActive?: boolean;
+  category: string;
+  // isActive?: boolean;
 }
 
 export const SubmenuSubItem: React.FC<SubmenuSubItemProps> = ({
   href,
   name,
-  isActive,
+  category,
   children,
 }) => {
+  const location = useLocation<{ category: string }>();
+  let isActive = false;
+  if (location.search === `?${category}`) {
+    // console.log(location.search);
+    isActive = true;
+  }
   return (
     <li>
-      <a
-        href={href}
+      <Link
+        to={{
+          pathname: href,
+          search: category,
+        }}
+        className={classNames({ active: isActive })}
         title={name}
-        className={classNames('', { active: isActive })}
       >
         {children}
-      </a>
+      </Link>
     </li>
   );
 };
