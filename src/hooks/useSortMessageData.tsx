@@ -1,4 +1,11 @@
 import { GoogleMessage } from '../models/GoogleMessage';
+import _ from 'lodash';
+
+interface MailHeaders {
+  From?: string;
+  Subject?: string;
+  Date?: string;
+}
 
 const convertDate = (date: string) => {
   const messageDate = new Date(date);
@@ -12,11 +19,12 @@ const convertDate = (date: string) => {
 export const sortMessageData = (messageData: GoogleMessage) => {
   const result = {
     from: '',
-    snippet: messageData.snippet,
+    snippet: '',
     title: '',
     date: '',
     text: messageData.payload.parts[0].body.data,
   };
+
   messageData.payload.headers.forEach(
     (element: { name: string; value: string }) => {
       switch (element.name) {
