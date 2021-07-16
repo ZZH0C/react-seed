@@ -1,11 +1,11 @@
 import { GoogleMessage } from '../models/GoogleMessage';
-import _ from 'lodash';
+// import _ from 'lodash';
 
-interface MailHeaders {
-  From?: string;
-  Subject?: string;
-  Date?: string;
-}
+// interface MailHeaders {
+//   From?: string;
+//   Subject?: string;
+//   Date?: string;
+// }
 
 const convertDate = (date: string) => {
   const messageDate = new Date(date);
