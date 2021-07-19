@@ -9,8 +9,8 @@ interface ButtonLinkProps extends React.ButtonHTMLAttributes<HTMLElement> {
 
 export const ButtonLink: React.FC<ButtonLinkProps> = ({ href, children }) => {
   return (
-    <Link to={href}>
-      <div className={classNames(styles.button_home)}>{children}</div>
+    <Link className={classNames(styles.button_home)} to={href}>
+      {children}
     </Link>
   );
 };
