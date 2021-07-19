@@ -9,8 +9,7 @@ export const useGetMessages = (): {
   const setMessageList = (token: string | null, category: string) => {
     if (token) {
       loadMessages(token, category).then((r) => setState(r));
-    }
-    if (!token) {
+    } else {
       setState([]);
     }
   };
