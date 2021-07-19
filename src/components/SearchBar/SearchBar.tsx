@@ -5,8 +5,8 @@ import { useQueryParams } from '../../hooks/useQueryParams';
 //TODO: fix this abomination
 export const SearchBar = (): JSX.Element => {
   const [state, setState] = useState('');
-  const { changeParams } = useQueryParams();
-  const params = changeParams(state, 'search');
+  const { changeParamsCallback } = useQueryParams();
+  const params = changeParamsCallback(state, 'search');
 
   const history = useHistory();
   return (

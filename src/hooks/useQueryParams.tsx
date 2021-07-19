@@ -1,18 +1,25 @@
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
 import _ from 'lodash';
+import { useCallback } from 'react';
+
+interface queryProps {
+  category: string;
+  key: 'in' | 'category' | 'search';
+}
 
 export const useQueryParams = (): {
-  getGoogleQueryParams: () => any;
-  changeParams: (
-    category: string,
-    key: string,
+  getGoogleQueryParamsCallback: () => string;
+  changeParamsCallback: (
+    category: queryProps['category'],
+    key: queryProps['key'],
   ) => { isActive: boolean; parsedParams: string };
 } => {
   const location = useLocation();
   const getGoogleQueryParams = () => {
     const queryParams = queryString.parse(location.search);
-    if (!queryParams.label && !queryParams.category) return '';
+    if (!queryParams.label && !queryParams.category && !queryParams.search)
+      return '';
     let result = '';
     _.forEach(queryParams, (value, key) => {
       if (key === 'search') {
@@ -21,11 +28,12 @@ export const useQueryParams = (): {
         result += `${key}:${value} `;
       }
     });
+
     return _.trim(result);
   };
   const changeParams = (
-    category: string,
-    key: string,
+    category: queryProps['category'],
+    key: queryProps['key'],
   ): { isActive: boolean; parsedParams: string } => {
     let isActive = false;
     const queryParams = queryString.parse(location.search);
@@ -39,5 +47,19 @@ export const useQueryParams = (): {
       parsedParams: parsedParams,
     };
   };
-  return { changeParams, getGoogleQueryParams };
+
+  const changeParamsCallback = useCallback(
+    (category: string, key: queryProps['key']) => {
+      return changeParams(category, key);
+    },
+    [changeParams],
+  );
+  const getGoogleQueryParamsCallback = useCallback(() => {
+    return getGoogleQueryParams();
+  }, [getGoogleQueryParams]);
+
+  return {
+    changeParamsCallback,
+    getGoogleQueryParamsCallback,
+  };
 };

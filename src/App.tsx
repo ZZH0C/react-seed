@@ -19,14 +19,12 @@ import { useUserContext } from './hooks/useUserContext';
 export const UserContext = useUserContext;
 
 export const App: React.FC = () => {
-  const { state, dispatch } = useUserData();
+  const { state, logoutCallback, login } = useUserData();
 
   const responseGoogle = (
     response: GoogleLoginResponse | GoogleLoginResponseOffline,
   ) => {
-    if ('profileObj' in response) {
-      dispatch({ type: 'logIn', user: response });
-    }
+    login(response);
   };
   const responseFailure = (resp: { error: string }) => {
     console.error(resp);
@@ -34,7 +32,7 @@ export const App: React.FC = () => {
     throw new Error(resp.error);
   };
   const logout = () => {
-    dispatch({ type: 'logOut' });
+    logoutCallback();
   };
 
   return (

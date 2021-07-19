@@ -2,7 +2,7 @@ import {
   GoogleLoginResponse,
   GoogleLoginResponseOffline,
 } from 'react-google-login';
-import { useReducer } from 'react';
+import { useCallback, useReducer } from 'react';
 
 type UserState = GoogleLoginResponse | GoogleLoginResponseOffline | null;
 
@@ -36,9 +36,19 @@ function reducer(
 const initialState: LoginState = { userData: null, isLogged: false };
 
 export const useUserData = (): {
+  logoutCallback: () => void;
   state: any;
-  dispatch: any;
+  login: (user: any) => void;
 } => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  return { state, dispatch };
+  const login = useCallback(
+    (user) => {
+      dispatch({ type: 'logIn', user });
+    },
+    [dispatch],
+  );
+  const logoutCallback = useCallback(() => {
+    dispatch({ type: 'logOut' });
+  }, [dispatch]);
+  return { state, login, logoutCallback };
 };
