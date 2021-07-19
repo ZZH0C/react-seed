@@ -29,7 +29,7 @@ export const App: React.FC = () => {
     }
   };
   const responseFailure = (resp: { error: string }) => {
-    console.log(resp);
+    console.error(resp);
     // TODO: add error handler
     throw new Error(resp.error);
   };

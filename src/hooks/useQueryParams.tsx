@@ -15,7 +15,11 @@ export const useQueryParams = (): {
     if (!queryParams.label && !queryParams.category) return '';
     let result = '';
     _.forEach(queryParams, (value, key) => {
-      result += `${key}:${value} `;
+      if (key === 'search') {
+        result += ` ${value} `;
+      } else {
+        result += `${key}:${value} `;
+      }
     });
     return result;
   };
