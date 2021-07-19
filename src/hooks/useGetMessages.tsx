@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { loadMessages } from '../api/userMessages';
+import { loadMessages } from '../api/userMessages/userMessages';
 
 export const useGetMessages = () => {
   const [state, setState] = useState<any>([]);
-
   const setMessageList = (token: string | null) => {
     if (token) {
       loadMessages(token).then((r) => setState(r));

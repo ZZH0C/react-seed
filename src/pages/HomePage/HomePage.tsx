@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  GoogleLogin,
-  GoogleLoginResponse,
-  GoogleLoginResponseOffline,
-  GoogleLogout,
-} from 'react-google-login';
+
 import { Head } from '../../components/Head/Head';
 import { Navbar } from '../../components/Navbar/Navbar';
 import { MainContainer } from '../../components/MainContainer/MainContainer';
@@ -21,13 +16,20 @@ import {
 } from '../../components/mockProps';
 import { SubmenuSubItem } from '../../components/Submenu/SubmenuSubItem/SubmenuSubItem';
 import { HeaderUserIcons } from '../../components/HeaderUserIcons/HeaderUserIcons';
-import { useUserData } from '../../hooks/useUserData';
-import { useUserContext } from '../../hooks/useUserContext';
 import { Submenu } from '../../components/Submenu/Submenu';
 import { MainSection } from '../../components/MainSection/MainSection';
-const clientId =
-  '386327906890-ce0q1vn2cja1ellekvjj6hmqah4g901c.apps.googleusercontent.com';
+import {
+  GoogleLogin,
+  GoogleLoginResponse,
+  GoogleLoginResponseOffline,
+  GoogleLogout,
+} from 'react-google-login';
+import { useUserContext } from '../../hooks/useUserContext';
+import { useUserData } from '../../hooks/useUserData';
+
 export const UserContext = useUserContext;
+const clientId =
+  '843858826455-oe7ebu2uaj0bcfjujcntbo7mu72no2f7.apps.googleusercontent.com';
 
 const emptyProfilePictureSrc =
   'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
@@ -39,7 +41,7 @@ export const HomePage: React.FC = () => {
     response: GoogleLoginResponse | GoogleLoginResponseOffline,
   ) => {
     if ('profileObj' in response) {
-      dispatch({ type: 'logIn', user: response, isLogged: true });
+      dispatch({ type: 'logIn', user: response });
     }
   };
   const responseFailure = (resp: { error: string }) => {
@@ -48,12 +50,11 @@ export const HomePage: React.FC = () => {
     throw new Error(resp.error);
   };
   const logout = () => {
-    dispatch({ type: 'logOut', user: null, isLogged: false });
+    dispatch({ type: 'logOut', user: null });
   };
-
   return (
-    <UserContext.Provider value={state.userData}>
-      <section>
+    <section>
+      <UserContext.Provider value={state.userData}>
         <GoogleLogin
           clientId={clientId}
           buttonText="Login"
@@ -114,7 +115,7 @@ export const HomePage: React.FC = () => {
           </Submenu>
           <MainSection />
         </MainContainer>
-      </section>
-    </UserContext.Provider>
+      </UserContext.Provider>
+    </section>
   );
 };
