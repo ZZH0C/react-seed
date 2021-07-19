@@ -61,13 +61,12 @@ export const sortMessageData = (
           result.title = element.value;
           break;
         case 'Date':
-          if (result.date) result.date = convertDate(element.value);
+          if (element.value) result.date = convertDate(element.value);
           break;
         default:
           break;
       }
     },
   );
-
   return result;
 };
