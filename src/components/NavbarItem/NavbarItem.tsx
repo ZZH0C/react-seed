@@ -16,7 +16,7 @@ export const NavbarItem: React.FC<NavbarElemProps> = ({
   children,
 }) => {
   const { changeParams } = useQueryParams();
-  const params = changeParams(label, 'label');
+  const params = changeParams(label, 'category');
   return (
     <li>
       <Link

@@ -30,12 +30,11 @@ export const sortMessageData = (
     snippet: '',
     title: '',
     date: '',
-    text: messageData.payload.parts[0].body.data,
+    text: '',
   };
   if (messageData.snippet) {
     result.snippet = messageData.snippet;
   }
-
   // TODO:  fix with using lodash
   // const headersList = ['From', 'Subject', 'Date'];
   // const filteredHeaders = _.filter(

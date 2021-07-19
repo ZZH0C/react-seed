@@ -16,7 +16,7 @@ export const SubmenuSubItem: React.FC<SubmenuSubItemProps> = ({
   children,
 }) => {
   const { changeParams } = useQueryParams();
-  const params = changeParams(category, 'category');
+  const params = changeParams(category, 'in');
   return (
     <li>
       <Link

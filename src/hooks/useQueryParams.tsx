@@ -1,8 +1,9 @@
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
+import _ from 'lodash';
 
 export const useQueryParams = (): {
-  getGoogleQueryParams: () => string;
+  getGoogleQueryParams: () => any;
   changeParams: (
     category: string,
     key: string,
@@ -11,7 +12,12 @@ export const useQueryParams = (): {
   const location = useLocation();
   const getGoogleQueryParams = () => {
     const queryParams = queryString.parse(location.search);
-    return `&q=in%3A${queryParams.category}%20category%3A${queryParams.label}`;
+    if (!queryParams.label && !queryParams.category) return '';
+    let result = '';
+    _.forEach(queryParams, (value, key) => {
+      result += `${key}:${value} `;
+    });
+    return result;
   };
   const changeParams = (
     category: string,

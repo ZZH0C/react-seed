@@ -14,9 +14,10 @@ const getMessage = async (id: string, token: string) => {
 };
 
 const getMessageList = async (token: string, category: string) => {
-  const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=3${category}`;
+  const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=3`;
   try {
     const response = await axios.get(url, {
+      params: { q: category },
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -30,7 +31,8 @@ const getMessageList = async (token: string, category: string) => {
 
 export const loadMessages = async (token: string, category: string) => {
   const idList = await getMessageList(token, category);
-  if (idList.messages) {
+
+  if (idList && idList.messages) {
     const messageList = idList.messages.map(async (e: { id: string }) => {
       return await getMessage(e.id, token);
     });
