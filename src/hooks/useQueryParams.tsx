@@ -21,7 +21,7 @@ export const useQueryParams = (): {
         result += `${key}:${value} `;
       }
     });
-    return result;
+    return _.trim(result);
   };
   const changeParams = (
     category: string,

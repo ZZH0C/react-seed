@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useQueryParams } from '../../hooks/useQueryParams';
 
 //TODO: fix this abomination
@@ -7,6 +7,8 @@ export const SearchBar = (): JSX.Element => {
   const [state, setState] = useState('');
   const { changeParams } = useQueryParams();
   const params = changeParams(state, 'search');
+
+  const history = useHistory();
   return (
     <>
       <div className="searchForm row">
@@ -16,6 +18,11 @@ export const SearchBar = (): JSX.Element => {
             className="form-inline form-search pull-left"
             onSubmit={(event) => {
               event.preventDefault();
+              setState('');
+              history.push({
+                pathname: '/home',
+                search: params.parsedParams,
+              });
             }}
           >
             <div className="input-group">
