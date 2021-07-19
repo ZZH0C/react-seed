@@ -19,7 +19,7 @@ export const App: React.FC = () => {
           <Route path="/message">
             <MessagePage />
           </Route>
-          <Redirect from="*" to="/home" />
+          <Redirect from="*" to="/home?category=inbox&label=primary" />
         </Switch>
       </Router>
     </>
