@@ -7,9 +7,11 @@ import { GoogleMessage } from '../models/GoogleMessage';
 //   Date?: string;
 // }
 
+import moment from 'moment';
+
 const convertDate = (date: string) => {
   const messageDate = new Date(date);
-  if (messageDate.getDate() !== messageDate.getDate()) {
+  if (!moment(date, true).isValid()) {
     return '';
   } else {
     return `${messageDate.getDate()}-${messageDate.getMonth()}-${messageDate.getFullYear()}`;
