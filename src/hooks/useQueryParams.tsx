@@ -9,14 +9,31 @@ interface queryProps {
 }
 
 export const useQueryParams = (): {
-  getGoogleQueryParamsCallback: () => string;
-  changeParamsCallback: (
+  getGoogleQueryParams: () => string;
+  changeParams: (
     category: queryProps['category'],
     key: queryProps['key'],
   ) => { isActive: boolean; parsedParams: string };
 } => {
   const location = useLocation();
-  const getGoogleQueryParams = () => {
+
+  const changeParams = useCallback(
+    (category: queryProps['category'], key: queryProps['key']) => {
+      let isActive = false;
+      const queryParams = queryString.parse(location.search);
+      if (queryParams[key] === category) {
+        isActive = true;
+      }
+      queryParams[key] = category;
+      const parsedParams = queryString.stringify(queryParams);
+      return {
+        isActive: isActive,
+        parsedParams: parsedParams,
+      };
+    },
+    [location.search],
+  );
+  const getGoogleQueryParams = useCallback(() => {
     const queryParams = queryString.parse(location.search);
     if (!queryParams.label && !queryParams.category && !queryParams.search)
       return '';
@@ -30,39 +47,13 @@ export const useQueryParams = (): {
     });
 
     return _.trim(result);
-  };
-  const changeParams = (
-    category: queryProps['category'],
-    key: queryProps['key'],
-  ): { isActive: boolean; parsedParams: string } => {
-    let isActive = false;
-    const queryParams = queryString.parse(location.search);
-    if (queryParams[key] === category) {
-      isActive = true;
-    }
-    queryParams[key] = category;
-    const parsedParams = queryString.stringify(queryParams);
-    return {
-      isActive: isActive,
-      parsedParams: parsedParams,
-    };
-  };
-
-  const changeParamsCallback = useCallback(
-    (category: string, key: queryProps['key']) => {
-      return changeParams(category, key);
-    },
-    [changeParams],
-  );
-  const getGoogleQueryParamsCallback = useCallback(() => {
-    return getGoogleQueryParams();
-  }, [getGoogleQueryParams]);
+  }, [location.search]);
 
   return useMemo(
     () => ({
-      changeParamsCallback,
-      getGoogleQueryParamsCallback,
+      changeParams,
+      getGoogleQueryParams,
     }),
-    [changeParamsCallback, getGoogleQueryParamsCallback],
+    [changeParams, getGoogleQueryParams],
   );
 };

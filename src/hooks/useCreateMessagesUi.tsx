@@ -7,14 +7,15 @@ import { UserContext } from '../pages/HomePage/HomePage';
 import { useQueryParams } from './useQueryParams';
 import { useLocation } from 'react-router-dom';
 
-export const useCreateMessagesUi = (): JSX.Element[] => {
+export const useCreateMessagesUi = (): JSX.Element => {
   const userData = useContext(UserContext);
   const { setMessageList, state } = useGetMessages();
-  const { getGoogleQueryParamsCallback } = useQueryParams();
+  const { getGoogleQueryParams } = useQueryParams();
   const messages: JSX.Element[] = [];
   const location = useLocation();
+  //
   useEffect(() => {
-    const googleData = getGoogleQueryParamsCallback();
+    const googleData = getGoogleQueryParams();
     if (userData && 'accessToken' in userData) {
       const token = userData.accessToken;
       setMessageList(token, googleData);
@@ -24,8 +25,9 @@ export const useCreateMessagesUi = (): JSX.Element[] => {
     }
     //TODO: add pagination and userData?.accessToken
   }, [location, userData]);
-  if (state.length > 0) {
-    state.forEach((e: GoogleMessage) => {
+  //
+  if (state.messages.length > 0) {
+    state.messages.forEach((e: GoogleMessage) => {
       const messageData = sortMessageData(e.value);
       messages.push(
         <MessageItem
@@ -39,5 +41,12 @@ export const useCreateMessagesUi = (): JSX.Element[] => {
       );
     });
   }
-  return messages;
+  return (
+    <>
+      {messages}
+      <div>PUT HERE PAGINATION</div>
+    </>
+  );
 };
+
+//TODO: add buttons with onClick()=>{ setMessageList([..props],pageToken) }
