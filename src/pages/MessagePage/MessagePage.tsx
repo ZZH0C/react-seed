@@ -36,7 +36,8 @@ export const MessagePage: React.FC = () => {
   }
   return (
     <React.Fragment>
-      <ButtonLink href={'/home'}>Return Home</ButtonLink>
+      <ButtonLink href={'/'}>Return Home</ButtonLink>
+
       <Message from={messageData.from} title={messageData.title}>
         {messageData.text}
       </Message>
