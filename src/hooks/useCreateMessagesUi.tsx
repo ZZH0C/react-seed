@@ -50,24 +50,26 @@ export const useCreateMessagesUi = (): JSX.Element => {
   return (
     <>
       {messages}
-      <PaginationButton
-        onClick={() => setMessageList(token, googleData, '-1')}
-        isDisabled={state.pages.length < 3}
-        isRight={false}
-        onClickFunction={() => setMessageList(token, googleData, '-1')}
-      >
-        Previous
-      </PaginationButton>
-      <PaginationButton
-        isDisabled={
-          state.pages[state.pages.length - 1] === undefined ||
-          state.pages.length < 2
-        }
-        isRight={true}
-        onClickFunction={() => setMessageList(token, googleData, '+1')}
-      >
-        Next
-      </PaginationButton>
+      <div className="controlButtons">
+        <PaginationButton
+          onClick={() => setMessageList(token, googleData, '-1')}
+          isDisabled={state.pages.length < 3}
+          isRight={false}
+          onClickFunction={() => setMessageList(token, googleData, '-1')}
+        >
+          Previous
+        </PaginationButton>
+        <PaginationButton
+          isDisabled={
+            state.pages[state.pages.length - 1] === undefined ||
+            state.pages.length < 2
+          }
+          isRight={true}
+          onClickFunction={() => setMessageList(token, googleData, '+1')}
+        >
+          Next
+        </PaginationButton>
+      </div>
     </>
   );
 };
