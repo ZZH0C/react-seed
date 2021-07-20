@@ -22,7 +22,7 @@ export const useCreateMessagesUi = (): JSX.Element[] => {
     if (!userData) {
       setMessageList(null, '');
     }
-    //TODO: add pagination
+    //TODO: add pagination and userData?.accessToken
   }, [location, userData]);
   if (state.length > 0) {
     state.forEach((e: GoogleMessage) => {
