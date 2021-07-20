@@ -47,7 +47,6 @@ export const useCreateMessagesUi = (): JSX.Element => {
       );
     });
   }
-  console.log(state.pages);
   return (
     <>
       {messages}

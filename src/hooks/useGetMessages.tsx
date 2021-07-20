@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { loadMessages } from '../api/userMessages/userMessages';
+import _ from 'lodash';
 
 export type Direction = '0' | '+1' | '-1';
 
@@ -32,7 +33,7 @@ export const useGetMessages = (): {
               pagesTEST.push(messagesData.nextPageToken);
             }
             if (direction === '-1' && pagesTEST.length > 2) {
-              pagesTEST.pop();
+              pagesTEST = _.initial(pagesTEST);
             }
             if (direction === '0') {
               pagesTEST = ['0', messagesData.nextPageToken];
@@ -46,7 +47,6 @@ export const useGetMessages = (): {
       } else {
         clearMessageList();
       }
-      //end here
     },
     [clearMessageList, state.pages],
   );
