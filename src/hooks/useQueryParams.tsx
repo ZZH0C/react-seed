@@ -1,7 +1,7 @@
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
 import _ from 'lodash';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 interface queryProps {
   category: string;
@@ -58,8 +58,11 @@ export const useQueryParams = (): {
     return getGoogleQueryParams();
   }, [getGoogleQueryParams]);
 
-  return {
-    changeParamsCallback,
-    getGoogleQueryParamsCallback,
-  };
+  return useMemo(
+    () => ({
+      changeParamsCallback,
+      getGoogleQueryParamsCallback,
+    }),
+    [changeParamsCallback, getGoogleQueryParamsCallback],
+  );
 };
