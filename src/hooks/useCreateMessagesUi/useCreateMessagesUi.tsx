@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { useGetMessages } from './useGetMessages';
-import { GoogleMessage } from '../models/GoogleMessage';
-import { MessageItem } from '../components/MessageItem/MessageItem';
-import { sortMessageData } from './useSortMessageData';
-import { UserContext } from '../pages/HomePage/HomePage';
-import { useQueryParams } from './useQueryParams';
+import { useGetMessages } from '../useGetMessages/useGetMessages';
+import { GoogleMessage } from '../../models/GoogleMessage';
+import { MessageItem } from '../../components/MessageItem/MessageItem';
+import { sortMessageData } from '../useSortMessageData/useSortMessageData';
+import { UserContext } from '../../pages/HomePage/HomePage';
+import { useQueryParams } from '../useQueryParams/useQueryParams';
 import { useLocation } from 'react-router-dom';
-import { PaginationButton } from '../components/PaginationButton/PaginationButton';
+import { PaginationButton } from '../../components/PaginationButton/PaginationButton';
 
 export const useCreateMessagesUi = (): JSX.Element => {
   const userData = useContext(UserContext);
@@ -14,7 +14,6 @@ export const useCreateMessagesUi = (): JSX.Element => {
   const { getGoogleQueryParams } = useQueryParams();
   const messages: JSX.Element[] = [];
   const location = useLocation();
-  //
   const googleData = getGoogleQueryParams();
   let token: string | null = null;
   if (userData && 'accessToken' in userData) {
@@ -22,7 +21,6 @@ export const useCreateMessagesUi = (): JSX.Element => {
   }
   useEffect(() => {
     clearMessageList();
-
     if (userData && 'accessToken' in userData) {
       setMessageList(token, googleData, '0');
     }
@@ -31,7 +29,6 @@ export const useCreateMessagesUi = (): JSX.Element => {
     }
     //TODO: add pagination and userData?.accessToken
   }, [userData, location]);
-  //
   if (state.messages.length > 0) {
     state.messages.forEach((e: GoogleMessage) => {
       const messageData = sortMessageData(e.value);

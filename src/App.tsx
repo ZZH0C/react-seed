@@ -14,8 +14,8 @@ import {
   GoogleLogout,
 } from 'react-google-login';
 import { clientId } from './components/config';
-import { useUserData } from './hooks/useUserData';
-import { useUserContext } from './hooks/useUserContext';
+import { useUserData } from './hooks/useUserData/useUserData';
+import { useUserContext } from './hooks/useUserContext/useUserContext';
 export const UserContext = useUserContext;
 
 export const App: React.FC = () => {

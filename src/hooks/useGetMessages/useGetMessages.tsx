@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
-import { loadMessages } from '../api/userMessages/userMessages';
+import { loadMessages } from '../../api/userMessages/userMessages';
 import _ from 'lodash';
 
 export type Direction = '0' | '+1' | '-1';

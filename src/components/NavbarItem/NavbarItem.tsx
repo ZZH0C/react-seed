@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { useQueryParams } from '../../hooks/useQueryParams';
+import { useQueryParams } from '../../hooks/useQueryParams/useQueryParams';
 
 interface NavbarElemProps extends React.HTMLAttributes<HTMLElement> {
   href: string;

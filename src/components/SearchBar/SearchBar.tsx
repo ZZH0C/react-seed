@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { useQueryParams } from '../../hooks/useQueryParams';
+import { useQueryParams } from '../../hooks/useQueryParams/useQueryParams';
 
 //TODO: fix this abomination
 export const SearchBar = (): JSX.Element => {

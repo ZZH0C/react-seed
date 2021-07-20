@@ -2,7 +2,7 @@ import axios from 'axios';
 import { SetStateAction } from 'react';
 import { GoogleMessage } from '../../models/GoogleMessage';
 import { PaginationToken } from '../../models/PaginationToken';
-import { Direction } from '../../hooks/useGetMessages';
+import { Direction } from '../../hooks/useGetMessages/useGetMessages';
 
 interface GoogleFilter {
   token: string;

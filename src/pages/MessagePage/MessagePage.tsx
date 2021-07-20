@@ -4,7 +4,7 @@ import { loadOneMessage } from '../../api/userMessages/userMessages';
 import { ButtonLink } from '../../components/ButtonLink/ButtonLink';
 import { Message } from '../../components/Message/Message';
 import { GoogleMessage } from '../../models/GoogleMessage';
-import { sortMessageData } from '../../hooks/useSortMessageData';
+import { sortMessageData } from '../../hooks/useSortMessageData/useSortMessageData';
 
 interface MessagePageValues {
   snippet?: string;
