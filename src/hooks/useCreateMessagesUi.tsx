@@ -73,5 +73,3 @@ export const useCreateMessagesUi = (): JSX.Element => {
     </>
   );
 };
-
-//TODO: add buttons with onClick()=>{ setMessageList([..props],pageToken) }
