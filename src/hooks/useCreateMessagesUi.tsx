@@ -6,25 +6,31 @@ import { sortMessageData } from './useSortMessageData';
 import { UserContext } from '../pages/HomePage/HomePage';
 import { useQueryParams } from './useQueryParams';
 import { useLocation } from 'react-router-dom';
+import { PaginationButton } from '../components/PaginationButton/PaginationButton';
 
 export const useCreateMessagesUi = (): JSX.Element => {
   const userData = useContext(UserContext);
-  const { setMessageList, state } = useGetMessages();
+  const { setMessageList, state, clearMessageList } = useGetMessages();
   const { getGoogleQueryParams } = useQueryParams();
   const messages: JSX.Element[] = [];
   const location = useLocation();
   //
+  const googleData = getGoogleQueryParams();
+  let token: string | null = null;
+  if (userData && 'accessToken' in userData) {
+    token = userData.accessToken;
+  }
   useEffect(() => {
-    const googleData = getGoogleQueryParams();
+    clearMessageList();
+
     if (userData && 'accessToken' in userData) {
-      const token = userData.accessToken;
-      setMessageList(token, googleData);
+      setMessageList(token, googleData, '0');
     }
     if (!userData) {
-      setMessageList(null, '');
+      setMessageList(token, '', '0');
     }
     //TODO: add pagination and userData?.accessToken
-  }, [location, userData]);
+  }, [userData, location]);
   //
   if (state.messages.length > 0) {
     state.messages.forEach((e: GoogleMessage) => {
@@ -41,10 +47,28 @@ export const useCreateMessagesUi = (): JSX.Element => {
       );
     });
   }
+  console.log(state.pages);
   return (
     <>
       {messages}
-      <div>PUT HERE PAGINATION</div>
+      <PaginationButton
+        onClick={() => setMessageList(token, googleData, '-1')}
+        isDisabled={state.pages.length < 3}
+        isRight={false}
+        onClickFunction={() => setMessageList(token, googleData, '-1')}
+      >
+        Previous
+      </PaginationButton>
+      <PaginationButton
+        isDisabled={
+          state.pages[state.pages.length - 1] === undefined ||
+          state.pages.length < 2
+        }
+        isRight={true}
+        onClickFunction={() => setMessageList(token, googleData, '+1')}
+      >
+        Next
+      </PaginationButton>
     </>
   );
 };

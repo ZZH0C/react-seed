@@ -1,4 +1,1 @@
-export interface PaginationToken {
-  currentPage: number;
-  pageTokens: string[];
-}
+export type PaginationToken = string[];
