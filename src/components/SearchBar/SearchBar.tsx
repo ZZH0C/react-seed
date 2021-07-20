@@ -7,7 +7,6 @@ export const SearchBar = (): JSX.Element => {
   const [state, setState] = useState('');
   const { changeParamsCallback } = useQueryParams();
   const params = changeParamsCallback(state, 'search');
-
   const history = useHistory();
   return (
     <>

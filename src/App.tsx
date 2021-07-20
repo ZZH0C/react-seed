@@ -19,12 +19,12 @@ import { useUserContext } from './hooks/useUserContext';
 export const UserContext = useUserContext;
 
 export const App: React.FC = () => {
-  const { state, logoutCallback, login } = useUserData();
+  const { state, logoutCallback, loginCallback } = useUserData();
 
   const responseGoogle = (
     response: GoogleLoginResponse | GoogleLoginResponseOffline,
   ) => {
-    login(response);
+    loginCallback(response);
   };
   const responseFailure = (resp: { error: string }) => {
     console.error(resp);
