@@ -1,25 +1,34 @@
 import React from 'react';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
+import { useQueryParams } from '../../hooks/useQueryParams';
 
 interface NavbarElemProps extends React.HTMLAttributes<HTMLElement> {
-  isActive: boolean;
-  url?: string;
+  href: string;
+  name: string;
+  label: string;
 }
 
 export const NavbarItem: React.FC<NavbarElemProps> = ({
-  isActive,
-  url,
+  href,
+  name,
+  label,
   children,
 }) => {
+  const { changeParamsCallback } = useQueryParams();
+  const params = changeParamsCallback(label, 'category');
   return (
     <li>
-      <a
-        href={url}
-        title="Menu item"
-        className={classNames('', { active: isActive })}
+      <Link
+        to={{
+          pathname: href,
+          search: params.parsedParams,
+        }}
+        title={name}
+        className={classNames('', { active: params.isActive })}
       >
         {children}
-      </a>
+      </Link>
     </li>
   );
 };
