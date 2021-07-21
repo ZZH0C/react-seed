@@ -3,6 +3,14 @@ import { loadMessages } from '../../api/userMessages/userMessages';
 import _ from 'lodash';
 
 export type Direction = '0' | '+1' | '-1';
+export type messagesAndPages = {
+  messages: any[];
+  pages: string[];
+};
+export const nullMessageDataState: messagesAndPages = {
+  messages: [],
+  pages: ['0'],
+};
 
 export const useGetMessages = (): {
   state: any;
@@ -13,15 +21,9 @@ export const useGetMessages = (): {
   ) => void;
   clearMessageList: () => void;
 } => {
-  const [state, setState] = useState<any>({
-    messages: [],
-    pages: ['0'],
-  });
+  const [state, setState] = useState<messagesAndPages>(nullMessageDataState);
   const clearMessageList = useCallback(() => {
-    setState({
-      messages: [],
-      pages: ['0'],
-    });
+    setState(nullMessageDataState);
   }, []);
   const setMessageList = useCallback(
     (token: string | null, category: string, direction: Direction) => {
