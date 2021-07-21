@@ -28,19 +28,19 @@ export const useGetMessages = (): {
       if (token) {
         loadMessages(token, category, state.pages, direction).then(
           (messagesData) => {
-            let pagesTEST = [...state.pages];
+            let pageTokens = [...state.pages];
             if (direction === '+1') {
-              pagesTEST.push(messagesData.nextPageToken);
+              pageTokens.push(messagesData.nextPageToken);
             }
-            if (direction === '-1' && pagesTEST.length > 2) {
-              pagesTEST = _.initial(pagesTEST);
+            if (direction === '-1' && pageTokens.length > 2) {
+              pageTokens = _.initial(pageTokens);
             }
             if (direction === '0') {
-              pagesTEST = ['0', messagesData.nextPageToken];
+              pageTokens = ['0', messagesData.nextPageToken];
             }
             setState({
               messages: messagesData.list,
-              pages: pagesTEST,
+              pages: pageTokens,
             });
           },
         );
