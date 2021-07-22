@@ -1,28 +1,13 @@
-export const testProps_subItemOn = {
-  href: '/',
-  name: 'subitem',
-  active: true,
-};
-
-export const testProps_subItemOff = {
-  href: '/',
-  name: 'subitem',
-  active: false,
-};
-
 export const testPropsNavBarOff = {
   isActive: false,
   content: 'Test Bar 0',
+  url: 'primary',
 };
 
 export const testPropsNavBarOn = {
   isActive: true,
   content: 'Test Bar 1',
-};
-
-export const testProps_UserIcon = {
-  alt: 'Search icon',
-  src: 'images/profilePhoto.png',
+  url: 'social',
 };
 
 export const testProps_logo = {

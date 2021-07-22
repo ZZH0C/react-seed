@@ -15,7 +15,6 @@ export const HeaderUser: React.FC<HeaderUserProps> = ({ src, children }) => {
     profile.name = userData.profileObj.name;
     profile.iconSrc = userData.profileObj.imageUrl;
   }
-
   return (
     <div className="header-comp pull-right">
       {children}

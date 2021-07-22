@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styles from './ButtonLink.module.scss';
 
 interface ButtonLinkProps extends React.ButtonHTMLAttributes<HTMLElement> {
   href: string;
@@ -7,8 +8,8 @@ interface ButtonLinkProps extends React.ButtonHTMLAttributes<HTMLElement> {
 
 export const ButtonLink: React.FC<ButtonLinkProps> = ({ href, children }) => {
   return (
-    <Link to={href}>
-      <button className={'button_home'}>{children}</button>
+    <Link className={styles.button_home} to={href}>
+      {children}
     </Link>
   );
 };
