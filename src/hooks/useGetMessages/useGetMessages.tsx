@@ -1,13 +1,18 @@
 import { useCallback, useMemo, useState } from 'react';
 import { loadMessages } from '../../api/userMessages/userMessages';
-import _ from 'lodash';
+// import _ from 'lodash';
+import initial from 'lodash/initial';
+export enum Direction {
+  next = 'next',
+  prev = 'prev',
+  current = 'current',
+}
 
-export type Direction = '0' | '+1' | '-1';
-export type messagesAndPages = {
+export type MessageResponseValue = {
   messages: any[];
   pages: string[];
 };
-export const nullMessageDataState: messagesAndPages = {
+export const nullMessageDataState: MessageResponseValue = {
   messages: [],
   pages: ['0'],
 };
@@ -21,7 +26,8 @@ export const useGetMessages = (): {
   ) => void;
   clearMessageList: () => void;
 } => {
-  const [state, setState] = useState<messagesAndPages>(nullMessageDataState);
+  const [state, setState] =
+    useState<MessageResponseValue>(nullMessageDataState);
   const clearMessageList = useCallback(() => {
     setState(nullMessageDataState);
   }, []);
@@ -31,13 +37,14 @@ export const useGetMessages = (): {
         loadMessages(token, category, state.pages, direction).then(
           (messagesData) => {
             let pageTokens = [...state.pages];
-            if (direction === '+1') {
+            if (direction === Direction.next) {
+              //TODO: just fix ok?
               pageTokens.push(messagesData.nextPageToken);
             }
-            if (direction === '-1' && pageTokens.length > 2) {
-              pageTokens = _.initial(pageTokens);
+            if (direction === Direction.prev && pageTokens.length > 2) {
+              pageTokens = initial(pageTokens);
             }
-            if (direction === '0') {
+            if (direction === Direction.current) {
               pageTokens = ['0', messagesData.nextPageToken];
             }
             setState({

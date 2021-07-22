@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useQueryParams } from '../../hooks/useQueryParams/useQueryParams';
 
 //TODO: fix this abomination
@@ -35,18 +35,18 @@ export const SearchBar = (): JSX.Element => {
                   setState(event.target.value);
                 }}
               />
-              <Link
-                to={{
-                  pathname: '/home',
-                  search: params.parsedParams,
-                }}
+              <button
                 className="btn btn-search"
                 onClick={() => {
                   setState('');
+                  history.push({
+                    pathname: '/home',
+                    search: params.parsedParams,
+                  });
                 }}
               >
                 <i className="icon-search" />
-              </Link>
+              </button>
             </div>
           </form>
         </div>

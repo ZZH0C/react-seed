@@ -3,6 +3,7 @@ import { SetStateAction } from 'react';
 import { GoogleMessage } from '../../models/GoogleMessage';
 import { PaginationToken } from '../../models/PaginationToken';
 import { Direction } from '../../hooks/useGetMessages/useGetMessages';
+import { MessageList } from '../../models/MessageList';
 
 interface GoogleFilter {
   token: string;
@@ -45,30 +46,23 @@ const getMessagesArray = async (idArr: { id: string }[], token: string) => {
   });
 };
 
-export interface messageList {
-  nextPageToken: any;
-  list: Array<
-    PromiseSettledResult<
-      Promise<any> extends PromiseLike<infer U> ? U : Promise<any>
-    >
-  >;
-}
-
+//TODO: you can pass filter model here instead of arguments!
 export const loadMessages = async (
   token: string,
   category: string,
   pages: PaginationToken,
   direction: Direction,
-): Promise<messageList> => {
+): Promise<MessageList> => {
+  // TODO: move this selection outside
   let pageToken;
   switch (direction) {
-    case '+1':
+    case Direction.next:
       pageToken = pages[pages.length - 1];
       break;
-    case '-1':
+    case Direction.prev:
       pageToken = pages[pages.length - 3];
       break;
-    case '0':
+    case Direction.current:
       pageToken = pages[0];
       break;
   }

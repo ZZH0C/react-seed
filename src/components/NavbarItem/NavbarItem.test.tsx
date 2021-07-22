@@ -31,7 +31,7 @@ describe('components/NavbarItem', () => {
     jest.clearAllMocks();
   });
 
-  it('should render', () => {
+  it('should render and call queryParams', () => {
     expect(
       shallow(
         <NavbarItem
@@ -43,18 +43,6 @@ describe('components/NavbarItem', () => {
         </NavbarItem>,
       ),
     ).toMatchSnapshot();
-  });
-
-  it('should call changeParams', () => {
-    shallow(
-      <NavbarItem
-        href={mockProps.href}
-        label={mockProps.label}
-        name={mockProps.name}
-      >
-        {mockProps.children}
-      </NavbarItem>,
-    );
     expect(mockedQueryParams).toHaveBeenCalledTimes(1);
   });
 });

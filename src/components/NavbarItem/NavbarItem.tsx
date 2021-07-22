@@ -16,16 +16,16 @@ export const NavbarItem: React.FC<NavbarElemProps> = ({
   children,
 }) => {
   const { changeParams } = useQueryParams();
-  const params = changeParams(label, 'category');
+  const { parsedParams, isActive } = changeParams(label, 'category');
   return (
     <li>
       <Link
         to={{
           pathname: href,
-          search: params.parsedParams,
+          search: parsedParams,
         }}
         title={name}
-        className={classNames('', { active: params.isActive })}
+        className={classNames('', { active: isActive })}
       >
         {children}
       </Link>

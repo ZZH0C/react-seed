@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { useGetMessages } from '../useGetMessages/useGetMessages';
+import { Direction, useGetMessages } from '../useGetMessages/useGetMessages';
 import { GoogleMessage } from '../../models/GoogleMessage';
 import { MessageItem } from '../../components/MessageItem/MessageItem';
 import { sortMessageData } from '../useSortMessageData/useSortMessageData';
@@ -22,13 +22,14 @@ export const useCreateMessagesUi = (): JSX.Element => {
   useEffect(() => {
     clearMessageList();
     if (userData && 'accessToken' in userData) {
-      setMessageList(token, googleData, '0');
+      setMessageList(token, googleData, Direction.current);
     }
     if (!userData) {
-      setMessageList(token, '', '0');
+      setMessageList(token, '', Direction.current);
     }
     //TODO: add pagination and userData?.accessToken
   }, [userData, location]);
+  //TODO: add lodash map pls and render it inside return
   if (state.messages.length > 0) {
     state.messages.forEach((e: GoogleMessage) => {
       const messageData = sortMessageData(e.value);
@@ -49,10 +50,12 @@ export const useCreateMessagesUi = (): JSX.Element => {
       {messages}
       <div className="controlButtons">
         <PaginationButton
-          onClick={() => setMessageList(token, googleData, '-1')}
+          onClick={() => setMessageList(token, googleData, Direction.prev)}
           isDisabled={state.pages.length < 3}
           isRight={false}
-          onClickFunction={() => setMessageList(token, googleData, '-1')}
+          onClickFunction={() =>
+            setMessageList(token, googleData, Direction.prev)
+          }
         >
           Previous
         </PaginationButton>
@@ -62,7 +65,9 @@ export const useCreateMessagesUi = (): JSX.Element => {
             state.pages.length < 2
           }
           isRight={true}
-          onClickFunction={() => setMessageList(token, googleData, '+1')}
+          onClickFunction={() =>
+            setMessageList(token, googleData, Direction.next)
+          }
         >
           Next
         </PaginationButton>
