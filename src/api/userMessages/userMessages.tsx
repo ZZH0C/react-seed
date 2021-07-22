@@ -40,7 +40,10 @@ const getMessageList = async (filter: GoogleFilter) => {
   }
 };
 
-const getMessagesArray = async (idArr: { id: string }[], token: string) => {
+const getMessagesArray = async (
+  idArr: { id: string }[],
+  token: string,
+): Promise<Promise<any>[]> => {
   return idArr.map((e: { id: string }) => {
     return getMessage(e.id, token);
   });
