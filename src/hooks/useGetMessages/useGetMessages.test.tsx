@@ -35,17 +35,20 @@ describe('hooks/useGetMessages', () => {
     });
   });
 
-  it('should clear state ti initial value', () => {
-    const { result } = renderHook(() => useGetMessages());
+  it('should clear state ti initial value', async () => {
     // console.log(result.current);
-    act(() => {
+    const { waitForNextUpdate, result } = renderHook(() => useGetMessages());
+    await act(async () => {
       result.current.setMessageList(
         fakeParams.token,
         fakeParams.category,
         fakeParams.direction,
       );
+      await waitForNextUpdate();
+
+      result.current.clearMessageList();
       // console.log(result.current.state);
-      expect(sortResponse).toBeCalled();
+      // expect(sortResponse).toBeCalled();
       expect(result.current.state).toEqual(nullMessageDataState);
     });
   });
