@@ -45,7 +45,7 @@ const getMessagesArray = async (idArr: { id: string }[], token: string) => {
   });
 };
 
-interface messageList {
+export interface messageList {
   nextPageToken: any;
   list: Array<
     PromiseSettledResult<

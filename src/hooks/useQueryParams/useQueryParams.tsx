@@ -19,11 +19,8 @@ export const useQueryParams = (): {
 
   const changeParams = useCallback(
     (category: queryProps['category'], key: queryProps['key']) => {
-      let isActive = false;
       const queryParams = queryString.parse(location.search);
-      if (queryParams[key] === category) {
-        isActive = true;
-      }
+      const isActive = queryParams[key] === category;
       queryParams[key] = category;
       const parsedParams = queryString.stringify(queryParams);
       return {
