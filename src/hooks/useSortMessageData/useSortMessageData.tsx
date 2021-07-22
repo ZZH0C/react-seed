@@ -1,4 +1,4 @@
-import { GoogleMessage } from '../models/GoogleMessage';
+import { GoogleMessage } from '../../models/GoogleMessage';
 // import _ from 'lodash';
 //
 // interface MailHeaders {

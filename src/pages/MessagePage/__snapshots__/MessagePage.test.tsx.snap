@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/MessagePage should render 1`] = `
+<Fragment>
+  <ButtonLink
+    href="/"
+  >
+    Return Home
+  </ButtonLink>
+  <Message
+    from=""
+    title=""
+  />
+</Fragment>
+`;

@@ -58,5 +58,4 @@ export const useUserData = (): {
     }),
     [loginCallback, logoutCallback, state],
   );
-  // return { state, login, logoutCallback };
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCreateMessagesUi } from '../../hooks/useCreateMessagesUi';
+import { useCreateMessagesUi } from '../../hooks/useCreateMessagesUi/useCreateMessagesUi';
 import { SearchBar } from '../SearchBar/SearchBar';
 type MainSectionProps = React.HTMLAttributes<HTMLElement>;
 

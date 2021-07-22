@@ -4,7 +4,7 @@ import { loadOneMessage } from '../../api/userMessages/userMessages';
 import { ButtonLink } from '../../components/ButtonLink/ButtonLink';
 import { Message } from '../../components/Message/Message';
 import { GoogleMessage } from '../../models/GoogleMessage';
-import { sortMessageData } from '../../hooks/useSortMessageData';
+import { sortMessageData } from '../../hooks/useSortMessageData/useSortMessageData';
 
 interface MessagePageValues {
   snippet?: string;
@@ -37,7 +37,6 @@ export const MessagePage: React.FC = () => {
   return (
     <React.Fragment>
       <ButtonLink href={'/'}>Return Home</ButtonLink>
-
       <Message from={messageData.from} title={messageData.title}>
         {messageData.text}
       </Message>

@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/NavbarItem should match snapshot 1`] = `
+<li>
+  <Link
+    className="active"
+    title="name"
+    to={
+      Object {
+        "pathname": "/",
+        "search": "someText",
+      }
+    }
+  >
+    some text
+  </Link>
+</li>
+`;
+
+exports[`components/NavbarItem should render 1`] = `
+<li>
+  <Link
+    className="active"
+    title="name"
+    to={
+      Object {
+        "pathname": "/",
+        "search": "someText",
+      }
+    }
+  >
+    some text
+  </Link>
+</li>
+`;

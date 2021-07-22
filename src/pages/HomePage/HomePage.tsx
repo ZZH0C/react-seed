@@ -12,7 +12,7 @@ import { SubmenuSubItem } from '../../components/Submenu/SubmenuSubItem/SubmenuS
 import { HeaderUserIcons } from '../../components/HeaderUserIcons/HeaderUserIcons';
 import { Submenu } from '../../components/Submenu/Submenu';
 import { MainSection } from '../../components/MainSection/MainSection';
-import { useUserContext } from '../../hooks/useUserContext';
+import { useUserContext } from '../../hooks/useUserContext/useUserContext';
 import {
   emptyProfilePictureSrc,
   SubItemCategories,

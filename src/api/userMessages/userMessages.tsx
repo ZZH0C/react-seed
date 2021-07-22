@@ -1,10 +1,14 @@
 import axios from 'axios';
 import { SetStateAction } from 'react';
 import { GoogleMessage } from '../../models/GoogleMessage';
+import { PaginationToken } from '../../models/PaginationToken';
+import { Direction } from '../../hooks/useGetMessages/useGetMessages';
+import { MessageList } from '../../models/MessageList';
 
 interface GoogleFilter {
   token: string;
   category: string;
+  pageToken: string;
 }
 
 const getMessage = async (id: string, token: string) => {
@@ -24,7 +28,7 @@ const getMessageList = async (filter: GoogleFilter) => {
   const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=3`;
   try {
     const response = await axios.get(url, {
-      params: { q: filter.category },
+      params: { q: filter.category, pageToken: filter.pageToken },
       headers: {
         Authorization: `Bearer ${filter.token}`,
       },
@@ -36,28 +40,52 @@ const getMessageList = async (filter: GoogleFilter) => {
   }
 };
 
-const getMessagesArray = async (idArr: { id: string }[], token: string) => {
+const getMessagesArray = async (
+  idArr: { id: string }[],
+  token: string,
+): Promise<Promise<any>[]> => {
   return idArr.map((e: { id: string }) => {
     return getMessage(e.id, token);
   });
 };
 
+//TODO: you can pass filter model here instead of arguments!
 export const loadMessages = async (
   token: string,
   category: string,
-): Promise<
-  Array<
-    PromiseSettledResult<
-      Promise<any> extends PromiseLike<infer U> ? U : Promise<any>
-    >
-  >
-> => {
-  const idList = await getMessageList({ token: token, category: category });
+  pages: PaginationToken,
+  direction: Direction,
+): Promise<MessageList> => {
+  // TODO: move this selection outside
+  let pageToken;
+  switch (direction) {
+    case Direction.next:
+      pageToken = pages[pages.length - 1];
+      break;
+    case Direction.prev:
+      pageToken = pages[pages.length - 3];
+      break;
+    case Direction.current:
+      pageToken = pages[0];
+      break;
+  }
+  const idList = await getMessageList({
+    token: token,
+    category: category,
+    pageToken: pageToken,
+  });
   if (idList && idList.messages) {
     const messageList = await getMessagesArray(idList.messages, token);
-    return Promise.allSettled(messageList);
+    const list = await Promise.allSettled(messageList);
+    return {
+      list: list,
+      nextPageToken: idList.nextPageToken,
+    };
   } else {
-    return [];
+    return {
+      list: [],
+      nextPageToken: null,
+    };
   }
 };
 

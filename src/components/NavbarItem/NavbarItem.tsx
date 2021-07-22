@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { useQueryParams } from '../../hooks/useQueryParams';
+import { useQueryParams } from '../../hooks/useQueryParams/useQueryParams';
 
 interface NavbarElemProps extends React.HTMLAttributes<HTMLElement> {
   href: string;
@@ -15,17 +15,17 @@ export const NavbarItem: React.FC<NavbarElemProps> = ({
   label,
   children,
 }) => {
-  const { changeParamsCallback } = useQueryParams();
-  const params = changeParamsCallback(label, 'category');
+  const { changeParams } = useQueryParams();
+  const { parsedParams, isActive } = changeParams(label, 'category');
   return (
     <li>
       <Link
         to={{
           pathname: href,
-          search: params.parsedParams,
+          search: parsedParams,
         }}
         title={name}
-        className={classNames('', { active: params.isActive })}
+        className={classNames('', { active: isActive })}
       >
         {children}
       </Link>
