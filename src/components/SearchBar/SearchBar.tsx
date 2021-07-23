@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useQueryParams } from '../../hooks/useQueryParams/useQueryParams';
 
-//TODO: fix this abomination
+//TODO: change this to uncontrollable input with useRef
 export const SearchBar = (): JSX.Element => {
   const [state, setState] = useState('');
   const { changeParams } = useQueryParams();
@@ -17,7 +17,6 @@ export const SearchBar = (): JSX.Element => {
             className="form-inline form-search pull-left"
             onSubmit={(event) => {
               event.preventDefault();
-              setState('');
               history.push({
                 pathname: '/home',
                 search: params.parsedParams,
@@ -38,7 +37,6 @@ export const SearchBar = (): JSX.Element => {
               <button
                 className="btn btn-search"
                 onClick={() => {
-                  setState('');
                   history.push({
                     pathname: '/home',
                     search: params.parsedParams,
