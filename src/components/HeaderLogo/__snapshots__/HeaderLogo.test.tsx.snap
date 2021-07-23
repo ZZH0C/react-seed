@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Head should render and match snapshot 1`] = `
+<div
+  className="logoBlock"
+>
+  <a
+    href="/"
+  >
+    <img
+      alt="mockAlt"
+      className="logo"
+      src="mockSrc"
+      title="Logo"
+    />
+    <img
+      alt="mockAlt"
+      className="logoMobile"
+      src="mockSrc"
+    />
+  </a>
+  <span>
+    some text
+  </span>
+</div>
+`;

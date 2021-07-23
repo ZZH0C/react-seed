@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface HeaderUserIconsProps {
+export interface HeaderUserIconsProps {
   classname: 'icon-mail' | 'icon-bell';
   url?: string;
 }

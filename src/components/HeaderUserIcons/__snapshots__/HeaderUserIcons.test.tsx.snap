@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Head should render and match snapshot with first classname 1`] = `
+<a
+  className="btn btn-sm btn-header"
+  href="mockURL"
+>
+  <i
+    className="headerIcon icon-mail"
+  />
+</a>
+`;
+
+exports[`components/Head should render and match snapshot with second classname 1`] = `
+<a
+  className="btn btn-sm btn-header"
+  href="mockURL"
+>
+  <i
+    className="headerIcon icon-bell"
+  />
+</a>
+`;

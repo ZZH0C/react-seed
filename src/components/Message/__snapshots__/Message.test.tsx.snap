@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ButtonLink should render and match snapshot 1`] = `
+<section
+  className="message_section_container"
+>
+  <div
+    className="message_section"
+  >
+    <span
+      className="message_section_text"
+    >
+      From: 
+      SOME_USER
+    </span>
+    <span
+      className="message_section_text"
+    >
+      Subject: 
+      SOME_TITLE
+    </span>
+    <span
+      className="message_section_text"
+    >
+      some text
+    </span>
+  </div>
+</section>
+`;
+
+exports[`components/ButtonLink should render without children and match snapshot 1`] = `
+<section
+  className="message_section_container"
+>
+  <div
+    className="message_section"
+  >
+    <span
+      className="message_section_text"
+    >
+      From: 
+      SOME_USER
+    </span>
+    <span
+      className="message_section_text"
+    >
+      Subject: 
+      SOME_TITLE
+    </span>
+    <span
+      className="message_section_text"
+    />
+  </div>
+</section>
+`;
