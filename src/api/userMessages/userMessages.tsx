@@ -62,7 +62,7 @@ const chosePageToken = (direction: Direction, pages: string[]) => {
   }
 };
 
-interface testFilter {
+export interface loadMessagesFilter {
   token: string;
   category: string;
   pages: PaginationToken;
@@ -70,7 +70,7 @@ interface testFilter {
 }
 
 export const loadMessages = async (
-  filter: testFilter,
+  filter: loadMessagesFilter,
 ): Promise<MessageList> => {
   const pageToken = chosePageToken(filter.direction, filter.pages);
   const idList = await getMessageList({

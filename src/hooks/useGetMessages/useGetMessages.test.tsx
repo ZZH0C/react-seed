@@ -1,6 +1,7 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 import {
   Direction,
+  MessageStateValue,
   nullMessageDataState,
   useGetMessages,
 } from './useGetMessages';
@@ -15,10 +16,18 @@ const mockResponse: MessageList = {
   list: [],
 };
 
-// export const SuccessMockMessageDataState: MessageStateValue = {
-//   messages: [],
-//   pages: ['SUCCESS_MOCK'],
-// };
+const currentSuccessMockMessageDataState: MessageStateValue = {
+  messages: [],
+  pages: ['0', 'NEXT_PAGE_TOKEN'],
+};
+const nextSuccessMockMessageDataState: MessageStateValue = {
+  messages: [],
+  pages: ['0', 'NEXT_PAGE_TOKEN'],
+};
+const prevSuccessMockMessageDataState: MessageStateValue = {
+  messages: [],
+  pages: ['0'],
+};
 
 mocked(loadMessages).mockImplementation(() => {
   return Promise.resolve(mockResponse);
@@ -35,7 +44,7 @@ describe('hooks/useGetMessages', () => {
     jest.clearAllMocks();
   });
 
-  it('should set state and reset it', async () => {
+  it('should set current state and reset it', async () => {
     const { waitForNextUpdate, result } = renderHook(() => useGetMessages());
     await act(async () => {
       expect(result.current.state).toEqual(nullMessageDataState);
@@ -45,10 +54,7 @@ describe('hooks/useGetMessages', () => {
         fakeParams.direction,
       );
       await waitForNextUpdate();
-      expect(result.current.state).toEqual({
-        messages: [],
-        pages: ['0', 'NEXT_PAGE_TOKEN'],
-      });
+      expect(result.current.state).toEqual(currentSuccessMockMessageDataState);
       expect(loadMessages).toBeCalledWith({
         token: fakeParams.token,
         category: fakeParams.category,
@@ -60,7 +66,7 @@ describe('hooks/useGetMessages', () => {
     });
   });
 
-  it('should call update for next page', async () => {
+  it('should call update for next page and set state', async () => {
     const { waitForNextUpdate, result } = renderHook(() => useGetMessages());
     await act(async () => {
       expect(result.current.state).toEqual(nullMessageDataState);
@@ -78,13 +84,10 @@ describe('hooks/useGetMessages', () => {
         direction: Direction.next,
       });
     });
-    expect(result.current.state).toEqual({
-      messages: [],
-      pages: ['0', 'NEXT_PAGE_TOKEN'],
-    });
+    expect(result.current.state).toEqual(nextSuccessMockMessageDataState);
   });
 
-  it('should call update for prev page', async () => {
+  it('should call update for prev page and set state', async () => {
     const { waitForNextUpdate, result } = renderHook(() => useGetMessages());
     await act(async () => {
       expect(result.current.state).toEqual(nullMessageDataState);
@@ -101,13 +104,6 @@ describe('hooks/useGetMessages', () => {
       pages: nullMessageDataState.pages,
       direction: Direction.prev,
     });
-    expect(result.current.state).toEqual({
-      messages: [],
-      pages: ['0'],
-    });
+    expect(result.current.state).toEqual(prevSuccessMockMessageDataState);
   });
-
-  // it('should update state forward', () => {});
-
-  // it('should clear state', () => {});
 });
