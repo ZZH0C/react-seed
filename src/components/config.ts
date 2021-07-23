@@ -63,3 +63,10 @@ export const navBarLabels = [
 export const categoryContainer = {
   name: 'Category',
 };
+
+export const logoProps = {
+  desktopImgSrc: 'images/logotype.png',
+  mobileImgSrc: 'images/logotypeMobile.png',
+  desktopImgAlt: 'logo',
+  mobileImgAlc: 'logo',
+};

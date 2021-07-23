@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/HomePage should render 1`] = `
+<section>
+  <Head>
+    <HeaderLogo
+      desktopImgAlt="logo"
+      desktopImgSrc="images/logotype.png"
+      mobileImgAlc="logo"
+      mobileImgSrc="images/logotypeMobile.png"
+    >
+      Page Title
+    </HeaderLogo>
+    <HeaderUser
+      src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+    >
+      <HeaderUserIcons
+        classname="icon-bell"
+      />
+      <HeaderUserIcons
+        classname="icon-mail"
+      />
+    </HeaderUser>
+  </Head>
+  <Navbar />
+  <MainContainer>
+    <Submenu>
+      <SubmenuItem
+        name="Category"
+      />
+    </Submenu>
+    <MainSection />
+  </MainContainer>
+</section>
+`;

@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
-import { Direction, MessageStateValue, useGetMessages } from './useGetMessages';
+import { Direction, useGetMessages } from './useGetMessages';
 import { nullMessageDataState } from './useGetMessages';
 import { loadMessages } from '../../api/userMessages/userMessages';
 import { MessageList } from '../../models/MessageList';
@@ -46,12 +46,12 @@ describe('hooks/useGetMessages', () => {
         messages: [],
         pages: ['0', 'NEXT_PAGE_TOKEN'],
       });
-      expect(loadMessages).toBeCalledWith(
-        fakeParams.token,
-        fakeParams.category,
-        nullMessageDataState.pages,
-        fakeParams.direction,
-      );
+      expect(loadMessages).toBeCalledWith({
+        token: fakeParams.token,
+        category: fakeParams.category,
+        pages: nullMessageDataState.pages,
+        direction: fakeParams.direction,
+      });
       result.current.clearMessageList();
       expect(result.current.state).toEqual(nullMessageDataState);
     });

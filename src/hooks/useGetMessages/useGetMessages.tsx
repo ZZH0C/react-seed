@@ -17,7 +17,7 @@ export const nullMessageDataState: MessageStateValue = {
   pages: ['0'],
 };
 
-export const sortResponse = (
+const sortResponse = (
   messagesData: MessageList,
   state: MessageStateValue,
   direction: Direction,

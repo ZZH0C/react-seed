@@ -7,7 +7,6 @@ import { NavbarItem } from '../../components/NavbarItem/NavbarItem';
 import { HeaderLogo } from '../../components/HeaderLogo/HeaderLogo';
 import { HeaderUser } from '../../components/HeaderUser/HeaderUser';
 import { SubmenuItem } from '../../components/Submenu/SubmenuItem/SubmenuItem';
-import { testProps_logo } from '../../components/mockProps';
 import { SubmenuSubItem } from '../../components/Submenu/SubmenuSubItem/SubmenuSubItem';
 import { HeaderUserIcons } from '../../components/HeaderUserIcons/HeaderUserIcons';
 import { Submenu } from '../../components/Submenu/Submenu';
@@ -18,6 +17,7 @@ import {
   SubItemCategories,
   categoryContainer,
   navBarLabels,
+  logoProps,
 } from '../../components/config';
 export const UserContext = useUserContext;
 export const HomePage: React.FC = () => {
@@ -50,10 +50,10 @@ export const HomePage: React.FC = () => {
     <section>
       <Head>
         <HeaderLogo
-          mobileImgSrc={testProps_logo.mobileImgSrc}
-          mobileImgAlc={testProps_logo.mobileImgAlc}
-          desktopImgSrc={testProps_logo.desktopImgSrc}
-          desktopImgAlt={testProps_logo.desktopImgAlt}
+          mobileImgSrc={logoProps.mobileImgSrc}
+          mobileImgAlc={logoProps.mobileImgAlc}
+          desktopImgSrc={logoProps.desktopImgSrc}
+          desktopImgAlt={logoProps.desktopImgAlt}
         >
           Page Title
         </HeaderLogo>
