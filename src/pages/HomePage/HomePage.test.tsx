@@ -8,6 +8,6 @@ describe('components/HomePage', () => {
   it('should render', () => {
     expect(shallow(<HomePage />)).toMatchSnapshot();
   });
-
+  //TODO: add useContext mock
   // it('should call changeParams', () => {});
 });
