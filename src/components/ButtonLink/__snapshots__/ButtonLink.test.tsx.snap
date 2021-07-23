@@ -8,12 +8,3 @@ exports[`components/ButtonLink should render and match snapshot 1`] = `
   some text
 </Link>
 `;
-
-exports[`components/NavbarItem should render and match snapshot 1`] = `
-<Link
-  className="button_home"
-  to="/"
->
-  some text
-</Link>
-`;

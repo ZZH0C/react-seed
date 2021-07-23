@@ -1,6 +1,9 @@
 import { act, renderHook } from '@testing-library/react-hooks';
-import { Direction, useGetMessages } from './useGetMessages';
-import { nullMessageDataState } from './useGetMessages';
+import {
+  Direction,
+  nullMessageDataState,
+  useGetMessages,
+} from './useGetMessages';
 import { loadMessages } from '../../api/userMessages/userMessages';
 import { MessageList } from '../../models/MessageList';
 import { mocked } from 'ts-jest/utils';
@@ -54,6 +57,53 @@ describe('hooks/useGetMessages', () => {
       });
       result.current.clearMessageList();
       expect(result.current.state).toEqual(nullMessageDataState);
+    });
+  });
+
+  it('should call update for next page', async () => {
+    const { waitForNextUpdate, result } = renderHook(() => useGetMessages());
+    await act(async () => {
+      expect(result.current.state).toEqual(nullMessageDataState);
+      result.current.setMessageList(
+        fakeParams.token,
+        fakeParams.category,
+        Direction.next,
+      );
+      await waitForNextUpdate();
+
+      expect(loadMessages).toBeCalledWith({
+        token: fakeParams.token,
+        category: fakeParams.category,
+        pages: nullMessageDataState.pages,
+        direction: Direction.next,
+      });
+    });
+    expect(result.current.state).toEqual({
+      messages: [],
+      pages: ['0', 'NEXT_PAGE_TOKEN'],
+    });
+  });
+
+  it('should call update for prev page', async () => {
+    const { waitForNextUpdate, result } = renderHook(() => useGetMessages());
+    await act(async () => {
+      expect(result.current.state).toEqual(nullMessageDataState);
+      result.current.setMessageList(
+        fakeParams.token,
+        fakeParams.category,
+        Direction.prev,
+      );
+      await waitForNextUpdate();
+    });
+    expect(loadMessages).toBeCalledWith({
+      token: fakeParams.token,
+      category: fakeParams.category,
+      pages: nullMessageDataState.pages,
+      direction: Direction.prev,
+    });
+    expect(result.current.state).toEqual({
+      messages: [],
+      pages: ['0'],
     });
   });
 

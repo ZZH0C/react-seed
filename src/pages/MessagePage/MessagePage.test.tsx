@@ -2,11 +2,28 @@ import { configure, shallow } from 'enzyme';
 import { MessagePage } from './MessagePage';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
+import { loadOneMessage } from '../../api/userMessages/userMessages';
+import { mocked } from 'ts-jest/utils';
+import { GoogleMessage } from '../../models/GoogleMessage';
 
-// import { useLocation } from 'react-router-dom';
-// import { mocked } from 'ts-jest/utils';
+const mockResponse: GoogleMessage = {
+  value: {} as GoogleMessage,
+  id: 'SOME_ID',
+  snippet: 'SOME_SNIPPET',
+  payload: {
+    headers: [{ name: 'SOME_NAME', value: 'SOME_VALUE' }],
+    parts: [
+      {
+        body: { data: 'SOME_DATA' },
+      },
+    ],
+  },
+};
 
-// jest.mock('../../hooks/useQueryParams/useQueryParams');
+jest.mock('../../api/userMessages/userMessages');
+mocked(loadOneMessage).mockImplementation(() => {
+  return Promise.resolve(mockResponse);
+});
 // mocked(useLocation).mockImplementation(() => {
 //   return {
 //     pathname: '',
@@ -43,8 +60,9 @@ describe('components/MessagePage', () => {
     expect(shallow(<MessagePage />)).toMatchSnapshot();
   });
 
-  // it('should render', () => {
+  // TODO:
+  // it('should render and call loadOneMessage', () => {
   //   shallow(<MessagePage />);
-  //   expect(testLocation).toBeCalledTimes(2);
+  // expect(loadOneMessage).toBeCalledTimes(1);
   // });
 });
