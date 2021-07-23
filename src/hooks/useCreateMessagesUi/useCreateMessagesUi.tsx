@@ -7,12 +7,26 @@ import { UserContext } from '../../pages/HomePage/HomePage';
 import { useQueryParams } from '../useQueryParams/useQueryParams';
 import { useLocation } from 'react-router-dom';
 import { PaginationButton } from '../../components/PaginationButton/PaginationButton';
+import map from 'lodash/map';
+
+const createMessage = (message: GoogleMessage) => {
+  const messageData = sortMessageData(message.value);
+  return (
+    <MessageItem
+      key={Math.random()}
+      fromWho={messageData.from}
+      messageSnippet={messageData.snippet}
+      messageTitle={messageData.title}
+      messageDate={messageData.date}
+      messageId={message.value.id}
+    />
+  );
+};
 
 export const useCreateMessagesUi = (): JSX.Element => {
   const userData = useContext(UserContext);
   const { setMessageList, state, clearMessageList } = useGetMessages();
   const { getGoogleQueryParams } = useQueryParams();
-  const messages: JSX.Element[] = [];
   const location = useLocation();
   const googleData = getGoogleQueryParams();
   let token: string | null = null;
@@ -29,25 +43,9 @@ export const useCreateMessagesUi = (): JSX.Element => {
     }
     //TODO: add pagination and userData?.accessToken
   }, [userData, location]);
-  //TODO: add lodash map pls and render it inside return
-  if (state.messages.length > 0) {
-    state.messages.forEach((e: GoogleMessage) => {
-      const messageData = sortMessageData(e.value);
-      messages.push(
-        <MessageItem
-          key={Math.random()}
-          fromWho={messageData.from}
-          messageSnippet={messageData.snippet}
-          messageTitle={messageData.title}
-          messageDate={messageData.date}
-          messageId={e.value.id}
-        />,
-      );
-    });
-  }
   return (
     <>
-      {messages}
+      {state.messages.length > 0 ? map(state.messages, createMessage) : []}
       <div className="controlButtons">
         <PaginationButton
           onClick={() => setMessageList(token, googleData, Direction.prev)}

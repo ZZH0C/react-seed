@@ -63,11 +63,14 @@ export const useGetMessages = (): {
   const setMessageList = useCallback(
     (token: string | null, category: string, direction: Direction) => {
       if (token) {
-        loadMessages(token, category, state.pages, direction).then(
-          (messageData) => {
-            setState(sortResponse(messageData, state, direction));
-          },
-        );
+        loadMessages({
+          token: token,
+          category: category,
+          pages: state.pages,
+          direction: direction,
+        }).then((messageData) => {
+          setState(sortResponse(messageData, state, direction));
+        });
       } else {
         clearMessageList();
       }
