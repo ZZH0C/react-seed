@@ -1,10 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
-import {
-  Direction,
-  MessageStateValue,
-  sortResponse,
-  useGetMessages,
-} from './useGetMessages';
+import { Direction, MessageStateValue, useGetMessages } from './useGetMessages';
 import { nullMessageDataState } from './useGetMessages';
 import { loadMessages } from '../../api/userMessages/userMessages';
 import { MessageList } from '../../models/MessageList';
@@ -17,10 +12,14 @@ const mockResponse: MessageList = {
   list: [],
 };
 
-export const SuccessMockMessageDataState: MessageStateValue = {
-  messages: [],
-  pages: ['SUCCESS_MOCK'],
-};
+// export const SuccessMockMessageDataState: MessageStateValue = {
+//   messages: [],
+//   pages: ['SUCCESS_MOCK'],
+// };
+
+mocked(loadMessages).mockImplementation(() => {
+  return Promise.resolve(mockResponse);
+});
 
 describe('hooks/useGetMessages', () => {
   const fakeParams = {
@@ -30,42 +29,35 @@ describe('hooks/useGetMessages', () => {
   };
 
   beforeEach(() => {
-    mocked(loadMessages).mockImplementation(() => {
-      return Promise.resolve(mockResponse);
-    });
+    jest.clearAllMocks();
   });
 
-  it('should clear state ti initial value', () => {
-    const { result } = renderHook(() => useGetMessages());
-    // console.log(result.current);
-    act(() => {
+  it('should set state and reset it', async () => {
+    const { waitForNextUpdate, result } = renderHook(() => useGetMessages());
+    await act(async () => {
+      expect(result.current.state).toEqual(nullMessageDataState);
       result.current.setMessageList(
         fakeParams.token,
         fakeParams.category,
         fakeParams.direction,
       );
-      // console.log(result.current.state);
-      expect(sortResponse).toBeCalled();
+      await waitForNextUpdate();
+      expect(result.current.state).toEqual({
+        messages: [],
+        pages: ['0', 'NEXT_PAGE_TOKEN'],
+      });
+      expect(loadMessages).toBeCalledWith(
+        fakeParams.token,
+        fakeParams.category,
+        nullMessageDataState.pages,
+        fakeParams.direction,
+      );
+      result.current.clearMessageList();
       expect(result.current.state).toEqual(nullMessageDataState);
     });
   });
 
-  it('should update state forward', () => {});
+  // it('should update state forward', () => {});
 
   // it('should clear state', () => {});
 });
-
-//TODO: put this test into another
-// it('should set initial state', () => {
-//   const { result } = renderHook(() => useGetMessages());
-//   expect(result.current.state).toEqual(nullMessageDataState);
-// });
-
-//TODO: put this test into another
-// it('should clear state ti initial value', () => {
-//   const { result } = renderHook(() => useGetMessages());
-//   act(() => {
-//     result.current.clearMessageList();
-//   });
-//   expect(result.current.state).toEqual(nullMessageDataState);
-// });
