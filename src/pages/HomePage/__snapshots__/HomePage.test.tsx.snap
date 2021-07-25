@@ -4,15 +4,15 @@ exports[`components/HomePage should render 1`] = `
 <section>
   <Head>
     <HeaderLogo
-      desktopImgAlt="logo"
-      desktopImgSrc="images/logotype.png"
-      mobileImgAlc="logo"
-      mobileImgSrc="images/logotypeMobile.png"
+      desktopImgAlt="FAKE_SRC"
+      desktopImgSrc="FAKE_SRC"
+      mobileImgAlc="FAKE_SRC"
+      mobileImgSrc="FAKE_SRC"
     >
       Page Title
     </HeaderLogo>
     <HeaderUser
-      src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+      src="/"
     >
       <HeaderUserIcons
         classname="icon-bell"
@@ -22,12 +22,46 @@ exports[`components/HomePage should render 1`] = `
       />
     </HeaderUser>
   </Head>
-  <Navbar />
+  <Navbar>
+    <NavbarItem
+      href="/"
+      key="0"
+      label="FAKE_LABEL"
+      name="FAKE_NAME"
+    >
+      FAKE_NAME
+    </NavbarItem>
+    <NavbarItem
+      href="/"
+      key="1"
+      label="FAKE_LABEL"
+      name="FAKE_NAME"
+    >
+      FAKE_NAME
+    </NavbarItem>
+  </Navbar>
   <MainContainer>
     <Submenu>
       <SubmenuItem
-        name="Category"
-      />
+        name="FAKE_CATEGORY_NAME"
+      >
+        <SubmenuSubItem
+          category="FAKE_CATEGORY"
+          href="/"
+          key="0"
+          name="FAKE_NAME"
+        >
+          FAKE_NAME
+        </SubmenuSubItem>
+        <SubmenuSubItem
+          category="FAKE_CATEGORY"
+          href="/"
+          key="1"
+          name="FAKE_NAME"
+        >
+          FAKE_NAME
+        </SubmenuSubItem>
+      </SubmenuItem>
     </Submenu>
     <MainSection />
   </MainContainer>

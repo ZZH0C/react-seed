@@ -21,10 +21,10 @@ import {
 } from '../../components/config';
 export const UserContext = useUserContext;
 export const HomePage: React.FC = () => {
-  const subItems = SubItemCategories.map((subItemProps) => {
+  const subItems = SubItemCategories.map((subItemProps, index) => {
     return (
       <SubmenuSubItem
-        key={Math.random()}
+        key={index}
         href={subItemProps.href}
         name={subItemProps.name}
         category={subItemProps.category}
@@ -33,10 +33,10 @@ export const HomePage: React.FC = () => {
       </SubmenuSubItem>
     );
   });
-  const navBarItems = navBarLabels.map((navBarItemProps) => {
+  const navBarItems = navBarLabels.map((navBarItemProps, index) => {
     return (
       <NavbarItem
-        key={Math.random()}
+        key={index}
         href={navBarItemProps.href}
         name={navBarItemProps.name}
         label={navBarItemProps.label}
