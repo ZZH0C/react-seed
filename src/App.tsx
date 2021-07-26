@@ -15,20 +15,11 @@ export const UserContext = useUserContext;
 
 export const App: React.FC = () => {
   const { state, logoutCallback, loginCallback } = useUserData();
-
-  // const responseGoogle = (
-  //   response: GoogleLoginResponse | GoogleLoginResponseOffline,
-  // ) => {
-  //   loginCallback(response);
-  // };
   const responseFailure = (resp: { error: string }) => {
     console.error(resp);
     // TODO: add error handler
     throw new Error(resp.error);
   };
-  // const logout = () => {
-  //   logoutCallback();
-  // };
 
   return (
     <>
