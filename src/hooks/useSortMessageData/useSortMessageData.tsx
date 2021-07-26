@@ -1,5 +1,5 @@
 import { GoogleMessage } from '../../models/GoogleMessage';
-// import _ from 'lodash';
+import { find } from 'lodash';
 //
 // interface MailHeaders {
 //   From?: string;
@@ -8,6 +8,7 @@ import { GoogleMessage } from '../../models/GoogleMessage';
 // }
 
 import moment from 'moment';
+import base64url from 'base64url';
 
 const convertDate = (date: string) => {
   const messageDate = new Date(date);
@@ -36,6 +37,25 @@ export const sortMessageData = (
   };
   if (messageData.snippet) {
     result.snippet = messageData.snippet;
+  }
+  if (messageData.payload) {
+    let encodedHTML;
+
+    const body = find(
+      find(messageData.payload.parts, { mimeType: 'multipart/alternative' })
+        ?.parts,
+      { mimeType: 'text/html' },
+    )?.body;
+
+    if (body) {
+      encodedHTML = body.data;
+    } else {
+      const body = find(messageData.payload.parts, {
+        mimeType: 'text/html',
+      })?.body;
+      encodedHTML = body?.data;
+    }
+    if (encodedHTML) result.text = base64url.toBase64(encodedHTML);
   }
   // TODO:  fix with using lodash
   // const headersList = ['From', 'Subject', 'Date'];

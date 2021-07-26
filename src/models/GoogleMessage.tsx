@@ -1,9 +1,26 @@
 export interface GoogleMessage {
-  value: GoogleMessage;
   id: string;
   snippet: string;
   payload: {
-    headers: { name: string; value: string }[];
-    parts: { body: { data?: string } }[];
+    headers: {
+      name: string;
+      value: string;
+    }[];
+    parts: {
+      mimeType: string;
+      body: {
+        data?: string;
+      };
+      parts?: {
+        mimeType: string;
+        body: {
+          data?: string;
+        };
+      }[];
+    }[];
   };
+}
+
+export interface GoogleMessagePromise {
+  value: GoogleMessage;
 }

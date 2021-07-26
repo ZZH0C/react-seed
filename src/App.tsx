@@ -16,7 +16,6 @@ export const UserContext = useUserContext;
 export const App: React.FC = () => {
   const { state, logoutCallback, loginCallback } = useUserData();
   const responseFailure = (resp: { error: string }) => {
-    console.error(resp);
     // TODO: add error handler
     throw new Error(resp.error);
   };
@@ -25,6 +24,7 @@ export const App: React.FC = () => {
     <>
       <UserContext.Provider value={state.userData}>
         <GoogleLogin
+          scope="https://mail.google.com"
           clientId={clientId}
           buttonText="Login"
           onSuccess={loginCallback}

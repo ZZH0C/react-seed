@@ -5,6 +5,7 @@ import { ButtonLink } from '../../components/ButtonLink/ButtonLink';
 import { Message } from '../../components/Message/Message';
 import { GoogleMessage } from '../../models/GoogleMessage';
 import { sortMessageData } from '../../hooks/useSortMessageData/useSortMessageData';
+import base64url from 'base64url';
 
 interface MessagePageValues {
   snippet?: string;
@@ -34,11 +35,19 @@ export const MessagePage: React.FC = () => {
   if (!messageData.text) {
     messageData.text = messageData.snippet;
   }
+
+  let convertedSuperText = '';
+  if (messageData.text)
+    convertedSuperText = base64url.toBase64(messageData.text);
   return (
     <React.Fragment>
       <ButtonLink href={'/'}>Return Home</ButtonLink>
-      <Message from={messageData.from} title={messageData.title}>
-        {messageData.text}
+      <Message
+        from={messageData.from}
+        title={messageData.title}
+        text={convertedSuperText}
+      >
+        {/*{messageData.text}*/}
       </Message>
     </React.Fragment>
   );

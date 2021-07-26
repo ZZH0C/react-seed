@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Direction, useGetMessages } from '../useGetMessages/useGetMessages';
-import { GoogleMessage } from '../../models/GoogleMessage';
+import { GoogleMessagePromise } from '../../models/GoogleMessage';
 import { MessageItem } from '../../components/MessageItem/MessageItem';
 import { sortMessageData } from '../useSortMessageData/useSortMessageData';
 import { UserContext } from '../../pages/HomePage/HomePage';
@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 import { PaginationButton } from '../../components/PaginationButton/PaginationButton';
 import map from 'lodash/map';
 
-const createMessage = (message: GoogleMessage) => {
+const createMessage = (message: GoogleMessagePromise) => {
   const messageData = sortMessageData(message.value);
   return (
     <MessageItem
