@@ -19,7 +19,6 @@ export const Message: React.FC<MessageProps> = ({ from, title, text }) => {
           Subject: {title}
         </span>
         <span className={classNames(styles.message_section_text)}>
-          {/*{children}*/}
           <iframe
             seamless
             className={classNames(styles.message_section_iframe)}
