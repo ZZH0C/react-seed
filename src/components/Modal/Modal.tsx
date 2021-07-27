@@ -7,6 +7,7 @@ import { UserContext } from '../../pages/HomePage/HomePage';
 import { useHistory, useLocation } from 'react-router-dom';
 import { sendMessageData } from '../../models/SendMessageData';
 import { sendMessage } from '../../api/sendMessage/sendMessage';
+import { Loader } from '../Loader/Loader';
 
 const Portal: React.FC = ({ children }) => {
   const modalRoot = document.getElementById('modal');
@@ -118,6 +119,7 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
           </div>
         </div>
       </form>
+      <Loader isActive={true} />
     </Portal>
   );
 };
