@@ -5,13 +5,8 @@ import classNames from 'classnames';
 import { useForm } from 'react-hook-form';
 import { UserContext } from '../../pages/HomePage/HomePage';
 import { useHistory, useLocation } from 'react-router-dom';
-
-export interface sendMessageData {
-  to?: string;
-  cc?: string;
-  subject?: string;
-  messageText?: string;
-}
+import { sendMessageData } from '../../models/SendMessageData';
+import { sendMessage } from '../../api/sendMessage/sendMessage';
 
 const Portal: React.FC = ({ children }) => {
   const modalRoot = document.getElementById('modal');
@@ -51,7 +46,7 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
   const handleSave = useCallback(
     (data: sendMessageData) => {
       console.log(data, token);
-      handleClose();
+      sendMessage(data, token).then(() => handleClose());
     },
     [token, handleClose],
   );

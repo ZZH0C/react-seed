@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useQueryParams } from '../../hooks/useQueryParams/useQueryParams';
+import styles from './SearchBar.module.scss';
+import classNames from 'classnames';
 
 //TODO: change this to uncontrollable input with useRef
 export const SearchBar = (): JSX.Element => {
@@ -56,7 +58,7 @@ export const SearchBar = (): JSX.Element => {
             </div>
           </form>
         </div>
-        <div className={'options col-sm-10'}>
+        <div className={classNames(styles.modal_button)}>
           <button onClick={handleCreateMessage}>
             <i className="icon-plus-small" />
             <span>New message</span>

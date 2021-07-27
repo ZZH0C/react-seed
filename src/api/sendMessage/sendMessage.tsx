@@ -1,16 +1,25 @@
 import axios from 'axios';
-import { sendMessageData } from '../../components/Modal/Modal';
+import { sendMessageData } from '../../models/SendMessageData';
+import base64url from 'base64url';
 
 export const sendMessage = async (
   data: sendMessageData,
   token: string,
 ): Promise<any> => {
-  const url = `https://gmail.googleapis.com/upload/gmail/v1/users/${data.to}/messages/send`;
+  const rawMessageBodyDecoded = `To: <${data.to}>  
+Cc: ${data.cc}  
+Subject: ${data.subject}  
+${data.messageText}`;
+  const rawMessageBodyEncoded = base64url.encode(rawMessageBodyDecoded);
+  const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages/send`;
   try {
-    const response = await axios.post(url, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    return response.data;
+    return await axios.post(
+      url,
+      {
+        raw: rawMessageBodyEncoded,
+      },
+      { headers: { Authorization: `Bearer ${token}` } },
+    );
   } catch (error) {
     //TODO: write nice error handler
     console.error(error);
