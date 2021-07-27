@@ -45,7 +45,6 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
 
   const handleSave = useCallback(
     (data: sendMessageData) => {
-      console.log(data, token);
       sendMessage(data, token).then(() => handleClose());
     },
     [token, handleClose],
@@ -122,15 +121,3 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
     </Portal>
   );
 };
-
-// <div className={'options col-sm-10'}>
-//   <button
-//     className={classNames(styles.modal_open_button)}
-//     onClick={() => {
-//       setModalState(!modalState);
-//     }}
-//   >
-//     <i className="icon-plus-small" />
-//     <span>New message</span>
-//   </button>
-// </div>
