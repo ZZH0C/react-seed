@@ -9,7 +9,9 @@ export const sendMessage = async (
   const rawMessageBodyDecoded = `To: <${data.to}>  
 Cc: ${data.cc}  
 Subject: ${data.subject}  
+
 ${data.messageText}`;
+
   const rawMessageBodyEncoded = base64url.encode(rawMessageBodyDecoded);
   const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages/send`;
   try {
