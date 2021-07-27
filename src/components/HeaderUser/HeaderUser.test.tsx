@@ -4,7 +4,7 @@ configure({ adapter: new Adapter() });
 import { HeaderUser } from './HeaderUser';
 import React from 'react';
 
-const useFakeContext_true = jest.fn().mockImplementation(() => {
+const useFakeContextTrue = jest.fn().mockImplementation(() => {
   return {
     profileObj: {
       name: '',
@@ -12,7 +12,8 @@ const useFakeContext_true = jest.fn().mockImplementation(() => {
     },
   };
 });
-const useFakeContext_false = jest.fn().mockImplementation(() => {
+
+const useFakeContextFalse = jest.fn().mockImplementation(() => {
   return {};
 });
 
@@ -25,23 +26,23 @@ describe('components/ButtonLink', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
-
+  //TODO: fix this context mock with https://enzymejs.github.io/enzyme/docs/api/shallow.html
   it('should render and match snapshot', () => {
-    React.useContext = useFakeContext_true;
+    React.useContext = useFakeContextTrue;
     expect(
       shallow(
         <HeaderUser src={mockProps.href}>{mockProps.children}</HeaderUser>,
       ),
     ).toMatchSnapshot();
-    expect(useFakeContext_true).toBeCalledTimes(1);
+    expect(useFakeContextTrue).toBeCalledTimes(1);
   });
   it('should render and match snapshot', () => {
-    React.useContext = useFakeContext_false;
+    React.useContext = useFakeContextFalse;
     expect(
       shallow(
         <HeaderUser src={mockProps.href}>{mockProps.children}</HeaderUser>,
       ),
     ).toMatchSnapshot();
-    expect(useFakeContext_false).toBeCalledTimes(1);
+    expect(useFakeContextFalse).toBeCalledTimes(1);
   });
 });

@@ -8,19 +8,19 @@ exports[`components/Head should render and match snapshot 1`] = `
     href="/"
   >
     <img
-      alt="mockAlt"
+      alt="Image Alt"
       className="logo"
-      src="mockSrc"
+      src="/fake-image-url"
       title="Logo"
     />
     <img
-      alt="mockAlt"
+      alt="Image Alt"
       className="logoMobile"
-      src="mockSrc"
+      src="/fake-image-url"
     />
   </a>
   <span>
-    some text
+    mock children
   </span>
 </div>
 `;

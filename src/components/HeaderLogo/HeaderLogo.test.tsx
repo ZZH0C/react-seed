@@ -5,9 +5,11 @@ import { HeaderLogo } from './HeaderLogo';
 
 describe('components/Head', () => {
   const mockProps = {
-    children: 'some text',
-    mockAlt: 'mockAlt',
-    mockSrc: 'mockSrc',
+    desktopImgAlt: 'Image Alt',
+    desktopImgSrc: '/fake-image-url',
+    mobileImgAlc: 'Image Alt',
+    mobileImgSrc: '/fake-image-url',
+    children: 'mock children',
   };
 
   beforeEach(() => {
@@ -16,16 +18,7 @@ describe('components/Head', () => {
 
   it('should render and match snapshot', () => {
     expect(
-      shallow(
-        <HeaderLogo
-          desktopImgAlt={mockProps.mockAlt}
-          desktopImgSrc={mockProps.mockSrc}
-          mobileImgSrc={mockProps.mockSrc}
-          mobileImgAlc={mockProps.mockAlt}
-        >
-          {mockProps.children}
-        </HeaderLogo>,
-      ),
+      shallow(<HeaderLogo {...mockProps}>{mockProps.children}</HeaderLogo>),
     ).toMatchSnapshot();
   });
 });

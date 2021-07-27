@@ -7,7 +7,7 @@ describe('components/ButtonLink', () => {
   const mockProps = {
     from: 'SOME_USER',
     title: 'SOME_TITLE',
-    children: 'some text',
+    text: 'some text',
   };
 
   beforeEach(() => {
@@ -17,15 +17,25 @@ describe('components/ButtonLink', () => {
   it('should render and match snapshot', () => {
     expect(
       shallow(
-        <Message from={mockProps.from} title={mockProps.title}>
-          {mockProps.children}
+        <Message
+          from={mockProps.from}
+          title={mockProps.title}
+          text={mockProps.text}
+        >
+          {mockProps.text}
         </Message>,
       ),
     ).toMatchSnapshot();
   });
-  it('should render without children and match snapshot', () => {
+  it('should render without text and match snapshot', () => {
     expect(
-      shallow(<Message from={mockProps.from} title={mockProps.title} />),
+      shallow(
+        <Message
+          from={mockProps.from}
+          title={mockProps.title}
+          text={mockProps.text}
+        />,
+      ),
     ).toMatchSnapshot();
   });
 });
