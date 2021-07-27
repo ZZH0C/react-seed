@@ -11,6 +11,8 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { clientId } from './components/config';
 import { useUserData } from './hooks/useUserData/useUserData';
 import { useUserContext } from './hooks/useUserContext/useUserContext';
+import { Modal } from './components/Modal/Modal';
+
 export const UserContext = useUserContext;
 
 export const App: React.FC = () => {
@@ -48,6 +50,11 @@ export const App: React.FC = () => {
               <MessagePage />
             </Route>
             <Redirect from="*" to="/home" />
+          </Switch>
+          <Switch>
+            <Route exact path="/home/add">
+              <Modal backUrl="/home" />
+            </Route>
           </Switch>
         </Router>
       </UserContext.Provider>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useQueryParams } from '../../hooks/useQueryParams/useQueryParams';
 
@@ -8,6 +8,14 @@ export const SearchBar = (): JSX.Element => {
   const { changeParams } = useQueryParams();
   const params = changeParams(state, 'search');
   const history = useHistory();
+
+  const handleCreateMessage = useCallback(() => {
+    history.replace({
+      pathname: '/home/add',
+      search: params.parsedParams,
+    });
+  }, [history, params.parsedParams]);
+
   return (
     <>
       <div className="searchForm row">
@@ -47,6 +55,12 @@ export const SearchBar = (): JSX.Element => {
               </button>
             </div>
           </form>
+        </div>
+        <div className={'options col-sm-10'}>
+          <button onClick={handleCreateMessage}>
+            <i className="icon-plus-small" />
+            <span>New message</span>
+          </button>
         </div>
       </div>
     </>

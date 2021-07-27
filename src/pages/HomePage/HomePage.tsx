@@ -45,7 +45,6 @@ export const HomePage: React.FC = () => {
       </NavbarItem>
     );
   });
-
   return (
     <section>
       <Head>

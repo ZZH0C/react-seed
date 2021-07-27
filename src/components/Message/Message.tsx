@@ -22,7 +22,7 @@ export const Message: React.FC<MessageProps> = ({ from, title, text }) => {
           <iframe
             seamless
             className={classNames(styles.message_section_iframe)}
-            title={'123'}
+            title={'Selected message'}
             src={`data:text/html;charset=UTF-8 ;base64,${text}`}
           />
         </span>
