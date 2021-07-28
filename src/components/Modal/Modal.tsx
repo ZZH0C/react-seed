@@ -51,8 +51,7 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
         // Timeout to see spinner
         // setTimeout(() => {
         handleClose();
-        setIsDisabled(!isDisabled);
-        // }, 1000);
+        // }, 400);
       });
     },
     [token, handleClose],
