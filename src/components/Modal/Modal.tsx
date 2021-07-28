@@ -82,6 +82,9 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
           role="none"
           className={classNames(styles.modal_module_container)}
         >
+          <div className={classNames(styles.modal_module_header)}>
+            <h4>New message</h4>
+          </div>
           <div className={classNames(styles.modal_module_field)}>
             <span>To:</span>
             <input
@@ -119,7 +122,7 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
               defaultValue={''}
             />
           </div>
-          <div className={classNames(styles.send_button_container)}>
+          <div className={classNames(styles.modal_module_footer)}>
             <button type="submit" className="btn btn-primary">
               Save changes
             </button>

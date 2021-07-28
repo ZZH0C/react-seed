@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { loadOneMessage } from '../../api/userMessages/userMessages';
-// import { ButtonLink } from '../../components/ButtonLink/ButtonLink';
 import { Message } from '../../components/Message/Message';
 import { GoogleMessage } from '../../models/GoogleMessage';
 import { sortMessageData } from '../../hooks/useSortMessageData/useSortMessageData';
@@ -40,14 +39,9 @@ export const MessagePage: React.FC = () => {
   let convertedSuperText = '';
   if (messageData.text)
     convertedSuperText = base64url.toBase64(messageData.text);
-  // const realHref = {
-  //   pathname: '/home',
-  //   search,
-  // };
 
   return (
     <Main>
-      {/*<ButtonLink href={realHref}>Return</ButtonLink>*/}
       <Message
         from={messageData.from}
         title={messageData.title}
