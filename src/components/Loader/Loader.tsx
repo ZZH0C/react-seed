@@ -8,6 +8,10 @@ interface LoaderProps {
 export const Loader: React.FC<LoaderProps> = ({ isActive }) => {
   return (
     <div
+      role="none"
+      onClick={(event) => {
+        event.stopPropagation();
+      }}
       className={classNames(isActive ? styles.loader_container : styles.hidden)}
     >
       <div className={classNames(styles.lds_dual_ring)} />

@@ -95,32 +95,39 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
               className="form-control"
             />
           </div>
-
           <div
             className={classNames(
-              copyState ? styles.modal_module_field : styles.hidden,
+              copyState
+                ? styles.modal_hidden_params_container_show
+                : styles.modal_hidden_params_container_hide,
             )}
           >
-            <span>Cc:</span>
-            <input
-              readOnly={isDisabled}
-              {...register('cc')}
-              type="text"
-              className="form-control"
-            />
-          </div>
-          <div
-            className={classNames(
-              copyState ? styles.modal_module_field : styles.hidden,
-            )}
-          >
-            <span>Bcc:</span>
-            <input
-              readOnly={isDisabled}
-              {...register('bcc')}
-              type="text"
-              className="form-control"
-            />
+            <div
+              className={classNames(
+                copyState ? styles.modal_module_field : styles.hidden,
+              )}
+            >
+              <span>Cc:</span>
+              <input
+                readOnly={isDisabled}
+                {...register('cc')}
+                type="text"
+                className="form-control"
+              />
+            </div>
+            <div
+              className={classNames(
+                copyState ? styles.modal_module_field : styles.hidden,
+              )}
+            >
+              <span>Bcc:</span>
+              <input
+                readOnly={isDisabled}
+                {...register('bcc')}
+                type="text"
+                className="form-control"
+              />
+            </div>
           </div>
           <div className={classNames(styles.modal_module_field_button)}>
             <div

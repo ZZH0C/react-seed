@@ -17,7 +17,7 @@ export const SearchBar = (): JSX.Element => {
       pathname: '/home/add',
       search: search,
     });
-  }, [history, params.parsedParams]);
+  }, [history, params.parsedParams, search]);
 
   return (
     <>

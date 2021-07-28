@@ -2,8 +2,8 @@
   width: 6rem;
   height: 3rem;
   border: none;
-  background: #fff;
-  color: #646d81;
+  background: #727989;
+  color: white;
   font-size: 14px;
   margin: 0 2rem;
   font-weight: 500;
@@ -11,10 +11,9 @@
 }
 
 .modal_open_button:hover {
-  box-shadow: inset 0 0.2rem 0.2rem 0 rgba(0, 0, 0,0.5);
+  box-shadow: inset 0 0.2rem 0.2rem 0 rgba(0, 0, 0, 0.5);
 }
 
 .modal_open_button:active {
-  box-shadow: inset 0 0.2rem 0.2rem 0 rgba(0, 0, 0,1);
-
+  box-shadow: inset 0 0.2rem 0.2rem 0 rgba(0, 0, 0, 1);
 }

@@ -22,10 +22,13 @@
   z-index: 1000;
 
   animation: modal_load 0.3s;
+
+
 }
 
 .modal_module_container {
   display: flex;
+  //position: absolute;
   flex-direction: column;
 
   width: 600px;
@@ -100,4 +103,14 @@
   display: inline-block;
   margin-right: 65px;
   color: #99a1b3;
+}
+
+.modal_hidden_params_container_show {
+  height: 200px;
+  transition: height ease 0.3s;
+}
+
+.modal_hidden_params_container_hide {
+  height: 0;
+  transition: height ease 0.2s;
 }
