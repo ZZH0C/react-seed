@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './Message.module.scss';
 import classNames from 'classnames';
+import { ButtonLink } from '../ButtonLink/ButtonLink';
+import { useLocation } from 'react-router-dom';
 
 interface MessageProps extends React.HTMLAttributes<HTMLElement> {
   from: string;
@@ -9,9 +11,16 @@ interface MessageProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 export const Message: React.FC<MessageProps> = ({ from, title, text }) => {
+  const { search } = useLocation();
+  const realHref = {
+    pathname: '/home',
+    search,
+  };
+
   return (
-    <section className={classNames(styles.message_section_container)}>
+    <section className="mainSection">
       <div className={classNames(styles.message_section)}>
+        <ButtonLink href={realHref}>Return</ButtonLink>
         <span className={classNames(styles.message_section_text)}>
           From: {from}
         </span>
