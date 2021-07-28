@@ -48,10 +48,7 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
     (data: sendMessageData) => {
       setIsDisabled(!isDisabled);
       sendMessage(data, token).then(() => {
-        // Timeout to see spinner
-        // setTimeout(() => {
         handleClose();
-        // }, 400);
       });
     },
     [token, handleClose],
