@@ -2,6 +2,9 @@ export interface GoogleMessage {
   id: string;
   snippet: string;
   payload: {
+    body?: {
+      data: string;
+    };
     headers: {
       name: string;
       value: string;

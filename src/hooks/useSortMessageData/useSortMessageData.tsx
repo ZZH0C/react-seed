@@ -41,6 +41,10 @@ export const sortMessageData = (
   if (messageData.payload) {
     let encodedHTML;
 
+    if (messageData.payload.body && messageData.payload.body.data) {
+      result.text = base64url.toBase64(messageData.payload.body.data);
+    }
+
     const body = find(
       find(messageData.payload.parts, { mimeType: 'multipart/alternative' })
         ?.parts,
@@ -55,8 +59,10 @@ export const sortMessageData = (
       })?.body;
       encodedHTML = body?.data;
     }
+    console.log(encodedHTML);
     if (encodedHTML) result.text = base64url.toBase64(encodedHTML);
   }
+
   // TODO:  fix with using lodash
   // const headersList = ['From', 'Subject', 'Date'];
   // const filteredHeaders = _.filter(
@@ -91,3 +97,4 @@ export const sortMessageData = (
   );
   return result;
 };
+0;

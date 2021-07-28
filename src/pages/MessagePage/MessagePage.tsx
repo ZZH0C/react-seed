@@ -24,6 +24,7 @@ export const MessagePage: React.FC = () => {
       setMessage(message),
     );
   }, []);
+  console.log(message);
   let messageData: MessagePageValues = {
     from: '',
     snippet: '',

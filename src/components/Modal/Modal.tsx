@@ -123,7 +123,6 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
             <button type="submit" className="btn btn-primary">
               Save changes
             </button>
-
             <button
               onClick={handleClose}
               type="button"
