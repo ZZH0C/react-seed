@@ -9,7 +9,7 @@ export const sendMessage = async (
   const rawMessageBodyDecoded = `To: <${data.to}>  
 Cc: ${data.cc}  
 Bc: ${data.bcc}  
-Subject: ${data.subject}  
+Subject: ${data.subject ? data.subject : '(No Subject)'}  
 
 ${data.messageText}`;
 
