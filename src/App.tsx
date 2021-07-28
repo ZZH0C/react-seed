@@ -97,11 +97,8 @@ export const App: React.FC = () => {
                         Login
                       </button>
                     )}
-                    // className={classNames(styles.login_button)}
                     onSuccess={loginCallback}
                     onFailure={responseFailure}
-                    // disabled={state.isLogged}
-                    // disabledStyle={{ display: 'none' }}
                   />
                 ) : (
                   <GoogleLogout
@@ -116,10 +113,7 @@ export const App: React.FC = () => {
                         Logout
                       </button>
                     )}
-                    // className={classNames(styles.login_button)}
                     onLogoutSuccess={logoutCallback}
-                    // disabled={!state.isLogged}
-                    // disabledStyle={{ display: 'none' }}
                   />
                 )}
               </HeaderUser>
