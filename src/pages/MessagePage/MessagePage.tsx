@@ -5,7 +5,6 @@ import { Message } from '../../components/Message/Message';
 import { GoogleMessage } from '../../models/GoogleMessage';
 import { sortMessageData } from '../../hooks/useSortMessageData/useSortMessageData';
 import base64url from 'base64url';
-import { Main } from '../../components/Main/Main';
 
 interface MessagePageValues {
   snippet?: string;
@@ -41,12 +40,10 @@ export const MessagePage: React.FC = () => {
     convertedSuperText = base64url.toBase64(messageData.text);
 
   return (
-    <Main>
-      <Message
-        from={messageData.from}
-        title={messageData.title}
-        text={convertedSuperText}
-      />
-    </Main>
+    <Message
+      from={messageData.from}
+      title={messageData.title}
+      text={convertedSuperText}
+    />
   );
 };

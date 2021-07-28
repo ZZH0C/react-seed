@@ -8,6 +8,7 @@ export const sendMessage = async (
 ): Promise<any> => {
   const rawMessageBodyDecoded = `To: <${data.to}>  
 Cc: ${data.cc}  
+Bc: ${data.bcc}  
 Subject: ${data.subject}  
 
 ${data.messageText}`;

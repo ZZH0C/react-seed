@@ -23,6 +23,7 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
   const history = useHistory();
   const { search } = useLocation();
   const [isDisabled, setIsDisabled] = useState(false);
+  const [copyState, setCopyState] = useState(false);
   let token = '';
   if (userData && 'accessToken' in userData) {
     token = userData.accessToken;
@@ -94,7 +95,12 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
               className="form-control"
             />
           </div>
-          <div className={classNames(styles.modal_module_field)}>
+
+          <div
+            className={classNames(
+              copyState ? styles.modal_module_field : styles.hidden,
+            )}
+          >
             <span>Cc:</span>
             <input
               readOnly={isDisabled}
@@ -102,6 +108,29 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
               type="text"
               className="form-control"
             />
+          </div>
+          <div
+            className={classNames(
+              copyState ? styles.modal_module_field : styles.hidden,
+            )}
+          >
+            <span>Bcc:</span>
+            <input
+              readOnly={isDisabled}
+              {...register('bcc')}
+              type="text"
+              className="form-control"
+            />
+          </div>
+          <div className={classNames(styles.modal_module_field_button)}>
+            <div
+              role="none"
+              onClick={() => {
+                setCopyState(!copyState);
+              }}
+            >
+              {copyState ? 'Remove' : 'Add copy'}
+            </div>
           </div>
           <div className={classNames(styles.modal_module_field)}>
             <span>Subject:</span>
