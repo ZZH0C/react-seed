@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { UserContext } from '../../pages/HomePage/HomePage';
 
 interface MessageItemProps extends React.HTMLAttributes<HTMLElement> {
@@ -18,6 +18,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
   messageId,
 }) => {
   const userData = useContext(UserContext);
+  const { search } = useLocation();
   let token = '';
   if (userData && 'accessToken' in userData) {
     token = userData.accessToken;
@@ -40,6 +41,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
           <Link
             to={{
               pathname: '/message',
+              search,
               state: { id: messageId, token: token },
             }}
           >

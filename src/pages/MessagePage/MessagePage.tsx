@@ -17,14 +17,13 @@ interface MessagePageValues {
 
 export const MessagePage: React.FC = () => {
   const [message, setMessage] = useState<GoogleMessage | undefined>();
-  const location = useLocation();
-  const apiData: any = location.state;
+  const { search, state } = useLocation();
+  const apiData: any = state;
   useEffect(() => {
     loadOneMessage(apiData.id, apiData.token).then((message) =>
       setMessage(message),
     );
   }, []);
-  console.log(message);
   let messageData: MessagePageValues = {
     from: '',
     snippet: '',
@@ -40,16 +39,18 @@ export const MessagePage: React.FC = () => {
   let convertedSuperText = '';
   if (messageData.text)
     convertedSuperText = base64url.toBase64(messageData.text);
+  const realHref = {
+    pathname: '/home',
+    search,
+  };
   return (
-    <React.Fragment>
-      <ButtonLink href={'/'}>Return Home</ButtonLink>
+    <>
+      <ButtonLink href={realHref}>Return Home</ButtonLink>
       <Message
         from={messageData.from}
         title={messageData.title}
         text={convertedSuperText}
-      >
-        {/*{messageData.text}*/}
-      </Message>
-    </React.Fragment>
+      />
+    </>
   );
 };

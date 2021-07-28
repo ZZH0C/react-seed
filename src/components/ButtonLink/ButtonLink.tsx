@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 import styles from './ButtonLink.module.scss';
 
 interface ButtonLinkProps extends React.ButtonHTMLAttributes<HTMLElement> {
-  href: string;
+  href: {
+    pathname: string;
+    search: string;
+  };
 }
 
 export const ButtonLink: React.FC<ButtonLinkProps> = ({ href, children }) => {

@@ -59,7 +59,6 @@ export const sortMessageData = (
       })?.body;
       encodedHTML = body?.data;
     }
-    console.log(encodedHTML);
     if (encodedHTML) result.text = base64url.toBase64(encodedHTML);
   }
 
