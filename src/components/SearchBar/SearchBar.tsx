@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useQueryParams } from '../../hooks/useQueryParams/useQueryParams';
 import styles from './SearchBar.module.scss';
 import classNames from 'classnames';
@@ -7,6 +7,7 @@ import classNames from 'classnames';
 //TODO: change this to uncontrollable input with useRef
 export const SearchBar = (): JSX.Element => {
   const [state, setState] = useState('');
+  const { search } = useLocation();
   const { changeParams } = useQueryParams();
   const params = changeParams(state, 'search');
   const history = useHistory();
@@ -14,7 +15,7 @@ export const SearchBar = (): JSX.Element => {
   const handleCreateMessage = useCallback(() => {
     history.replace({
       pathname: '/home/add',
-      search: params.parsedParams,
+      search: search,
     });
   }, [history, params.parsedParams]);
 
