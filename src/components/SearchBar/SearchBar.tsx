@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useQueryParams } from '../../hooks/useQueryParams/useQueryParams';
 
-//TODO: fix this abomination
+//TODO: change this to uncontrollable input with useRef
 export const SearchBar = (): JSX.Element => {
   const [state, setState] = useState('');
   const { changeParams } = useQueryParams();
   const params = changeParams(state, 'search');
   const history = useHistory();
+
+  const handleCreateMessage = useCallback(() => {
+    history.replace({
+      pathname: '/home/add',
+      search: params.parsedParams,
+    });
+  }, [history, params.parsedParams]);
+
   return (
     <>
       <div className="searchForm row">
@@ -17,7 +25,6 @@ export const SearchBar = (): JSX.Element => {
             className="form-inline form-search pull-left"
             onSubmit={(event) => {
               event.preventDefault();
-              setState('');
               history.push({
                 pathname: '/home',
                 search: params.parsedParams,
@@ -38,7 +45,6 @@ export const SearchBar = (): JSX.Element => {
               <button
                 className="btn btn-search"
                 onClick={() => {
-                  setState('');
                   history.push({
                     pathname: '/home',
                     search: params.parsedParams,
@@ -49,6 +55,12 @@ export const SearchBar = (): JSX.Element => {
               </button>
             </div>
           </form>
+        </div>
+        <div className={'options col-sm-10'}>
+          <button onClick={handleCreateMessage}>
+            <i className="icon-plus-small" />
+            <span>New message</span>
+          </button>
         </div>
       </div>
     </>

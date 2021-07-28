@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ButtonLink should render with valid data and match snapshot 1`] = `
+<section
+  className="media"
+>
+  <div
+    className="media-body"
+  >
+    <div
+      className="userInfo clearfix"
+    >
+      <span>
+        from: 
+        SOME_USER
+      </span>
+      <div
+        className="commentsAndTime pull-right"
+      >
+        <span>
+          <i
+            className="icon-clock"
+          />
+          <time
+            className="timeago"
+            dateTime="11-03-1996"
+          >
+            11-03-1996
+          </time>
+        </span>
+      </div>
+    </div>
+    <div
+      className="itemName"
+    >
+      <Link
+        to={
+          Object {
+            "pathname": "/message",
+            "state": Object {
+              "id": "FAKE_ID",
+              "token": "FAKE_TOKEN",
+            },
+          }
+        }
+      >
+        <span
+          className="media-heading"
+          title="Message Title"
+        >
+          SOME_TITLE
+        </span>
+      </Link>
+      <span
+        className="status pull-right"
+      />
+    </div>
+    <p>
+      SOME_TEXT
+       
+    </p>
+  </div>
+</section>
+`;
+
+exports[`components/ButtonLink should render with wrong data and match snapshot 1`] = `
+<section
+  className="media"
+>
+  <div
+    className="media-body"
+  >
+    <div
+      className="userInfo clearfix"
+    >
+      <span>
+        from: 
+        SOME_USER
+      </span>
+      <div
+        className="commentsAndTime pull-right"
+      >
+        <span>
+          <i
+            className="icon-clock"
+          />
+          <time
+            className="timeago"
+            dateTime="11-03-1996"
+          >
+            11-03-1996
+          </time>
+        </span>
+      </div>
+    </div>
+    <div
+      className="itemName"
+    >
+      <Link
+        to={
+          Object {
+            "pathname": "/message",
+            "state": Object {
+              "id": "FAKE_ID",
+              "token": "",
+            },
+          }
+        }
+      >
+        <span
+          className="media-heading"
+          title="Message Title"
+        >
+          SOME_TITLE
+        </span>
+      </Link>
+      <span
+        className="status pull-right"
+      />
+    </div>
+    <p>
+      SOME_TEXT
+       
+    </p>
+  </div>
+</section>
+`;

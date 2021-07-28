@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ButtonLink should render and match snapshot 1`] = `
+<section
+  className="mainSection"
+>
+  <SearchBar />
+  <div>
+    <p>
+      MOCK_ELEMENT
+    </p>
+  </div>
+</section>
+`;

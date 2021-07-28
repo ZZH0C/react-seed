@@ -1,17 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App.tsx 1`] = `
-<BrowserRouter>
-  <Switch>
-    <Route
-      path="/home"
-    >
-      <HomePage />
-    </Route>
-    <Redirect
-      from="*"
-      to="/home"
+<Fragment>
+  <ContextProvider
+    value={null}
+  >
+    <y
+      accessType="online"
+      buttonText="Login"
+      clientId="386327906890-ce0q1vn2cja1ellekvjj6hmqah4g901c.apps.googleusercontent.com"
+      cookiePolicy="single_host_origin"
+      disabled={false}
+      disabledStyle={
+        Object {
+          "display": "none",
+        }
+      }
+      fetchBasicProfile={true}
+      icon={true}
+      isSignedIn={false}
+      onFailure={[Function]}
+      onRequest={[Function]}
+      onSuccess={[Function]}
+      prompt=""
+      scope="profile email"
+      tag="button"
+      theme="light"
+      type="button"
+      uxMode="popup"
     />
-  </Switch>
-</BrowserRouter>
+    <v
+      buttonText="Logout"
+      clientId="386327906890-ce0q1vn2cja1ellekvjj6hmqah4g901c.apps.googleusercontent.com"
+      disabled={true}
+      disabledStyle={
+        Object {
+          "display": "none",
+        }
+      }
+      icon={true}
+      jsSrc="https://apis.google.com/js/api.js"
+      onLogoutSuccess={[Function]}
+      tag="button"
+      theme="light"
+      type="button"
+    />
+    <BrowserRouter>
+      <Switch>
+        <Route
+          path="/home"
+        >
+          <HomePage />
+        </Route>
+        <Route
+          path="/message"
+        >
+          <MessagePage />
+        </Route>
+        <Redirect
+          from="*"
+          to="/home"
+        />
+      </Switch>
+    </BrowserRouter>
+  </ContextProvider>
+</Fragment>
 `;

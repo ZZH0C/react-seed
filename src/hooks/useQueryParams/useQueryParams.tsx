@@ -16,7 +16,6 @@ export const useQueryParams = (): {
   ) => { isActive: boolean; parsedParams: string };
 } => {
   const location = useLocation();
-
   const changeParams = useCallback(
     (category: queryProps['category'], key: queryProps['key']) => {
       const queryParams = queryString.parse(location.search);
@@ -32,7 +31,7 @@ export const useQueryParams = (): {
   );
   const getGoogleQueryParams = useCallback(() => {
     const queryParams = queryString.parse(location.search);
-    if (!queryParams.label && !queryParams.category && !queryParams.search)
+    if (!queryParams.in && !queryParams.category && !queryParams.search)
       return '';
     let result = '';
     _.forEach(queryParams, (value, key) => {
@@ -42,7 +41,6 @@ export const useQueryParams = (): {
         result += `${key}:${value} `;
       }
     });
-
     return _.trim(result);
   }, [location.search]);
 

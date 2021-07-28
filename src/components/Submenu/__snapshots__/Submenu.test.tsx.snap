@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ButtonLink should render and match snapshot 1`] = `
+<aside
+  className="submenu"
+>
+  SOME_TEXT
+</aside>
+`;

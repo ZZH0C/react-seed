@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ButtonLink should render and match snapshot 1`] = `
+<section
+  className="submenuSection"
+>
+  <h4
+    className="submenuCategory"
+  >
+    SOME_NAME
+  </h4>
+  <ul
+    className="nav"
+  >
+    SOME_TEXT
+  </ul>
+</section>
+`;

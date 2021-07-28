@@ -6,18 +6,15 @@ import { useQueryParams } from '../../hooks/useQueryParams/useQueryParams';
 import { mocked } from 'ts-jest/utils';
 
 jest.mock('../../hooks/useQueryParams/useQueryParams');
-const mockedQueryParams = mocked(useQueryParams).mockImplementation(() => {
-  const changeParams = () => {
-    return {
-      parsedParams: 'someText',
-      isActive: true,
-    };
-  };
-  const getGoogleQueryParams = () => {
-    return 'someText';
-  };
-  return { getGoogleQueryParams, changeParams };
-});
+const changeParams = jest.fn(() => ({
+  parsedParams: 'someText',
+  isActive: true,
+}));
+const getGoogleQueryParams = jest.fn(() => 'someText');
+mocked(useQueryParams).mockImplementation(() => ({
+  getGoogleQueryParams,
+  changeParams,
+}));
 
 describe('components/NavbarItem', () => {
   const mockProps = {
@@ -32,17 +29,13 @@ describe('components/NavbarItem', () => {
   });
 
   it('should render and call queryParams', () => {
-    expect(
-      shallow(
-        <NavbarItem
-          href={mockProps.href}
-          label={mockProps.label}
-          name={mockProps.name}
-        >
-          {mockProps.children}
-        </NavbarItem>,
-      ),
-    ).toMatchSnapshot();
-    expect(mockedQueryParams).toHaveBeenCalledTimes(1);
+    const label = 'MOCK_LABEL';
+    shallow(
+      <NavbarItem href={mockProps.href} label={label} name={mockProps.name}>
+        {mockProps.children}
+      </NavbarItem>,
+    );
+    expect(useQueryParams).toHaveBeenCalled();
+    expect(changeParams).toHaveBeenCalledWith(label, 'category');
   });
 });

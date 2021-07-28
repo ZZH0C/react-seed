@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ButtonLink should render and match snapshot 1`] = `
+<div
+  className="header-comp pull-right"
+>
+  some text
+  <a
+    className="profile"
+    href="/"
+  >
+    <span />
+    <img
+      alt="userPick"
+      src=""
+    />
+  </a>
+  <a
+    className="btn btn-xs btn-header"
+    href="/"
+  >
+    <i
+      className="headerIcon icon-search"
+    />
+  </a>
+</div>
+`;
+
+exports[`components/ButtonLink should render and match snapshot 2`] = `
+<div
+  className="header-comp pull-right"
+>
+  some text
+  <a
+    className="profile"
+    href="/"
+  >
+    <span />
+    <img
+      alt="userPick"
+      src="/"
+    />
+  </a>
+  <a
+    className="btn btn-xs btn-header"
+    href="/"
+  >
+    <i
+      className="headerIcon icon-search"
+    />
+  </a>
+</div>
+`;

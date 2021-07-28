@@ -49,33 +49,37 @@ const getMessagesArray = async (
   });
 };
 
-//TODO: you can pass filter model here instead of arguments!
-export const loadMessages = async (
-  token: string,
-  category: string,
-  pages: PaginationToken,
-  direction: Direction,
-): Promise<MessageList> => {
-  // TODO: move this selection outside
-  let pageToken;
+const chosePageToken = (direction: Direction, pages: string[]) => {
   switch (direction) {
     case Direction.next:
-      pageToken = pages[pages.length - 1];
-      break;
+      return pages[pages.length - 1];
+
     case Direction.prev:
-      pageToken = pages[pages.length - 3];
-      break;
+      return pages[pages.length - 3];
+
     case Direction.current:
-      pageToken = pages[0];
-      break;
+      return pages[0];
   }
+};
+
+export interface loadMessagesFilter {
+  token: string;
+  category: string;
+  pages: PaginationToken;
+  direction: Direction;
+}
+
+export const loadMessages = async (
+  filter: loadMessagesFilter,
+): Promise<MessageList> => {
+  const pageToken = chosePageToken(filter.direction, filter.pages);
   const idList = await getMessageList({
-    token: token,
-    category: category,
+    token: filter.token,
+    category: filter.category,
     pageToken: pageToken,
   });
   if (idList && idList.messages) {
-    const messageList = await getMessagesArray(idList.messages, token);
+    const messageList = await getMessagesArray(idList.messages, filter.token);
     const list = await Promise.allSettled(messageList);
     return {
       list: list,

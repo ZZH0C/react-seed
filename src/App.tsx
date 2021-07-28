@@ -11,29 +11,22 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { clientId } from './components/config';
 import { useUserData } from './hooks/useUserData/useUserData';
 import { useUserContext } from './hooks/useUserContext/useUserContext';
+import { Modal } from './components/Modal/Modal';
+
 export const UserContext = useUserContext;
 
 export const App: React.FC = () => {
   const { state, logoutCallback, loginCallback } = useUserData();
-
-  // const responseGoogle = (
-  //   response: GoogleLoginResponse | GoogleLoginResponseOffline,
-  // ) => {
-  //   loginCallback(response);
-  // };
   const responseFailure = (resp: { error: string }) => {
-    console.error(resp);
     // TODO: add error handler
     throw new Error(resp.error);
   };
-  // const logout = () => {
-  //   logoutCallback();
-  // };
 
   return (
     <>
       <UserContext.Provider value={state.userData}>
         <GoogleLogin
+          scope="https://mail.google.com"
           clientId={clientId}
           buttonText="Login"
           onSuccess={loginCallback}
@@ -57,6 +50,11 @@ export const App: React.FC = () => {
               <MessagePage />
             </Route>
             <Redirect from="*" to="/home" />
+          </Switch>
+          <Switch>
+            <Route exact path="/home/add">
+              <Modal backUrl="/home" />
+            </Route>
           </Switch>
         </Router>
       </UserContext.Provider>

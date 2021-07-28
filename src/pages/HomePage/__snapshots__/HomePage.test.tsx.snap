@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/HomePage should render 1`] = `
+<section>
+  <Head>
+    <HeaderLogo
+      desktopImgAlt="FAKE_SRC"
+      desktopImgSrc="FAKE_SRC"
+      mobileImgAlc="FAKE_SRC"
+      mobileImgSrc="FAKE_SRC"
+    >
+      Page Title
+    </HeaderLogo>
+    <HeaderUser
+      src="/"
+    >
+      <HeaderUserIcons
+        classname="icon-bell"
+      />
+      <HeaderUserIcons
+        classname="icon-mail"
+      />
+    </HeaderUser>
+  </Head>
+  <Navbar>
+    <NavbarItem
+      href="/"
+      key="0"
+      label="FAKE_LABEL"
+      name="FAKE_NAME"
+    >
+      FAKE_NAME
+    </NavbarItem>
+    <NavbarItem
+      href="/"
+      key="1"
+      label="FAKE_LABEL"
+      name="FAKE_NAME"
+    >
+      FAKE_NAME
+    </NavbarItem>
+  </Navbar>
+  <MainContainer>
+    <Submenu>
+      <SubmenuItem
+        name="FAKE_CATEGORY_NAME"
+      >
+        <SubmenuSubItem
+          category="FAKE_CATEGORY"
+          href="/"
+          key="0"
+          name="FAKE_NAME"
+        >
+          FAKE_NAME
+        </SubmenuSubItem>
+        <SubmenuSubItem
+          category="FAKE_CATEGORY"
+          href="/"
+          key="1"
+          name="FAKE_NAME"
+        >
+          FAKE_NAME
+        </SubmenuSubItem>
+      </SubmenuItem>
+    </Submenu>
+    <MainSection />
+  </MainContainer>
+</section>
+`;

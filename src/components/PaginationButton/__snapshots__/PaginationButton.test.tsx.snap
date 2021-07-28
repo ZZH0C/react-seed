@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ButtonLink should render left active and match snapshot 1`] = `
+<button
+  className="btn btn-default btn-prevNext"
+  disabled={false}
+  onClick={null}
+>
+  <i
+    className="icon-left-open-big"
+  />
+  SOME_TEXT
+</button>
+`;
+
+exports[`components/ButtonLink should render left disabled and match snapshot 1`] = `
+<button
+  className="btn btn-default btn-prevNext"
+  disabled={true}
+  onClick={null}
+>
+  <i
+    className="icon-left-open-big"
+  />
+  SOME_TEXT
+</button>
+`;
+
+exports[`components/ButtonLink should render right active and match snapshot 1`] = `
+<button
+  className="btn btn-default btn-prevNext"
+  disabled={false}
+  onClick={null}
+>
+  SOME_TEXT
+  <i
+    className="icon-right-open-big"
+  />
+</button>
+`;
+
+exports[`components/ButtonLink should render right disabled and match snapshot 1`] = `
+<button
+  className="btn btn-default btn-prevNext"
+  disabled={true}
+  onClick={null}
+>
+  SOME_TEXT
+  <i
+    className="icon-right-open-big"
+  />
+</button>
+`;
