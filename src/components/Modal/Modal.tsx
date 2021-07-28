@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import styles from './Modal.module.scss';
 import classNames from 'classnames';
 import { useForm } from 'react-hook-form';
@@ -22,7 +22,7 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
   const userData = useContext(UserContext);
   const history = useHistory();
   const { search } = useLocation();
-  //TODO: fix search
+  const [isDisabled, setIsDisabled] = useState(false);
   let token = '';
   if (userData && 'accessToken' in userData) {
     token = userData.accessToken;
@@ -46,7 +46,14 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
 
   const handleSave = useCallback(
     (data: sendMessageData) => {
-      sendMessage(data, token).then(() => handleClose());
+      setIsDisabled(!isDisabled);
+      sendMessage(data, token).then(() => {
+        // Timeout to see spinner
+        // setTimeout(() => {
+        handleClose();
+        setIsDisabled(!isDisabled);
+        // }, 1000);
+      });
     },
     [token, handleClose],
   );
@@ -81,15 +88,26 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
         >
           <div className={classNames(styles.modal_module_field)}>
             <span>To:</span>
-            <input {...register('to')} type="text" className="form-control" />
+            <input
+              readOnly={isDisabled}
+              {...register('to')}
+              type="text"
+              className="form-control"
+            />
           </div>
           <div className={classNames(styles.modal_module_field)}>
             <span>Cc:</span>
-            <input {...register('cc')} type="text" className="form-control" />
+            <input
+              readOnly={isDisabled}
+              {...register('cc')}
+              type="text"
+              className="form-control"
+            />
           </div>
           <div className={classNames(styles.modal_module_field)}>
             <span>Subject:</span>
             <input
+              readOnly={isDisabled}
               type="text"
               {...register('subject')}
               className="form-control"
@@ -98,6 +116,7 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
           <div className={classNames(styles.modal_module_field)}>
             <span>Message:</span>
             <textarea
+              disabled={isDisabled}
               {...register('messageText')}
               className="form-control"
               rows={4}
@@ -108,6 +127,7 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
             <button type="submit" className="btn btn-primary">
               Save changes
             </button>
+
             <button
               onClick={handleClose}
               type="button"
@@ -118,8 +138,8 @@ export const Modal: React.FC<ModalProps> = ({ backUrl }) => {
             </button>
           </div>
         </div>
+        <Loader isActive={isDisabled} />
       </form>
-      <Loader isActive={true} />
     </Portal>
   );
 };

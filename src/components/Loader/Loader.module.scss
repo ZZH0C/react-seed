@@ -1,4 +1,4 @@
-.loader_container{
+.loader_container {
   position: absolute;
   width: 100%;
   display: flex;
@@ -13,7 +13,7 @@
   z-index: 15000;
 }
 .lds_dual_ring:after {
-  content: " ";
+  content: ' ';
   display: block;
   width: 15rem;
   height: 15rem;
@@ -32,6 +32,6 @@
   }
 }
 
-.hidden{
+.hidden {
   display: none;
 }
