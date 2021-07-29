@@ -31,6 +31,7 @@ import { SubmenuItem } from './components/Submenu/SubmenuItem/SubmenuItem';
 import { MainContainer } from './components/MainContainer/MainContainer';
 import styles from './styles/App.module.scss';
 import classNames from 'classnames';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 export const UserContext = useUserContext;
 
@@ -134,11 +135,33 @@ export const App: React.FC = () => {
                 </Route>
                 <Redirect from="*" to="/home" />
               </Switch>
-              <Switch>
-                <Route exact path="/home/add">
-                  <Modal backUrl="/home" />
-                </Route>
-              </Switch>
+              <Route
+                render={({ location }) => {
+                  const { key } = location;
+
+                  return (
+                    <TransitionGroup component={null}>
+                      <CSSTransition
+                        timeout={500}
+                        classNames={{
+                          enterActive: classNames(styles.portal_enter_active),
+                          exitActive: classNames(styles.portal_exit_active),
+                        }}
+                        unmountOnExit
+                        key={key}
+                      >
+                        <Switch location={location}>
+                          <Route
+                            exact
+                            path="/home/add"
+                            render={() => <Modal backUrl="/home" />}
+                          />
+                        </Switch>
+                      </CSSTransition>
+                    </TransitionGroup>
+                  );
+                }}
+              />
             </MainContainer>
           </section>
         </Router>

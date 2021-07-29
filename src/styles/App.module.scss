@@ -17,3 +17,24 @@
 .modal_open_button:active {
   box-shadow: inset 0 0.2rem 0.2rem 0 rgba(0, 0, 0, 1);
 }
+
+
+@keyframes modal_fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.portal_enter_active {
+  animation: modal_fadein 0.5s;
+}
+
+.portal_exit_active {
+  opacity: 0;
+  transition: opacity ease 0.5s;
+}
+

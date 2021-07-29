@@ -1,11 +1,11 @@
-@keyframes modal_load {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
+//@keyframes modal_load {
+//  0% {
+//    opacity: 0;
+//  }
+//  100% {
+//    opacity: 1;
+//  }
+//}
 
 .modal_module_wrapper {
   position: absolute;
@@ -50,7 +50,7 @@
     font-weight: 700;
   }
 
-  animation: modal_load 0.3s;
+  //animation: modal_load 0.3s;
 }
 
 .modal_module_field_button {
