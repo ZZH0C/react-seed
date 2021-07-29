@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 type NavbarProps = React.HTMLAttributes<HTMLElement>;
 
 export const Navbar: React.FC<NavbarProps> = ({ children }) => {
+  const { pathname } = useLocation();
   return (
     <nav className="navbar navbar-default navbar-top">
       <div className="container">
@@ -20,7 +22,19 @@ export const Navbar: React.FC<NavbarProps> = ({ children }) => {
           </button>
         </div>
         <div className="collapse navbar-collapse bs-example-navbar-collapse-1">
-          <ul className="nav navbar-nav">{children}</ul>
+          <ul className="nav navbar-nav">
+            <li>
+              <Link
+                to={{
+                  pathname,
+                  search: '',
+                }}
+              >
+                Clear Search
+              </Link>
+            </li>
+            {children}
+          </ul>
         </div>
       </div>
     </nav>

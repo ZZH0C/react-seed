@@ -42,7 +42,7 @@ export const useCreateMessagesUi = (): JSX.Element => {
       setMessageList(token, '', Direction.current);
     }
     //TODO: add pagination and userData?.accessToken
-  }, [userData, location.search]);
+  }, [userData, location]);
   return (
     <>
       {state.messages.length > 0 ? map(state.messages, createMessage) : []}
