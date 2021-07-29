@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { UserContext } from '../../pages/HomePage/HomePage';
 import styles from './MessageItem.module.scss';
 import classNames from 'classnames';
@@ -11,6 +11,7 @@ interface MessageItemProps extends React.HTMLAttributes<HTMLElement> {
   messageSnippet: string;
   messageDate: string;
   messageId: string;
+  refreshPageCallback: any;
 }
 
 export const MessageItem: React.FC<MessageItemProps> = ({
@@ -19,14 +20,14 @@ export const MessageItem: React.FC<MessageItemProps> = ({
   messageSnippet,
   messageDate,
   messageId,
+  refreshPageCallback,
 }) => {
   const userData = useContext(UserContext);
-  const { search, pathname } = useLocation();
+  const { search } = useLocation();
   let token = '';
   if (userData && 'accessToken' in userData) {
     token = userData.accessToken;
   }
-  const { replace } = useHistory();
   return (
     <section className={classNames(styles.media_message)}>
       <div className="media-body">
@@ -59,12 +60,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
         <button
           className={classNames(styles.delete_button)}
           onClick={() => {
-            deleteMessage(messageId, token).then(() =>
-              replace({
-                pathname,
-                search,
-              }),
-            );
+            deleteMessage(messageId, token).then(refreshPageCallback);
           }}
         >
           DELETE

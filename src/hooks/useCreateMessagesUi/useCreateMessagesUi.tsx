@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import { Direction, useGetMessages } from '../useGetMessages/useGetMessages';
 import { GoogleMessagePromise } from '../../models/GoogleMessage';
 import { MessageItem } from '../../components/MessageItem/MessageItem';
@@ -8,20 +8,6 @@ import { useQueryParams } from '../useQueryParams/useQueryParams';
 import { useLocation } from 'react-router-dom';
 import { PaginationButton } from '../../components/PaginationButton/PaginationButton';
 import map from 'lodash/map';
-
-const createMessage = (message: GoogleMessagePromise) => {
-  const messageData = sortMessageData(message.value);
-  return (
-    <MessageItem
-      key={Math.random()}
-      fromWho={messageData.from}
-      messageSnippet={messageData.snippet}
-      messageTitle={messageData.title}
-      messageDate={messageData.date}
-      messageId={message.value.id}
-    />
-  );
-};
 
 export const useCreateMessagesUi = (): JSX.Element => {
   const userData = useContext(UserContext);
@@ -42,7 +28,27 @@ export const useCreateMessagesUi = (): JSX.Element => {
       setMessageList(token, '', Direction.current);
     }
     //TODO: add pagination and userData?.accessToken
-  }, [userData, location]);
+  }, [userData, location.search]);
+
+  const refreshPage = useCallback(() => {
+    setMessageList(token, googleData, Direction.current);
+  }, []);
+
+  const createMessage = (message: GoogleMessagePromise) => {
+    const messageData = sortMessageData(message.value);
+    return (
+      <MessageItem
+        key={Math.random()}
+        fromWho={messageData.from}
+        messageSnippet={messageData.snippet}
+        messageTitle={messageData.title}
+        messageDate={messageData.date}
+        messageId={message.value.id}
+        refreshPageCallback={refreshPage}
+      />
+    );
+  };
+
   return (
     <>
       {state.messages.length > 0 ? map(state.messages, createMessage) : []}
