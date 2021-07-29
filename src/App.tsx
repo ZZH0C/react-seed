@@ -147,7 +147,6 @@ export const App: React.FC = () => {
                           enterActive: classNames(styles.portal_enter_active),
                           exitActive: classNames(styles.portal_exit_active),
                         }}
-                        unmountOnExit
                         key={key}
                       >
                         <Switch location={location}>
