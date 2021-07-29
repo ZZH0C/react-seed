@@ -34,14 +34,16 @@ export const MessageItem: React.FC<MessageItemProps> = ({
     <section className={classNames(styles.media_message)}>
       <div className="media-body">
         <div className="userInfo clearfix">
-          <span>from: {fromWho}</span>
-          <div className="commentsAndTime pull-right">
-            <span>
-              <i className="icon-clock" />
-              <time className="timeago" dateTime={messageDate}>
-                {messageDate}
-              </time>
-            </span>
+          <div className={classNames(styles.row)}>
+            <span>from: {fromWho}</span>
+            <div className="commentsAndTime pull-right">
+              <span>
+                <i className="icon-clock" />
+                <time className="timeago" dateTime={messageDate}>
+                  {messageDate}
+                </time>
+              </span>
+            </div>
           </div>
         </div>
         <div className={classNames(styles.item_name)}>

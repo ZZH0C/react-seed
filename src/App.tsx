@@ -78,9 +78,7 @@ export const App: React.FC = () => {
                 mobileImgAlc={logoProps.mobileImgAlc}
                 desktopImgSrc={logoProps.desktopImgSrc}
                 desktopImgAlt={logoProps.desktopImgAlt}
-              >
-                Page Title
-              </HeaderLogo>
+              />
               <HeaderUser src={emptyProfilePictureSrc}>
                 <HeaderUserIcons classname={'icon-bell'} />
                 <HeaderUserIcons classname={'icon-mail'} />

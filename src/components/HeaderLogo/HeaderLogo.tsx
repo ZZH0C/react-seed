@@ -12,7 +12,6 @@ export const HeaderLogo: React.FC<HeaderLogoProps> = ({
   desktopImgSrc,
   mobileImgSrc,
   mobileImgAlc,
-  children,
 }) => {
   return (
     <div className="logoBlock">
@@ -25,7 +24,6 @@ export const HeaderLogo: React.FC<HeaderLogoProps> = ({
         />
         <img alt={mobileImgAlc} src={mobileImgSrc} className="logoMobile" />
       </a>
-      <span>{children}</span>
     </div>
   );
 };
