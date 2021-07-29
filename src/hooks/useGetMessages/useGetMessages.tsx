@@ -46,11 +46,12 @@ const sortResponse = (
 };
 
 export const useGetMessages = (): {
-  state: any;
+  state: MessageStateValue;
   setMessageList: (
     token: string | null,
     category: string,
     direction: Direction,
+    disableLoader: any,
   ) => void;
   clearMessageList: () => void;
 } => {
@@ -61,7 +62,12 @@ export const useGetMessages = (): {
   }, []);
 
   const setMessageList = useCallback(
-    (token: string | null, category: string, direction: Direction) => {
+    (
+      token: string | null,
+      category: string,
+      direction: Direction,
+      disableLoader: any,
+    ) => {
       if (token) {
         loadMessages({
           token: token,
@@ -70,6 +76,7 @@ export const useGetMessages = (): {
           direction: direction,
         }).then((messageData) => {
           setState(sortResponse(messageData, state, direction));
+          disableLoader();
         });
       } else {
         clearMessageList();

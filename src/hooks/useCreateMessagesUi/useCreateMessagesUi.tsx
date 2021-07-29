@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Direction, useGetMessages } from '../useGetMessages/useGetMessages';
 import { GoogleMessagePromise } from '../../models/GoogleMessage';
 import { MessageItem } from '../../components/MessageItem/MessageItem';
@@ -8,6 +8,9 @@ import { useQueryParams } from '../useQueryParams/useQueryParams';
 import { useLocation } from 'react-router-dom';
 import { PaginationButton } from '../../components/PaginationButton/PaginationButton';
 import map from 'lodash/map';
+import { Loader } from '../../components/Loader/Loader';
+import styles from '../../components/MainSection/MainSection.module.scss';
+import classNames from 'classnames';
 
 export const useCreateMessagesUi = (): JSX.Element => {
   const userData = useContext(UserContext);
@@ -19,20 +22,33 @@ export const useCreateMessagesUi = (): JSX.Element => {
   if (userData && 'accessToken' in userData) {
     token = userData.accessToken;
   }
+
+  const [loaderState, setLoaderState] = useState(true);
+
+  const activateLoader = useCallback(() => {
+    setLoaderState(true);
+  }, []);
+
+  const disableLoader = useCallback(() => {
+    setLoaderState(false);
+  }, []);
+
+  const refreshPage = useCallback(() => {
+    activateLoader();
+    setMessageList(token, googleData, Direction.current, disableLoader);
+  }, [googleData, setMessageList, token]);
+
   useEffect(() => {
+    activateLoader();
     clearMessageList();
     if (userData && 'accessToken' in userData) {
-      setMessageList(token, googleData, Direction.current);
+      refreshPage();
     }
     if (!userData) {
-      setMessageList(token, '', Direction.current);
+      setMessageList(token, '', Direction.current, disableLoader);
     }
     //TODO: add pagination and userData?.accessToken
   }, [userData, location.search]);
-
-  const refreshPage = useCallback(() => {
-    setMessageList(token, googleData, Direction.current);
-  }, [googleData, setMessageList, token]);
 
   const createMessage = (message: GoogleMessagePromise) => {
     const messageData = sortMessageData(message.value);
@@ -48,18 +64,20 @@ export const useCreateMessagesUi = (): JSX.Element => {
       />
     );
   };
-
   return (
     <>
-      {state.messages.length > 0 ? map(state.messages, createMessage) : []}
+      <div className={classNames(styles.main_section)}>
+        <Loader isActive={loaderState} />
+        {state.messages.length > 0 ? map(state.messages, createMessage) : []}
+      </div>
       <div className="controlButtons">
         <PaginationButton
-          onClick={() => setMessageList(token, googleData, Direction.prev)}
           isDisabled={state.pages.length < 3}
           isRight={false}
-          onClickFunction={() =>
-            setMessageList(token, googleData, Direction.prev)
-          }
+          onClickFunction={() => {
+            activateLoader();
+            setMessageList(token, googleData, Direction.prev, disableLoader);
+          }}
         >
           Previous
         </PaginationButton>
@@ -69,9 +87,10 @@ export const useCreateMessagesUi = (): JSX.Element => {
             state.pages.length < 2
           }
           isRight={true}
-          onClickFunction={() =>
-            setMessageList(token, googleData, Direction.next)
-          }
+          onClickFunction={() => {
+            activateLoader();
+            setMessageList(token, googleData, Direction.next, disableLoader);
+          }}
         >
           Next
         </PaginationButton>

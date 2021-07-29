@@ -11,15 +11,15 @@
 
 .lds_dual_ring {
   display: inline-block;
-  width: 15rem;
-  height: 15rem;
+  width: 9rem;
+  height: 9rem;
   z-index: 15000;
 }
 .lds_dual_ring:after {
   content: ' ';
   display: block;
-  width: 15rem;
-  height: 15rem;
+  width: 9rem;
+  height: 9rem;
   margin: 0;
   border-radius: 50%;
   border: 2rem solid #fff;
