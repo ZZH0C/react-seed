@@ -1,7 +1,7 @@
 .modal_button{
   background: none;
   border: none;
-  padding: 1.4rem 2rem;
+  padding: 1.4rem 0;
   display: inline-block;
   box-sizing: content-box;
   margin-right: 65px;
@@ -9,10 +9,11 @@
 
   button{
     border: none;
-    background: #f2f4f8;
+    background: none;
+  }
+
+  button:hover{
+    color: #bfc5d0;
   }
 }
 
-.modal_button:hover{
-  color: #bfc5d0;
-}
