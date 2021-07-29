@@ -42,7 +42,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
             </span>
           </div>
         </div>
-        <div className="itemName">
+        <div className={classNames(styles.item_name)}>
           <Link
             to={{
               pathname: '/message',
@@ -55,16 +55,16 @@ export const MessageItem: React.FC<MessageItemProps> = ({
             </span>
           </Link>
           <span className="status pull-right" />
+          <button
+            className={classNames(styles.delete_button)}
+            onClick={() => {
+              deleteMessage(messageId, token).then(refreshPageCallback);
+            }}
+          >
+            Delete message
+          </button>
         </div>
         <p>{messageSnippet} </p>
-        <button
-          className={classNames(styles.delete_button)}
-          onClick={() => {
-            deleteMessage(messageId, token).then(refreshPageCallback);
-          }}
-        >
-          DELETE
-        </button>
       </div>
     </section>
   );

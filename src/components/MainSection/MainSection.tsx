@@ -11,7 +11,7 @@ export const MainSection: React.FC<MainSectionProps> = () => {
   const [hiddenStyle, setHiddenStyle] = useState(styles.hidden);
   useEffect(() => {
     if (userData) {
-      setHiddenStyle('');
+      setHiddenStyle(styles.main_section);
     } else {
       setHiddenStyle(styles.hidden);
     }

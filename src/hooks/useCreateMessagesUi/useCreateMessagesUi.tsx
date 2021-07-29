@@ -32,7 +32,7 @@ export const useCreateMessagesUi = (): JSX.Element => {
 
   const refreshPage = useCallback(() => {
     setMessageList(token, googleData, Direction.current);
-  }, []);
+  }, [googleData, setMessageList, token]);
 
   const createMessage = (message: GoogleMessagePromise) => {
     const messageData = sortMessageData(message.value);
