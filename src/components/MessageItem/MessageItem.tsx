@@ -12,6 +12,7 @@ interface MessageItemProps extends React.HTMLAttributes<HTMLElement> {
   messageDate: string;
   messageId: string;
   refreshPageCallback: any;
+  activateLoader: any;
 }
 
 export const MessageItem: React.FC<MessageItemProps> = ({
@@ -21,6 +22,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
   messageDate,
   messageId,
   refreshPageCallback,
+  activateLoader,
 }) => {
   const userData = useContext(UserContext);
   const { search } = useLocation();
@@ -58,6 +60,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
           <button
             className={classNames(styles.delete_button)}
             onClick={() => {
+              activateLoader();
               deleteMessage(messageId, token).then(refreshPageCallback);
             }}
           >

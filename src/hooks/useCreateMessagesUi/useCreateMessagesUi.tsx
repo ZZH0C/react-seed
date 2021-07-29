@@ -23,7 +23,7 @@ export const useCreateMessagesUi = (): JSX.Element => {
     token = userData.accessToken;
   }
 
-  const [loaderState, setLoaderState] = useState(true);
+  const [loaderState, setLoaderState] = useState(false);
 
   const activateLoader = useCallback(() => {
     setLoaderState(true);
@@ -61,6 +61,7 @@ export const useCreateMessagesUi = (): JSX.Element => {
         messageDate={messageData.date}
         messageId={message.value.id}
         refreshPageCallback={refreshPage}
+        activateLoader={activateLoader}
       />
     );
   };
