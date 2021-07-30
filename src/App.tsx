@@ -62,7 +62,7 @@ export const App: React.FC = () => {
         name={navBarItemProps.name}
         label={navBarItemProps.label}
       >
-        {navBarItemProps.name}
+        {navBarItemProps.name}K
       </NavbarItem>
     );
   });
