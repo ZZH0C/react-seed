@@ -8,13 +8,14 @@ interface queryProps {
   key: 'in' | 'category' | 'search';
 }
 
-// getGoogleQueryParams: () => string;
-// changeParams: (
-//   category: queryProps['category'],
-//   key: queryProps['key'],
-// ) => { isActive: boolean; parsedParams: string };
-
-export const useQueryParams = () => {
+export const useQueryParams = (): {
+  removeParam: (key: queryProps['key']) => string;
+  changeParams: (
+    category: queryProps['category'],
+    key: queryProps['key'],
+  ) => { isActive: boolean; parsedParams: string };
+  getGoogleQueryParams: () => string;
+} => {
   const location = useLocation();
   const changeParams = useCallback(
     (category: queryProps['category'], key: queryProps['key']) => {
