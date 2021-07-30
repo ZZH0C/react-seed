@@ -8,13 +8,13 @@ interface queryProps {
   key: 'in' | 'category' | 'search';
 }
 
-export const useQueryParams = (): {
-  getGoogleQueryParams: () => string;
-  changeParams: (
-    category: queryProps['category'],
-    key: queryProps['key'],
-  ) => { isActive: boolean; parsedParams: string };
-} => {
+// getGoogleQueryParams: () => string;
+// changeParams: (
+//   category: queryProps['category'],
+//   key: queryProps['key'],
+// ) => { isActive: boolean; parsedParams: string };
+
+export const useQueryParams = () => {
   const location = useLocation();
   const changeParams = useCallback(
     (category: queryProps['category'], key: queryProps['key']) => {
@@ -29,6 +29,15 @@ export const useQueryParams = (): {
     },
     [location.search],
   );
+  const removeParam = useCallback(
+    (key: queryProps['key']) => {
+      const queryParams = queryString.parse(location.search);
+      delete queryParams[key];
+      return queryString.stringify(queryParams);
+    },
+    [location.search],
+  );
+
   const getGoogleQueryParams = useCallback(() => {
     const queryParams = queryString.parse(location.search);
     if (!queryParams.in && !queryParams.category && !queryParams.search)
@@ -46,9 +55,10 @@ export const useQueryParams = (): {
 
   return useMemo(
     () => ({
+      removeParam,
       changeParams,
       getGoogleQueryParams,
     }),
-    [changeParams, getGoogleQueryParams],
+    [changeParams, getGoogleQueryParams, removeParam],
   );
 };

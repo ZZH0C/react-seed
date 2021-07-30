@@ -85,7 +85,8 @@ export const useCreateMessagesUi = (): JSX.Element => {
         <PaginationButton
           isDisabled={
             state.pages[state.pages.length - 1] === undefined ||
-            state.pages.length < 2
+            state.pages.length < 2 ||
+            state.pages[state.pages.length - 1] === null
           }
           isRight={true}
           onClickFunction={() => {
