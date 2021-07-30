@@ -10,7 +10,12 @@ interface MessageProps extends React.HTMLAttributes<HTMLElement> {
   text: string;
 }
 
-export const Message: React.FC<MessageProps> = ({ from, title, text }) => {
+export const Message: React.FC<MessageProps> = ({
+  from,
+  title,
+  text,
+  children,
+}) => {
   const { search } = useLocation();
   const realHref = {
     pathname: '/home',
@@ -18,7 +23,8 @@ export const Message: React.FC<MessageProps> = ({ from, title, text }) => {
   };
 
   return (
-    <section className="mainSection">
+    <section className={`mainSection ${styles.main_section}`}>
+      {children}
       <div className={classNames(styles.message_section)}>
         <ButtonLink href={realHref}>Return</ButtonLink>
         <span className={classNames(styles.message_section_text)}>

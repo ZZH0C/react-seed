@@ -24,7 +24,7 @@ import { NavbarItem } from './components/NavbarItem/NavbarItem';
 import { Head } from './components/Head/Head';
 import { HeaderLogo } from './components/HeaderLogo/HeaderLogo';
 import { HeaderUser } from './components/HeaderUser/HeaderUser';
-import { HeaderUserIcons } from './components/HeaderUserIcons/HeaderUserIcons';
+// import { HeaderUserIcons } from './components/HeaderUserIcons/HeaderUserIcons';
 import { Navbar } from './components/Navbar/Navbar';
 import { Submenu } from './components/Submenu/Submenu';
 import { SubmenuItem } from './components/Submenu/SubmenuItem/SubmenuItem';
@@ -80,8 +80,8 @@ export const App: React.FC = () => {
                 desktopImgAlt={logoProps.desktopImgAlt}
               />
               <HeaderUser src={emptyProfilePictureSrc}>
-                <HeaderUserIcons classname={'icon-bell'} />
-                <HeaderUserIcons classname={'icon-mail'} />
+                {/*<HeaderUserIcons classname={'icon-bell'} />*/}
+                {/*<HeaderUserIcons classname={'icon-mail'} />*/}
                 {!state.isLogged ? (
                   <GoogleLogin
                     scope="https://mail.google.com"

@@ -5,6 +5,7 @@ import { Message } from '../../components/Message/Message';
 import { GoogleMessage } from '../../models/GoogleMessage';
 import { sortMessageData } from '../../hooks/useSortMessageData/useSortMessageData';
 import base64url from 'base64url';
+import { Loader } from '../../components/Loader/Loader';
 
 interface MessagePageValues {
   snippet?: string;
@@ -16,12 +17,15 @@ interface MessagePageValues {
 
 export const MessagePage: React.FC = () => {
   const [message, setMessage] = useState<GoogleMessage | undefined>();
+  const [loaderState, setLoaderState] = useState(true);
   const { state } = useLocation();
   const apiData: any = state;
   useEffect(() => {
-    loadOneMessage(apiData.id, apiData.token).then((message) =>
-      setMessage(message),
-    );
+    setLoaderState(true);
+    loadOneMessage(apiData.id, apiData.token).then((message) => {
+      setLoaderState(false);
+      setMessage(message);
+    });
   }, []);
   let messageData: MessagePageValues = {
     from: '',
@@ -44,6 +48,8 @@ export const MessagePage: React.FC = () => {
       from={messageData.from}
       title={messageData.title}
       text={convertedSuperText}
-    />
+    >
+      <Loader isActive={loaderState} />
+    </Message>
   );
 };
